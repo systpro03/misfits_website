@@ -13,7 +13,7 @@ if ($base_path && strpos($current_path, $base_path) === 0) {
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= isset($title) ? htmlspecialchars($title) : 'MISFITS RIDERS'; ?></title>
+    <title><?= isset($title) ? htmlspecialchars($title) : 'MISFITS RIDER'; ?></title>
     
 
     <meta name="description"
