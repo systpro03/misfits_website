@@ -140,7 +140,7 @@
   aria-label="Back to top"
   title="Back to top"
   class="back-to-top-button"
-  style="position:fixed !important; right:20px !important; bottom:88px !important; z-index:2147483647 !important; display:flex !important; visibility:visible !important; opacity:1 !important; width:44px !important; height:44px !important; align-items:center !important; justify-content:center !important; border-radius:9999px !important; background:#17181c !important; color:#fff !important; border:2px solid #e8580c !important; box-shadow:0 10px 30px rgba(0,0,0,.5) !important; text-decoration:none !important;"
+  style="position:fixed !important; right:20px !important; bottom:84px !important; z-index:2147483647 !important; display:flex !important; visibility:visible !important; opacity:0 !important; pointer-events:none !important; width:54px !important; height:54px !important; align-items:center !important; justify-content:center !important; border-radius:50% !important; background:#17181c !important; color:#fff !important; border:1px solid rgba(232,88,12,.45) !important; box-shadow:0 14px 35px rgba(0,0,0,.45) !important; text-decoration:none !important; transition:opacity .2s ease, transform .2s ease, background .2s ease !important; animation:backToTopReveal linear both !important; animation-timeline:scroll(root) !important; animation-range:0 300px !important;"
 >
   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
@@ -148,6 +148,35 @@
 </button>
 
 <?php $this->load->view('messages/widget'); ?>
+
+<style>
+  @keyframes backToTopReveal {
+    from { opacity: 0; pointer-events: none; transform: translateY(8px); }
+    to { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  }
+
+  @supports not (animation-timeline: scroll()) {
+    .back-to-top-button {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+  }
+
+  .back-to-top-button:hover {
+    background: #e8580c !important;
+    color: #0e0f12 !important;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 767px) {
+    .back-to-top-button {
+      right: 20px !important;
+      bottom: 84px !important;
+      width: 54px !important;
+      height: 54px !important;
+    }
+  }
+</style>
 
 <script>
   window.MISFITS_CHAT_BASE = <?= json_encode(rtrim(site_url(), '/') . '/'); ?>;
