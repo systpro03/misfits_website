@@ -8,15 +8,6 @@ class Rides extends Public_Controller
 	{
 		parent::__construct();
 		$this->load->model('Ride_model');
-		header('Access-Control-Allow-Origin: https://image-enhance-lab.vercel.app/');
-		header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-		header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
-
-		// Handle preflight request
-		if ($_SERVER[ 'REQUEST_METHOD' ] === 'OPTIONS') {
-			http_response_code(204);
-			exit;
-		}
 	}
 
 	public function index()
@@ -50,7 +41,6 @@ class Rides extends Public_Controller
 
 		return $this->output
 			->set_content_type('application/json', 'utf-8')
-			->set_status_header(200)
 			->set_output(json_encode(['success' => TRUE,'data' => $rides
 			], JSON_UNESCAPED_SLASHES));
 	}
