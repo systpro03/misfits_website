@@ -13,7 +13,7 @@ if ($base_path && strpos($current_path, $base_path) === 0) {
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOUEI</title>
+    <title><?= isset($title) ? htmlspecialchars($title) : 'MISFITS RIDERS'; ?></title>
     
 
     <meta name="description"
@@ -41,7 +41,7 @@ if ($base_path && strpos($current_path, $base_path) === 0) {
             <img src="<?= base_url('assets/img/logo/misfits-logo.png'); ?>" alt="Misfits Riders emblem"
               class="h-10 w-10">
             <span class="font-display font-semibold text-lg tracking-wide">
-              <?= htmlspecialchars(isset($site->club_name) ? $site->club_name : 'MISFITS RIDERS'); ?>
+             LOEUEUUEUUEUUE
             </span>
           </a>
 
