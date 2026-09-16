@@ -1,0 +1,47 @@
+name: Deploy to InfinityFree
+
+on:
+  push:
+    branches:
+      - main  # Triggers the build every time you push to the main branch
+
+jobs:
+  web-deploy:
+    name: Build Tailwind and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Pull down the code from your repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js to handle Tailwind compilation
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-node-version: '24'
+
+      # 3. Install npm dependencies (Tailwind) without saving node_modules to Git
+      - name: Install Dependencies
+        run: npm install
+
+      # 4. Run the Tailwind compilation script
+      - name: Build Tailwind CSS
+        run: npx tailwindcss -i ./src/input.css -o ./dist/app.css --minify
+
+      # 5. Upload ONLY the production files to InfinityFree htdocs folder
+      - name: Sync FTP Files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./                  # The local directory to upload
+          server-dir: ./htdocs/          # Upload directly into InfinityFree's target folder
+          exclude: |                     # Skip source files you don't need live
+            .git*
+            .github/**
+            node_modules/**
+            src/**
+            package*.json
+            tailwind.config.js
