@@ -108,7 +108,7 @@
 <!-- Copyright Sub-Footer -->
   <div class="border-t border-asphalt-800/60 bg-asphalt-950/80 py-4">
     <div
-      class="max-w-6xl mx-auto px-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-asphalt-400">
+      class="max-w-7xl mx-auto px-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-asphalt-400">
       <p>&copy; <?= date('Y'); ?> <strong class="text-white font-medium">
         <?= htmlspecialchars($site->club_name ?? 'MISFITS RIDERS'); ?>
       </strong>
