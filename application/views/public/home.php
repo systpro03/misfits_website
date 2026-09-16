@@ -81,7 +81,8 @@ if (!empty($gallery)) {
             </a>
           </div>
 
-          <div class="home-hero-stats animate-rise mt-16 grid grid-cols-3 max-w-lg gap-6 border-t border-asphalt-800/80 pt-8"
+          <div
+            class="home-hero-stats animate-rise mt-16 grid grid-cols-3 max-w-lg gap-6 border-t border-asphalt-800/80 pt-8"
             style="animation-delay:.32s">
             <div>
               <p class="font-display text-3xl md:text-4xl font-bold text-ember-500"><?= (int) $member_count; ?></p>
@@ -218,7 +219,8 @@ if (!empty($gallery)) {
               <!-- Route Suggestions & Voting Cards Section -->
               <div class="mt-6">
                 <div class="flex items-center justify-between mb-4">
-                  <span class="text-xs font-display font-bold uppercase tracking-widest text-ember-500 flex items-center gap-2">
+                  <span
+                    class="text-xs font-display font-bold uppercase tracking-widest text-ember-500 flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 20l-5-4V4l5 4 5-4 5 4v12l-5-4-5 4z" />
@@ -453,19 +455,15 @@ if (!empty($gallery)) {
                         if (!detail || Number(detail.rideId) !== Number(this.rideId)) return;
                         this.votedRouteId = detail.newRouteId ? Number(detail.newRouteId) : null;
                       }
-                    }"
-                    @route-vote-sync.window="syncVoteState($event.detail)"
-                    @focus.window="refreshVotedRoute()"
-                    @pageshow.window="refreshVotedRoute()"
-                    @storage.window="
+                    }" @route-vote-sync.window="syncVoteState($event.detail)" @focus.window="refreshVotedRoute()"
+                      @pageshow.window="refreshVotedRoute()" @storage.window="
                       if ($event.key === 'rideVoteSync' && $event.newValue) {
                         try {
                           const sync = JSON.parse($event.newValue);
                           syncVoteState(sync);
                         } catch (e) {}
                       }
-                    "
-                    class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    " class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                       <?php foreach ($routes as $route): ?>
                         <?php
@@ -569,15 +567,13 @@ if (!empty($gallery)) {
                                   }
                                 })
                                 .catch(err => console.error('Vote failed:', err));
-                            }"
-                            @route-vote-changed.window="
+                            }" @route-vote-changed.window="
                               if (Number($event.detail.rideId) === Number(rideId) && Number($event.detail.previousRouteId) === Number(routeId)) {
                                 voteCount = $event.detail.previousVoteCount !== null && $event.detail.previousVoteCount !== undefined
                                   ? $event.detail.previousVoteCount
                                   : Math.max(0, voteCount - 1);
                               }
-                            "
-                            @route-vote-sync.window="
+                            " @route-vote-sync.window="
                               if (Number($event.detail.rideId) === Number(rideId)) {
                                 if (Number($event.detail.newRouteId) === Number(routeId)) {
                                   voteCount = $event.detail.newVoteCount;
@@ -585,8 +581,7 @@ if (!empty($gallery)) {
                                   voteCount = $event.detail.previousVoteCount;
                                 }
                               }
-                            "
-                            @storage.window="
+                            " @storage.window="
                               if ($event.key === 'rideVoteSync' && $event.newValue) {
                                 try {
                                   const sync = JSON.parse($event.newValue);
@@ -688,10 +683,13 @@ if (!empty($gallery)) {
         </a>
       </div>
 
-      <div class="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-6">
-        <?php $shown = array_slice($members, 0, 18);
-        foreach ($shown as $m): ?>
-          <div class="text-center group">
+      <div class="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-6"
+        style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+        <?php
+        $shown = array_slice($members, 0, 18);
+        foreach ($shown as $m):
+          ?>
+          <div class="text-center group min-w-0">
             <div
               class="relative w-24 h-24 sm:w-28 sm:h-28 mx-auto rounded-full overflow-hidden bg-asphalt-900 mb-3 border-2 border-asphalt-800/10 group-hover:border-ember-500 transition-colors shadow-md">
               <img src="<?= upload_url('members', $m->image); ?>" alt="<?= htmlspecialchars($m->full_name); ?>"
@@ -703,16 +701,20 @@ if (!empty($gallery)) {
                 <?= strtoupper(substr($m->road_name ?: $m->full_name, 0, 2)); ?>
               </div>
             </div>
+
             <p
               class="font-display font-bold text-sm text-asphalt-900 group-hover:text-ember-600 transition-colors truncate">
               <?= htmlspecialchars($m->road_name ?: $m->full_name); ?>
             </p>
+
             <p class="text-[10px] text-asphalt-700/60 uppercase font-semibold tracking-wider mt-0.5 truncate">
               <?= htmlspecialchars($m->position); ?>
             </p>
           </div>
         <?php endforeach; ?>
       </div>
+
+
     </div>
   </section>
 

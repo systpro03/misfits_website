@@ -213,14 +213,14 @@ body:has(> div.flex.min-h-screen) aside a.bg-ember-500 {
   main a, main span, main label, main td, main th { overflow-wrap: anywhere; }
 
   /* Stack common two-column content cleanly on phones. */
-  main .grid-cols-2 { grid-template-columns: 1fr !important; }
   main .grid-cols-3:not(.home-hero-stats) { grid-template-columns: 1fr !important; }
   main .grid-cols-4 { grid-template-columns: 1fr !important; }
   main .grid-cols-5 { grid-template-columns: 1fr !important; }
   main .grid-cols-6 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
 
-  /* Team roster: exactly two cards per row on phones. */
+  /* Team grids: exactly two cards per row on phones. */
   main .members-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px !important; }
+  main .team-preview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 16px !important; }
   main .members-grid > * { min-width: 0; }
 
   /* Home hero: deliberate mobile composition. */
