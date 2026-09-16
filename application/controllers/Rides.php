@@ -35,24 +35,17 @@ class Rides extends Public_Controller {
     
     public function upcoming_rides_api()
     {
-        header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-        header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization');
-
-        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-            http_response_code(204);
-            exit;
-        }
-
+        // CORS is handled globally by application/hooks/Cors.php.
+        // Keep this endpoint JSON-only so React can consume it directly.
         $rides = $this->Ride_model->get_upcoming_api();
 
         return $this->output
-            ->set_content_type('application/json')
+            ->set_content_type('application/json', 'utf-8')
             ->set_status_header(200)
             ->set_output(json_encode([
                 'success' => TRUE,
                 'data'    => $rides
-            ]));
+            ], JSON_UNESCAPED_SLASHES));
     }
 
 	public function past()
