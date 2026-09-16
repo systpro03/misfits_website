@@ -37,31 +37,12 @@ class Rides extends Public_Controller
 
 	public function upcoming_rides_api()
 	{
-		// CORS
-		$origin = isset($_SERVER[ 'HTTP_ORIGIN' ])
-			? $_SERVER[ 'HTTP_ORIGIN' ]
-			: '*';
-
-		header("Access-Control-Allow-Origin: {$origin}");
-		header("Access-Control-Allow-Methods: GET, OPTIONS");
-		header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
-		header("Access-Control-Allow-Credentials: true");
-		header("Content-Type: application/json; charset=utf-8");
-
-		// CORS preflight
-		if ($_SERVER[ 'REQUEST_METHOD' ] === 'OPTIONS') {
-			http_response_code(204);
-			exit;
-		}
-
 		$rides = $this->Ride_model->get_upcoming_api();
 
-		echo json_encode([
-			'success' => true,
-			'data' => $rides
-		], JSON_UNESCAPED_SLASHES);
-
-		exit;
+		return $this->output
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode(['success' => TRUE,'data' => $rides
+			], JSON_UNESCAPED_SLASHES));
 	}
 
 
