@@ -51,7 +51,6 @@ class Rides extends Public_Controller
 
 		return $this->output
 			->set_content_type('application/json', 'utf-8')
-			->set_status_header(200)
 			->set_output(json_encode([
 				'success' => TRUE,
 				'data' => $rides
