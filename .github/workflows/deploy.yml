@@ -1,20 +1,45 @@
 name: Deploy Website
+
 on:
   push:
     branches:
       - main
+
 jobs:
   web-deploy:
     name: Deploy
     runs-on: ubuntu-latest
+
     steps:
     - name: Get latest code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v4.2.2
 
+    # 1. Setup Node 24 environment to compile Tailwind
+    - name: Use Node.js 24
+      uses: actions/setup-node@v4
+      with:
+        node-version: '24'
+
+    # 2. Install your Tailwind dependencies
+    - name: Install dependencies
+      run: npm install
+
+    # 3. Generate your fresh production app.css
+    - name: Build Tailwind CSS
+      run: npx tailwindcss -i ./src/input.css -o ./dist/app.css --minify
+
+    # 4. Sync the production files to InfinityFree
     - name: Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.6
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: htdocs/   # InfinityFree requires files to be in htdocs
+        server-dir: htdocs/
+        exclude: |
+          .git*
+          .github/**
+          node_modules/**
+          src/**
+          package*.json
+          tailwind.config.js
