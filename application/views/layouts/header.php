@@ -41,7 +41,7 @@ if ($base_path && strpos($current_path, $base_path) === 0) {
             <img src="<?= base_url('assets/img/logo/misfits-logo.png'); ?>" alt="Misfits Riders emblem"
               class="h-10 w-10">
             <span class="font-display font-semibold text-lg tracking-wide">
-             LOEUEUUEUUEUUE
+              <?= htmlspecialchars(isset($site->club_name) ? $site->club_name : 'MISFITS RIDERS'); ?>
             </span>
           </a>
 
