@@ -6,18 +6,9 @@ class Cors
 {
     public function __construct()
     {
-        $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Credentials: true');
 
-        $allowed_origins = [
-            'http://localhost:3001',
-            'http://localhost:3000',
-            '*'
-        ];
-
-        if (in_array($origin, $allowed_origins, true)) {
-            header("Access-Control-Allow-Origin: {$origin}");
-            header('Access-Control-Allow-Credentials: true');
-        }
 
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
         header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');

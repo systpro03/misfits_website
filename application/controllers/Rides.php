@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Rides extends Public_Controller {
+class Rides extends Public_Controller
+{
 
 	public function __construct()
 	{
@@ -21,10 +22,10 @@ class Rides extends Public_Controller {
 
 	public function index()
 	{
-		$data['site']  = $this->site;
-		$data['upcoming_rides'] = $this->Ride_model->get_upcoming();
-		$data['past_rides']     = $this->Ride_model->get_past();
-		$data['title'] = 'Group Rides — ' . $this->site->club_name;
+		$data[ 'site' ] = $this->site;
+		$data[ 'upcoming_rides' ] = $this->Ride_model->get_upcoming();
+		$data[ 'past_rides' ] = $this->Ride_model->get_past();
+		$data[ 'title' ] = 'Group Rides — ' . $this->site->club_name;
 
 		$this->load->view('layouts/header', $data);
 		$this->load->view('public/rides_index', $data);
@@ -33,37 +34,49 @@ class Rides extends Public_Controller {
 
 	public function upcoming()
 	{
-		$data['site']  = $this->site;
-		$data['rides'] = $this->Ride_model->get_upcoming();
-		$data['heading'] = 'Upcoming Group Rides';
-		$data['title'] = 'Upcoming Rides — ' . $this->site->club_name;
+		$data[ 'site' ] = $this->site;
+		$data[ 'rides' ] = $this->Ride_model->get_upcoming();
+		$data[ 'heading' ] = 'Upcoming Group Rides';
+		$data[ 'title' ] = 'Upcoming Rides — ' . $this->site->club_name;
 
 		$this->load->view('layouts/header', $data);
 		$this->load->view('public/rides_list', $data);
 		$this->load->view('layouts/footer', $data);
 	}
-    
-    public function upcoming_rides_api()
-    {
-        // CORS is handled globally by application/hooks/Cors.php.
-        // Keep this endpoint JSON-only so React can consume it directly.
-        $rides = $this->Ride_model->get_upcoming_api();
 
-        return $this->output
-            ->set_content_type('application/json', 'utf-8')
-            ->set_status_header(200)
-            ->set_output(json_encode([
-                'success' => TRUE,
-                'data'    => $rides
-            ], JSON_UNESCAPED_SLASHES));
-    }
+
+	public function upcoming_rides_api()
+	{
+		// Allow requests from your Next.js/Vercel frontend
+		header('Access-Control-Allow-Origin: *');
+		header('Access-Control-Allow-Methods: GET, OPTIONS');
+		header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
+		// Handle browser CORS preflight request
+		if ($_SERVER[ 'REQUEST_METHOD' ] === 'OPTIONS') {
+			http_response_code(204);
+			exit();
+		}
+
+		$rides = $this->Ride_model->get_upcoming_api();
+
+		return $this->output
+			->set_content_type('application/json', 'utf-8')
+			->set_status_header(200)
+			->set_output(json_encode([
+				'success' => TRUE,
+				'data' => $rides
+			], JSON_UNESCAPED_SLASHES));
+	}
+
+
 
 	public function past()
 	{
-		$data['site']  = $this->site;
-		$data['rides'] = $this->Ride_model->get_past();
-		$data['heading'] = 'Latest Rides';
-		$data['title'] = 'Past Rides — ' . $this->site->club_name;
+		$data[ 'site' ] = $this->site;
+		$data[ 'rides' ] = $this->Ride_model->get_past();
+		$data[ 'heading' ] = 'Latest Rides';
+		$data[ 'title' ] = 'Past Rides — ' . $this->site->club_name;
 
 		$this->load->view('layouts/header', $data);
 		$this->load->view('public/rides_list', $data);
@@ -73,20 +86,19 @@ class Rides extends Public_Controller {
 	public function view($id)
 	{
 		$ride = $this->Ride_model->find_with_route($id);
-		if ( ! $ride)
-		{
+		if (!$ride) {
 			show_404();
 			return;
 		}
-		$data['site']  = $this->site;
-		$data['ride']  = $ride;
-		$data['pending_routes'] = $this->db
+		$data[ 'site' ] = $this->site;
+		$data[ 'ride' ] = $ride;
+		$data[ 'pending_routes' ] = $this->db
 			->where('ride_id', $ride->id)
 			->where('status', 'pending')
 			->order_by('id', 'asc')
 			->get('routes')
 			->result();
-		$data['title'] = $ride->title . ' — ' . $this->site->club_name;
+		$data[ 'title' ] = $ride->title . ' — ' . $this->site->club_name;
 
 		$this->load->view('layouts/header', $data);
 		$this->load->view('public/ride_detail', $data);
