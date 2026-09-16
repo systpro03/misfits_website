@@ -19,7 +19,7 @@ class Cors
     function handle_cors_preflight()
     {
         // This API is public, so allow browser clients from any origin.
-        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Origin: https://image-enhance-lab.vercel.app/');
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
         header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization');
         header('Access-Control-Max-Age: 86400');
