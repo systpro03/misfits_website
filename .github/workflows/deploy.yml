@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: Get latest code
-      uses: actions/checkout@v4.2.2
+      uses: actions/checkout@v4
 
     # 1. Setup Node 24 environment to compile Tailwind
     - name: Use Node.js 24
@@ -24,13 +24,17 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    # 3. Generate your fresh production app.css
-    - name: Build Tailwind CSS
-      run: npx tailwindcss -i ./src/input.css -o ./dist/app.css --minify
+    # 3. Fix execution permissions for the Tailwind binary
+    - name: Fix Tailwind Permissions
+      run: chmod +x ./node_modules/.bin/tailwindcss
 
-    # 4. Sync the production files to InfinityFree
+    # 4. Generate your fresh production app.css directly into your assets folder
+    - name: Build Tailwind CSS
+      run: ./node_modules/.bin/tailwindcss -i ./src/input.css -o ./assets/css/app.css --minify
+
+    # 5. Sync the production files to InfinityFree
     - name: Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
@@ -40,6 +44,5 @@ jobs:
           .git*
           .github/**
           node_modules/**
-          src/**
           package*.json
           tailwind.config.js
