@@ -30,7 +30,7 @@ jobs:
 
     # 4. Generate your fresh production app.css directly into your assets folder
     - name: Build Tailwind CSS
-      run: ./node_modules/.bin/tailwindcss -i ./src/input.css -o ./assets/css/app.css --minify
+      run: ./node_modules/.bin/tailwindcss -i ./assets/css/app.css --minify
 
     # 5. Sync the production files to InfinityFree
     - name: Sync files
