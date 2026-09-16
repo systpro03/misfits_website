@@ -145,8 +145,8 @@
 <style>
   .back-to-top-button {
     position: fixed !important;
-    right: 20px !important;
-    bottom: 84px !important;
+    right: 12px !important;
+    bottom: 76px !important;
     z-index: 2147483647 !important;
     display: flex !important;
     visibility: hidden !important;
@@ -181,10 +181,10 @@
 
   @media (max-width: 767px) {
     .back-to-top-button {
-      right: 20px !important;
-      bottom: 84px !important;
-      width: 54px !important;
-      height: 54px !important;
+      right: 12px !important;
+      bottom: 76px !important;
+      width: 52px !important;
+      height: 52px !important;
     }
   }
 </style>
