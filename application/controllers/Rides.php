@@ -37,55 +37,11 @@ class Rides extends Public_Controller
 
 	public function upcoming_rides_api()
 	{
-		// CORS
-		$origin = isset($_SERVER[ 'HTTP_ORIGIN' ])
-			? $_SERVER[ 'HTTP_ORIGIN' ]
-			: '';
-
-		// Allow your local React/Next.js development server
-		$allowed_origins = [
-			'http://localhost:3000',
-			'http://localhost:3001',
-			'http://127.0.0.1:3000',
-			'http://127.0.0.1:3001',
-		];
-
-		if (in_array($origin, $allowed_origins, true)) {
-			$this->output->set_header(
-				'Access-Control-Allow-Origin: ' . $origin
-			);
-		}
-
-		$this->output->set_header(
-			'Access-Control-Allow-Methods: GET, OPTIONS'
-		);
-
-		$this->output->set_header(
-			'Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With'
-		);
-
-		$this->output->set_header(
-			'Access-Control-Max-Age: 86400'
-		);
-
-		// Handle browser preflight request
-		if ($_SERVER[ 'REQUEST_METHOD' ] === 'OPTIONS') {
-			$this->output
-				->set_status_header(204)
-				->set_output('');
-
-			return;
-		}
-
-		// Get rides
 		$rides = $this->Ride_model->get_upcoming_api();
 
 		return $this->output
 			->set_content_type('application/json', 'utf-8')
-			->set_status_header(200)
-			->set_output(json_encode([
-				'success' => true,
-				'data' => $rides
+			->set_output(json_encode(['success' => TRUE,'data' => $rides
 			], JSON_UNESCAPED_SLASHES));
 	}
 
