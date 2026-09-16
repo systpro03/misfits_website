@@ -37,13 +37,11 @@ class Rides extends Public_Controller
 
 	public function upcoming_rides_api()
 	{
-		// CORS
 		$this->output
 			->set_header('Access-Control-Allow-Origin: *')
 			->set_header('Access-Control-Allow-Methods: GET, OPTIONS')
 			->set_header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 
-		// OPTIONS / preflight
 		if ($_SERVER[ 'REQUEST_METHOD' ] === 'OPTIONS') {
 			$this->output
 				->set_status_header(204)
