@@ -688,7 +688,7 @@ if (!empty($gallery)) {
         </a>
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5">
+      <div class="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-6">
         <?php $shown = array_slice($members, 0, 18);
         foreach ($shown as $m): ?>
           <div class="text-center group">
