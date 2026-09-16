@@ -214,10 +214,28 @@ body:has(> div.flex.min-h-screen) aside a.bg-ember-500 {
 
   /* Stack common two-column content cleanly on phones. */
   main .grid-cols-2 { grid-template-columns: 1fr !important; }
-  main .grid-cols-3 { grid-template-columns: 1fr !important; }
+  main .grid-cols-3:not(.home-hero-stats) { grid-template-columns: 1fr !important; }
   main .grid-cols-4 { grid-template-columns: 1fr !important; }
   main .grid-cols-5 { grid-template-columns: 1fr !important; }
   main .grid-cols-6 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+
+  /* Team roster: exactly two cards per row on phones. */
+  main .members-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px !important; }
+  main .members-grid > * { min-width: 0; }
+
+  /* Home hero: deliberate mobile composition. */
+  main .home-hero { min-height: auto; }
+  main .home-hero-inner { padding-top: 4.5rem !important; padding-bottom: 4rem !important; }
+  main .home-hero-inner > .grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+  main .home-hero-copy { text-align: center; display: flex; flex-direction: column; align-items: center; }
+  main .home-hero-copy h1 { max-width: 100%; line-height: .98 !important; }
+  main .home-hero-copy > p:not(:first-child) { max-width: 34rem; }
+  main .home-hero-copy > .flex { justify-content: center; width: 100%; }
+  main .home-hero-copy > .flex a { flex: 1 1 0; min-width: 0; text-align: center; }
+  main .home-hero-stats { width: 100%; max-width: 28rem !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; text-align: center; gap: 10px !important; }
+  main .home-hero-logo { justify-content: center !important; }
+  main .home-hero-logo > .group { max-width: 78vw; }
+  main .home-hero-logo img { width: min(72vw, 300px) !important; }
 
   /* Buttons/actions should not squeeze each other. */
   main .flex-row { flex-wrap: wrap; }

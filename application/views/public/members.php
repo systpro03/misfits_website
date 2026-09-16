@@ -24,8 +24,8 @@
       <p class="text-asphalt-700/60 text-xs mt-1">Our team members will be listed here shortly.</p>
     </div>
   <?php else: ?>
-    <!-- Grid configured for 5 items per row (xl:grid-cols-5) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+    <!-- Responsive roster: 2 cards per row on phones, expanding on larger screens. -->
+    <div class="members-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
       <?php foreach ($members as $m): ?>
         <div
           class="group bg-white border border-asphalt-800/10 rounded-xl overflow-hidden hover:border-ember-500/50 hover:shadow-md transition-all duration-300 flex flex-col">

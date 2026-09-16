@@ -45,17 +45,17 @@ if (!empty($gallery)) {
   }" class="relative">
 
   <!-- ================= HERO ================= -->
-  <section class="relative bg-asphalt-950 text-chrome-200 overflow-hidden min-h-[85vh] flex items-center">
+  <section class="home-hero relative bg-asphalt-950 text-chrome-200 overflow-hidden min-h-[85vh] flex items-center">
     <div class="absolute inset-y-0 right-[-10%] w-2/3 bg-ember-500/10 -skew-x-12 pointer-events-none blur-xl"></div>
     <div class="absolute inset-y-0 right-[-18%] w-1/3 bg-ember-500/5 -skew-x-12 pointer-events-none"></div>
     <div
       class="absolute top-1/2 right-[10%] -translate-y-1/2 w-96 h-96 bg-ember-500/15 rounded-full blur-3xl pointer-events-none">
     </div>
 
-    <div class="relative max-w-6xl mx-auto px-5 py-20 md:py-28 w-full">
+    <div class="home-hero-inner relative max-w-6xl mx-auto px-5 py-20 md:py-28 w-full">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
-        <div class="lg:col-span-7">
+        <div class="home-hero-copy lg:col-span-7">
           <p
             class="animate-rise font-display text-ember-500 tracking-[0.3em] text-xs md:text-sm mb-5 font-bold uppercase">
             <?= !empty($site->founded_year) ? 'RIDING TOGETHER SINCE ' . htmlspecialchars($site->founded_year) : 'A MOTORCYCLE RIDING GROUP'; ?>
@@ -81,7 +81,7 @@ if (!empty($gallery)) {
             </a>
           </div>
 
-          <div class="animate-rise mt-16 grid grid-cols-3 max-w-lg gap-6 border-t border-asphalt-800/80 pt-8"
+          <div class="home-hero-stats animate-rise mt-16 grid grid-cols-3 max-w-lg gap-6 border-t border-asphalt-800/80 pt-8"
             style="animation-delay:.32s">
             <div>
               <p class="font-display text-3xl md:text-4xl font-bold text-ember-500"><?= (int) $member_count; ?></p>
@@ -98,7 +98,7 @@ if (!empty($gallery)) {
           </div>
         </div>
 
-        <div class="lg:col-span-5 flex justify-center lg:justify-end">
+        <div class="home-hero-logo lg:col-span-5 flex justify-center lg:justify-end">
           <div class="relative group animate-float">
             <div
               class="absolute inset-0 bg-ember-500/20 rounded-full blur-2xl scale-95 group-hover:scale-110 transition-transform duration-500">
