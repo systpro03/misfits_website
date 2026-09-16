@@ -9,7 +9,6 @@ jobs:
   web-deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    # Bypasses the internal action Node deprecation warning
     env:
       ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true 
 
@@ -34,7 +33,7 @@ jobs:
     # 4. Generate your fresh production app.css directly into your assets folder
     # ⚠️ EDIT THE '-i' INPUT FILE PATH BELOW TO MATCH WHERE YOUR MAIN CSS FILE IS!
     - name: Build Tailwind CSS
-      run: ./node_modules/.bin/tailwindcss -i ./assets/css/app.css --minify
+      run: ./node_modules/.bin/tailwindcss -i ./src/input.css -o ./assetss/css/app.css --minify
 
     # 5. Sync the production files to InfinityFree
     - name: Sync files
