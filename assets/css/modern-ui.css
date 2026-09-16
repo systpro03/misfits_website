@@ -221,6 +221,10 @@ body:has(> div.flex.min-h-screen) aside a.bg-ember-500 {
   /* Team grids: exactly two cards per row on phones. */
   main .members-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px !important; }
   main .team-preview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 16px !important; }
+
+@media (min-width: 768px) {
+  main .team-preview-grid { grid-template-columns: repeat(6, minmax(0, 1fr)) !important; }
+}
   main .members-grid > * { min-width: 0; }
 
   /* Home hero: deliberate mobile composition. */

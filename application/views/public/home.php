@@ -683,8 +683,7 @@ if (!empty($gallery)) {
         </a>
       </div>
 
-      <div class="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-6"
-        style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+      <div class="team-preview-grid grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-6">
         <?php
         $shown = array_slice($members, 0, 18);
         foreach ($shown as $m):
