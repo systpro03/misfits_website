@@ -6,7 +6,7 @@ class Cors
 {
     public function __construct()
     {
-        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Origin: https://image-enhance-lab.vercel.app/");
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
         header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 
