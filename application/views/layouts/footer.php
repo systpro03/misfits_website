@@ -134,6 +134,19 @@
 </div>
 </footer>
 
+<!-- Back to Top -->
+<button
+  type="button"
+  id="back-to-top"
+  aria-label="Back to top"
+  title="Back to top"
+  class="fixed bottom-24 right-5 z-40 hidden w-11 h-11 items-center justify-center rounded-full bg-asphalt-900/95 text-white border border-asphalt-700 shadow-lg hover:bg-ember-500 hover:text-asphalt-950 transition-all duration-200"
+>
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+  </svg>
+</button>
+
 <?php $this->load->view('messages/widget'); ?>
 
 <script>
@@ -149,6 +162,33 @@
     this.setAttribute('aria-expanded', String(!expanded));
     menu?.classList.toggle('hidden');
   });
+
+  // Back to top button
+  (function () {
+    var backToTop = document.getElementById('back-to-top');
+    if (!backToTop) return;
+
+    function toggleBackToTop() {
+      if (window.scrollY > 300) {
+        backToTop.classList.remove('hidden');
+        backToTop.classList.add('flex');
+      } else {
+        backToTop.classList.add('hidden');
+        backToTop.classList.remove('flex');
+      }
+    }
+
+    window.addEventListener('scroll', toggleBackToTop, { passive: true });
+
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    toggleBackToTop();
+  })();
 </script>
 </body>
 </html>
