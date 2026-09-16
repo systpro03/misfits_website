@@ -1,0 +1,280 @@
+/* MISFITS modern UI layer - presentation only. No application logic is changed. */
+:root {
+  --misfits-bg: #f5f6f8;
+  --misfits-surface: #ffffff;
+  --misfits-surface-soft: #f8f9fb;
+  --misfits-ink: #15171a;
+  --misfits-muted: #68707b;
+  --misfits-border: rgba(21, 23, 26, .09);
+  --misfits-accent: #e53945;
+  --misfits-accent-dark: #b91f2b;
+  --misfits-shadow: 0 12px 35px rgba(15, 18, 22, .07);
+  --misfits-shadow-hover: 0 18px 45px rgba(15, 18, 22, .12);
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--misfits-bg); color: var(--misfits-ink); }
+
+/* ---------- Public site ---------- */
+body > header {
+  box-shadow: 0 1px 0 rgba(255,255,255,.05), 0 8px 30px rgba(0,0,0,.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+body > header > div { max-width: 1280px; }
+body > header a { transition: color .2s ease, opacity .2s ease, transform .2s ease, background .2s ease; }
+body > header nav a:not(.ml-2):hover { transform: translateY(-1px); }
+body > header .ml-2 {
+  border-radius: 999px;
+  padding-left: 18px;
+  padding-right: 18px;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(229,57,69,.16);
+}
+
+/* Make common public content cards feel consistent without touching markup. */
+main .rounded,
+main .rounded-lg,
+main .rounded-xl,
+main .rounded-2xl {
+  transition: box-shadow .25s ease, transform .25s ease, border-color .25s ease;
+}
+
+main .shadow-sm { box-shadow: var(--misfits-shadow); }
+main .shadow-md { box-shadow: 0 14px 35px rgba(15,18,22,.09); }
+
+/* Images become cleaner and less cramped on smaller screens. */
+main img { max-width: 100%; }
+main input, main select, main textarea {
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+main input:focus, main select:focus, main textarea:focus {
+  outline: none;
+  border-color: rgba(229,57,69,.65) !important;
+  box-shadow: 0 0 0 4px rgba(229,57,69,.10);
+}
+
+/* Public footer polish */
+footer { box-shadow: 0 -12px 35px rgba(0,0,0,.08); }
+footer a { transition: color .2s ease, transform .2s ease, background .2s ease; }
+footer a:hover { transform: translateX(2px); }
+
+/* ---------- Admin application ---------- */
+body:has(> div.flex.min-h-screen) {
+  background:
+    radial-gradient(circle at top right, rgba(229,57,69,.055), transparent 28rem),
+    #f5f6f8;
+}
+
+body:has(> div.flex.min-h-screen) > div.flex.min-h-screen > aside {
+  box-shadow: 8px 0 35px rgba(0,0,0,.10);
+  border-right-color: rgba(255,255,255,.07) !important;
+}
+
+body:has(> div.flex.min-h-screen) > div.flex.min-h-screen > div.flex-1 > header {
+  height: 72px;
+  background: rgba(255,255,255,.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 rgba(21,23,26,.06), 0 8px 25px rgba(15,18,22,.035);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+body:has(> div.flex.min-h-screen) > div.flex.min-h-screen > div.flex-1 > header h1 {
+  font-size: 1.35rem;
+  letter-spacing: -.02em;
+}
+
+body:has(> div.flex.min-h-screen) main { min-width: 0; }
+
+body:has(> div.flex.min-h-screen) main > * {
+  max-width: 100%;
+}
+
+/* Admin cards / panels */
+body:has(> div.flex.min-h-screen) .bg-white.rounded,
+body:has(> div.flex.min-h-screen) .bg-white.rounded-lg,
+body:has(> div.flex.min-h-screen) .bg-white.rounded-xl,
+body:has(> div.flex.min-h-screen) .bg-white.rounded-2xl {
+  border: 1px solid var(--misfits-border);
+  box-shadow: var(--misfits-shadow);
+}
+
+body:has(> div.flex.min-h-screen) .bg-white.rounded:hover,
+body:has(> div.flex.min-h-screen) .bg-white.rounded-lg:hover,
+body:has(> div.flex.min-h-screen) .bg-white.rounded-xl:hover {
+  box-shadow: var(--misfits-shadow-hover);
+}
+
+/* Admin tables: modern desktop + horizontal mobile scrolling. */
+body:has(> div.flex.min-h-screen) table {
+  margin: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+}
+
+body:has(> div.flex.min-h-screen) table thead th {
+  background: #f8f9fb;
+  color: #68707b;
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  border-bottom: 1px solid var(--misfits-border);
+}
+
+body:has(> div.flex.min-h-screen) table tbody tr {
+  transition: background .18s ease;
+}
+body:has(> div.flex.min-h-screen) table tbody tr:hover { background: #fafbfc; }
+body:has(> div.flex.min-h-screen) table td {
+  border-bottom: 1px solid rgba(21,23,26,.06);
+  vertical-align: middle;
+}
+
+/* DataTables controls */
+body:has(> div.flex.min-h-screen) .dataTables_wrapper {
+  padding: 14px 0 0;
+  color: #68707b;
+}
+body:has(> div.flex.min-h-screen) .dataTables_wrapper .dataTables_filter input,
+body:has(> div.flex.min-h-screen) .dataTables_wrapper .dataTables_length select {
+  background: #fff !important;
+  color: #15171a !important;
+  border: 1px solid rgba(21,23,26,.12) !important;
+  border-radius: 10px !important;
+  min-height: 36px;
+  box-shadow: 0 2px 8px rgba(15,18,22,.035);
+}
+body:has(> div.flex.min-h-screen) .dataTables_wrapper .dataTables_filter input:focus {
+  border-color: rgba(229,57,69,.55) !important;
+  box-shadow: 0 0 0 4px rgba(229,57,69,.10) !important;
+}
+body:has(> div.flex.min-h-screen) .dataTables_wrapper .dataTables_paginate .paginate_button {
+  background: #fff !important;
+  color: #68707b !important;
+  border: 1px solid rgba(21,23,26,.10) !important;
+  border-radius: 9px !important;
+  min-width: 34px;
+  min-height: 32px;
+  transition: all .18s ease;
+}
+body:has(> div.flex.min-h-screen) .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+body:has(> div.flex.min-h-screen) .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+  background: var(--misfits-accent) !important;
+  color: #fff !important;
+  border-color: var(--misfits-accent) !important;
+}
+
+/* Buttons */
+body:has(> div.flex.min-h-screen) button,
+body:has(> div.flex.min-h-screen) a[class*="bg-ember"] {
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+body:has(> div.flex.min-h-screen) button:hover,
+body:has(> div.flex.min-h-screen) a[class*="bg-ember"]:hover {
+  transform: translateY(-1px);
+}
+
+/* Sidebar active item */
+body:has(> div.flex.min-h-screen) aside a.bg-ember-500 {
+  box-shadow: 0 8px 22px rgba(229,57,69,.20);
+}
+
+/* ---------- Responsive refinements ---------- */
+@media (max-width: 1023px) {
+  body > header > div { padding-left: 16px; padding-right: 16px; }
+
+  body:has(> div.flex.min-h-screen) > div.flex.min-h-screen > div.flex-1 > header {
+    height: 64px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  body:has(> div.flex.min-h-screen) > div.flex.min-h-screen > div.flex-1 > main {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  body > header .h-16 { height: 60px; }
+  body > header img { width: 36px; height: 36px; }
+  body > header .font-display.text-lg { font-size: .92rem; }
+
+  body > header #mobile-menu {
+    margin-left: -16px;
+    margin-right: -16px;
+    padding: 10px 16px 16px;
+    background: rgba(20,22,25,.97);
+    border-top: 1px solid rgba(255,255,255,.07);
+    box-shadow: 0 18px 30px rgba(0,0,0,.18);
+  }
+
+  body > header #mobile-menu a {
+    display: flex;
+    align-items: center;
+    min-height: 42px;
+    padding: 9px 12px;
+    border-radius: 10px;
+  }
+
+  body > header #mobile-menu a:hover { background: rgba(255,255,255,.055); }
+
+  body:has(> div.flex.min-h-screen) > div.flex.min-h-screen > div.flex-1 > main {
+    padding: 16px;
+  }
+
+  body:has(> div.flex.min-h-screen) main .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  body:has(> div.flex.min-h-screen) table {
+    min-width: 680px;
+  }
+
+  body:has(> div.flex.min-h-screen) .dataTables_wrapper .dataTables_length,
+  body:has(> div.flex.min-h-screen) .dataTables_wrapper .dataTables_filter {
+    float: none;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  body:has(> div.flex.min-h-screen) .dataTables_wrapper .dataTables_filter input {
+    width: min(100%, 280px);
+    margin-left: 0;
+  }
+
+  /* Prevent dense admin forms from overflowing narrow screens. */
+  body:has(> div.flex.min-h-screen) input,
+  body:has(> div.flex.min-h-screen) select,
+  body:has(> div.flex.min-h-screen) textarea {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  body > header .max-w-6xl { padding-left: 14px; padding-right: 14px; }
+  body > header .gap-3 { gap: 8px; }
+  body > header .font-display.text-lg { max-width: 190px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  body:has(> div.flex.min-h-screen) > div.flex.min-h-screen > div.flex-1 > main {
+    padding: 12px;
+  }
+
+  body:has(> div.flex.min-h-screen) > div.flex.min-h-screen > div.flex-1 > header h1 {
+    font-size: 1.05rem;
+  }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+}

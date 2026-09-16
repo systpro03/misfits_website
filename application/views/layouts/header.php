@@ -25,6 +25,7 @@ if ($base_path && strpos($current_path, $base_path) === 0) {
     <link rel="icon" href="<?= base_url('assets/img/logo/misfits-logo.png'); ?>" type="image/png">
 
     <link rel="stylesheet" href="<?= base_url('assets/css/app.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/modern-ui.css') ?>">
     <script src="<?php echo base_url('assets/js/jquery-3.7.1.min.js') ?>"></script>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/toastr.css') ?>">
     <script src="<?php echo base_url('assets/js/toastr.min.js') ?>"></script>

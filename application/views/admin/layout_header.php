@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/app.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/modern-ui.css') ?>">
     <script src="<?php echo base_url('assets/js/jquery-3.7.1.min.js') ?>"></script>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/toastr.css') ?>">
     <script src="<?php echo base_url('assets/js/toastr.min.js') ?>"></script>
