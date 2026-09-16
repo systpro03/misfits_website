@@ -49,12 +49,7 @@ class Rides extends Public_Controller
 	{
 		$rides = $this->Ride_model->get_upcoming_api();
 
-		return $this->output
-			->set_content_type('application/json', 'utf-8')
-			->set_output(json_encode([
-				'success' => TRUE,
-				'data' => $rides
-			], JSON_UNESCAPED_SLASHES));
+		echo json_encode($rides);
 	}
 
 
