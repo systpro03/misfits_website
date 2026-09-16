@@ -134,12 +134,13 @@
 </footer>
 
 <!-- Back to Top -->
-<button
-  type="button"
+<a
+  href="#page-top"
   id="back-to-top"
   aria-label="Back to top"
   title="Back to top"
-  class="fixed bottom-24 right-5 z-[9999] flex w-11 h-11 items-center justify-center rounded-full bg-asphalt-900 text-white border-2 border-ember-500 shadow-xl hover:bg-ember-500 hover:text-asphalt-950 transition-all duration-200"
+  class="back-to-top-button"
+  style="position:fixed !important; right:20px !important; bottom:88px !important; z-index:2147483647 !important; display:flex !important; visibility:visible !important; opacity:1 !important; width:44px !important; height:44px !important; align-items:center !important; justify-content:center !important; border-radius:9999px !important; background:#17181c !important; color:#fff !important; border:2px solid #e8580c !important; box-shadow:0 10px 30px rgba(0,0,0,.5) !important; text-decoration:none !important;"
 >
   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
@@ -162,28 +163,7 @@
     menu?.classList.toggle('hidden');
   });
 
-  // Back to top button
-  (function () {
-    var backToTop = document.getElementById('back-to-top');
-    if (!backToTop) return;
 
-    function toggleBackToTop() {
-      // Keep the button visible on both desktop and mobile.
-      backToTop.classList.remove('hidden');
-      backToTop.classList.add('flex');
-    }
-
-    window.addEventListener('scroll', toggleBackToTop, { passive: true });
-
-    backToTop.addEventListener('click', function () {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-
-    toggleBackToTop();
-  })();
 </script>
 </body>
 </html>

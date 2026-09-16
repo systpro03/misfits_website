@@ -32,7 +32,7 @@ if ($base_path && strpos($current_path, $base_path) === 0) {
     <script defer src="<?php echo base_url('assets/js/alpine.js') ?>"></script>
   </head>
 
-  <body class="bg-paper-50 text-asphalt-900 antialiased">
+  <body id="page-top" class="bg-paper-50 text-asphalt-900 antialiased">
 
     <!-- Removed border-b border-asphalt-800 and the bottom road-divider div -->
     <header class="bg-asphalt-950 text-chrome-200 sticky top-0 z-50">
