@@ -201,6 +201,46 @@ body:has(> div.flex.min-h-screen) aside a.bg-ember-500 {
 }
 
 @media (max-width: 767px) {
+  html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+  body { font-size: 15px; }
+  main, main > section, main > div { max-width: 100%; min-width: 0; }
+  main .max-w-6xl, main .max-w-4xl { width: 100%; max-width: 100%; }
+  main .px-5 { padding-left: 16px !important; padding-right: 16px !important; }
+  main .px-4 { padding-left: 14px !important; padding-right: 14px !important; }
+
+  /* Prevent long URLs, labels and dynamic database values from breaking the viewport. */
+  main p, main h1, main h2, main h3, main h4, main h5, main h6,
+  main a, main span, main label, main td, main th { overflow-wrap: anywhere; }
+
+  /* Stack common two-column content cleanly on phones. */
+  main .grid-cols-2 { grid-template-columns: 1fr !important; }
+  main .grid-cols-3 { grid-template-columns: 1fr !important; }
+  main .grid-cols-4 { grid-template-columns: 1fr !important; }
+  main .grid-cols-5 { grid-template-columns: 1fr !important; }
+  main .grid-cols-6 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+
+  /* Buttons/actions should not squeeze each other. */
+  main .flex-row { flex-wrap: wrap; }
+  main button, main a[class*="px-"] { max-width: 100%; }
+
+  /* Home hero: reduce oversized desktop typography and spacing. */
+  main .text-7xl { font-size: 3.15rem !important; }
+  main .text-6xl { font-size: 2.8rem !important; }
+  main .text-5xl { font-size: 2.45rem !important; }
+  main .py-24 { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; }
+  main .py-20 { padding-top: 3.25rem !important; padding-bottom: 3.25rem !important; }
+  main .gap-12 { gap: 2rem !important; }
+
+  /* Gallery images remain compact and never force horizontal scrolling. */
+  main img { height: auto; }
+  main .aspect-square { aspect-ratio: 1 / 1; }
+
+  /* Footer */
+  footer .max-w-6xl { padding-left: 16px !important; padding-right: 16px !important; }
+  footer .py-16 { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+  footer .grid-cols-1 { grid-template-columns: 1fr !important; }
+  footer .flex-row { flex-wrap: wrap; }
+
   body > header .h-16 { height: 60px; }
   body > header img { width: 36px; height: 36px; }
   body > header .font-display.text-lg { font-size: .92rem; }
@@ -258,6 +298,17 @@ body:has(> div.flex.min-h-screen) aside a.bg-ember-500 {
 
 @media (max-width: 480px) {
   body > header .max-w-6xl { padding-left: 14px; padding-right: 14px; }
+  body > header .h-16 { height: 58px; }
+  body > header #menu-toggle { width: 42px; height: 42px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  main .text-7xl { font-size: 2.7rem !important; }
+  main .text-6xl { font-size: 2.45rem !important; }
+  main .text-5xl { font-size: 2.15rem !important; }
+  main .text-4xl { font-size: 1.8rem !important; }
+  main .text-3xl { font-size: 1.55rem !important; }
+  main .gap-8 { gap: 1.25rem !important; }
+  main .gap-6 { gap: 1rem !important; }
+  main .p-8 { padding: 1.25rem !important; }
+  main .p-6 { padding: 1rem !important; }
   body > header .gap-3 { gap: 8px; }
   body > header .font-display.text-lg { max-width: 190px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 

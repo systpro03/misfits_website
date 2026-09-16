@@ -37,11 +37,11 @@ if ($base_path && strpos($current_path, $base_path) === 0) {
     <!-- Removed border-b border-asphalt-800 and the bottom road-divider div -->
     <header class="bg-asphalt-950 text-chrome-200 sticky top-0 z-50">
       <div class="max-w-6xl mx-auto px-5">
-        <div class="flex items-center justify-between h-16">
-          <a href="<?= base_url(); ?>" class="flex items-center gap-3 group">
+        <div class="flex items-center justify-between h-16 min-w-0">
+          <a href="<?= base_url(); ?>" class="flex items-center gap-2.5 group min-w-0 max-w-[calc(100%-52px)]">
             <img src="<?= base_url('assets/img/logo/misfits-logo.png'); ?>" alt="Misfits Riders emblem"
-              class="h-10 w-10">
-            <span class="font-display font-semibold text-lg tracking-wide">
+              class="h-9 w-9 sm:h-10 sm:w-10 shrink-0">
+            <span class="font-display font-semibold text-base sm:text-lg tracking-wide truncate">
               <?= htmlspecialchars(isset($site->club_name) ? $site->club_name : 'MISFITS RIDERS'); ?>
             </span>
           </a>
@@ -71,20 +71,20 @@ if ($base_path && strpos($current_path, $base_path) === 0) {
           </button>
         </div>
 
-        <nav id="mobile-menu" class="md:hidden hidden pb-4 font-display text-sm tracking-wide flex flex-col gap-3 pt-3">
+        <nav id="mobile-menu" class="md:hidden hidden font-display text-sm tracking-wide flex flex-col gap-1 py-3 border-t border-white/10">
           <a href="<?= base_url(); ?>"
-            class="py-1 hover:text-ember-500 transition-colors <?= ($current_path == '' || $current_path == base_url()) ? 'text-ember-500 font-medium' : ''; ?>">Home</a>
+            class="flex items-center min-h-11 px-3 rounded-lg hover:bg-white/5 hover:text-ember-500 transition-colors <?= ($current_path == '' || $current_path == base_url()) ? 'text-ember-500 font-medium bg-white/5' : ''; ?>">Home</a>
           <a href="<?= site_url('rides'); ?>"
-            class="py-1 hover:text-ember-500 transition-colors <?= (strpos($current_path, 'rides') === 0) ? 'text-ember-500 font-medium' : ''; ?>">Rides</a>
+            class="flex items-center min-h-11 px-3 rounded-lg hover:bg-white/5 hover:text-ember-500 transition-colors <?= (strpos($current_path, 'rides') === 0) ? 'text-ember-500 font-medium bg-white/5' : ''; ?>">Rides</a>
           <a href="<?= site_url('members'); ?>"
-            class="py-1 hover:text-ember-500 transition-colors <?= ($current_path == 'members') ? 'text-ember-500 font-medium' : ''; ?>">Team</a>
+            class="flex items-center min-h-11 px-3 rounded-lg hover:bg-white/5 hover:text-ember-500 transition-colors <?= ($current_path == 'members') ? 'text-ember-500 font-medium bg-white/5' : ''; ?>">Team</a>
           <a href="<?= site_url('gallery'); ?>"
-            class="py-1 hover:text-ember-500 transition-colors <?= ($current_path == 'gallery') ? 'text-ember-500 font-medium' : ''; ?>">Gallery</a>
+            class="flex items-center min-h-11 px-3 rounded-lg hover:bg-white/5 hover:text-ember-500 transition-colors <?= ($current_path == 'gallery') ? 'text-ember-500 font-medium bg-white/5' : ''; ?>">Gallery</a>
           <a href="<?= site_url('about'); ?>"
-            class="py-1 hover:text-ember-500 transition-colors <?= ($current_path == 'about') ? 'text-ember-500 font-medium' : ''; ?>">About</a>
+            class="flex items-center min-h-11 px-3 rounded-lg hover:bg-white/5 hover:text-ember-500 transition-colors <?= ($current_path == 'about') ? 'text-ember-500 font-medium bg-white/5' : ''; ?>">About</a>
           <a href="<?= site_url('contact'); ?>"
-            class="py-1 hover:text-ember-500 transition-colors <?= ($current_path == 'contact') ? 'text-ember-500 font-medium' : ''; ?>">Contact</a>
-          <a href="<?= site_url('admin'); ?>" class="py-1 text-ember-500 font-semibold">Admin</a>
+            class="flex items-center min-h-11 px-3 rounded-lg hover:bg-white/5 hover:text-ember-500 transition-colors <?= ($current_path == 'contact') ? 'text-ember-500 font-medium bg-white/5' : ''; ?>">Contact</a>
+          <a href="<?= site_url('admin'); ?>" class="flex items-center min-h-11 px-3 rounded-lg text-ember-500 font-semibold hover:bg-ember-500/10">Admin</a>
         </nav>
       </div>
     </header>
