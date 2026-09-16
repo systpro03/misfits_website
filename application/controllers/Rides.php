@@ -47,17 +47,6 @@ class Rides extends Public_Controller
 
 	public function upcoming_rides_api()
 	{
-		// Allow requests from your Next.js/Vercel frontend
-		header('Access-Control-Allow-Origin: *');
-		header('Access-Control-Allow-Methods: GET, OPTIONS');
-		header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization');
-
-		// Handle browser CORS preflight request
-		if ($_SERVER[ 'REQUEST_METHOD' ] === 'OPTIONS') {
-			http_response_code(204);
-			exit();
-		}
-
 		$rides = $this->Ride_model->get_upcoming_api();
 
 		return $this->output
