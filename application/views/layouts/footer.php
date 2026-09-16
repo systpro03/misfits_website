@@ -108,7 +108,7 @@
 <!-- Copyright Sub-Footer -->
   <div class="border-t border-asphalt-800/60 bg-asphalt-950/80 py-4">
     <div
-      class="max-w-7xl mx-auto px-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-asphalt-400">
+      class="max-w-6xl mx-auto px-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-asphalt-400">
       <p>&copy; <?= date('Y'); ?> <strong class="text-white font-medium">
         <?= htmlspecialchars($site->club_name ?? 'MISFITS RIDERS'); ?>
       </strong>
@@ -123,7 +123,6 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
       </svg>
-      <span class="text-asphalt-400">Visits:</span>
       <strong class="font-display text-white tracking-wide">
         <?= number_format($total_visits ?? 0); ?>
       </strong>
@@ -140,7 +139,7 @@
   id="back-to-top"
   aria-label="Back to top"
   title="Back to top"
-  class="fixed bottom-24 right-5 z-40 hidden w-11 h-11 items-center justify-center rounded-full bg-asphalt-900/95 text-white border border-asphalt-700 shadow-lg hover:bg-ember-500 hover:text-asphalt-950 transition-all duration-200"
+  class="fixed bottom-24 right-5 z-[9999] flex w-11 h-11 items-center justify-center rounded-full bg-asphalt-900 text-white border-2 border-ember-500 shadow-xl hover:bg-ember-500 hover:text-asphalt-950 transition-all duration-200"
 >
   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
@@ -169,13 +168,9 @@
     if (!backToTop) return;
 
     function toggleBackToTop() {
-      if (window.scrollY > 300) {
-        backToTop.classList.remove('hidden');
-        backToTop.classList.add('flex');
-      } else {
-        backToTop.classList.add('hidden');
-        backToTop.classList.remove('flex');
-      }
+      // Keep the button visible on both desktop and mobile.
+      backToTop.classList.remove('hidden');
+      backToTop.classList.add('flex');
     }
 
     window.addEventListener('scroll', toggleBackToTop, { passive: true });
