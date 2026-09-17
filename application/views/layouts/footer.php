@@ -147,7 +147,7 @@
     position: fixed !important;
     right: 20px !important;
     bottom: 76px !important;
-    z-index: 2147483647 !important;
+    z-index: 99998 !important;
     display: flex !important;
     visibility: hidden !important;
     opacity: 0 !important;

@@ -26,7 +26,32 @@
   }
 
   .announcement-floating-button {
-    z-index: 99999 !important;
+    position: fixed !important;
+    right: 20px !important;
+    bottom: 140px !important;
+    z-index: 100000 !important;
+    width: 54px !important;
+    height: 54px !important;
+    min-width: 54px !important;
+    min-height: 54px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .announcement-floating-button > span {
+    width: 40px !important;
+    height: 40px !important;
+    flex: 0 0 40px !important;
+    border-radius: 50% !important;
+    background: #e8580c !important;
+    color: #0e0f12 !important;
+  }
+
+  .announcement-floating-button > span > svg {
+    width: 22px !important;
+    height: 22px !important;
+    stroke-width: 2 !important;
   }
 
   .announcement-overlay > .relative {
@@ -47,6 +72,8 @@
       bottom: 140px !important;
       width: 52px !important;
       height: 52px !important;
+      min-width: 52px !important;
+      min-height: 52px !important;
     }
 
     .announcement-overlay > .relative {
@@ -220,8 +247,8 @@ if (!empty($gallery)) {
 
     <!-- Floating announcement button after closing the bulletin -->
     <button type="button" x-show="!announcementOpen" x-cloak @click="announcementOpen = true" class="announcement-floating-button fixed right-5 bottom-[140px] sm:right-5 sm:bottom-[140px] group flex items-center justify-center w-[54px] h-[54px] rounded-full bg-asphalt-950 text-white border border-ember-500/45 shadow-2xl shadow-asphalt-950/25 hover:border-ember-500 hover:bg-asphalt-900 transition-all active:scale-95" aria-label="Open announcements" title="Open announcements">
-      <span class="relative inline-flex items-center justify-center w-7 h-7">
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <span class="relative inline-flex items-center justify-center w-10 h-10 rounded-full bg-ember-500 text-asphalt-950">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M19 5H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3l4 3 4-3h3a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zM7 9h10M7 13h7"/>
         </svg>
         <span class="absolute -top-3 -right-3 min-w-[20px] h-5 px-1 rounded-full bg-ember-500 text-asphalt-950 border-2 border-asphalt-950 text-[9px] font-display font-black leading-none flex items-center justify-center">
