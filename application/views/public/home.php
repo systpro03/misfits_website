@@ -134,7 +134,7 @@ if (!empty($gallery)) {
         <div class="hidden sm:block text-[10px] font-display font-bold uppercase tracking-widest text-asphalt-700/40">Stay in the loop</div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
         <?php foreach ($announcements as $announcement):
           $bulletin_type = $announcement->type ?? 'announcement';
           $type_styles = array(
@@ -145,7 +145,7 @@ if (!empty($gallery)) {
           );
           $style = isset($type_styles[$bulletin_type]) ? $type_styles[$bulletin_type] : $type_styles['announcement'];
         ?>
-          <article class="group bg-white rounded-2xl border border-asphalt-800/10 p-5 md:p-6 shadow-xs hover:shadow-lg hover:border-ember-500/30 transition-all duration-300 relative overflow-hidden">
+          <article class="group bg-white rounded-2xl border border-asphalt-800/10 p-5 shadow-xs hover:shadow-lg hover:border-ember-500/30 transition-all duration-300 relative overflow-hidden h-fit">
             <div class="absolute top-0 left-0 right-0 h-0.5 bg-ember-500/70 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
             <div class="flex items-start justify-between gap-3">
               <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[9px] font-bold uppercase tracking-wider <?= $style['class']; ?>">
@@ -158,13 +158,13 @@ if (!empty($gallery)) {
                 </span>
               <?php endif; ?>
             </div>
-            <h3 class="mt-4 font-display text-xl font-bold text-asphalt-900 group-hover:text-ember-600 transition-colors">
+            <h3 class="mt-3 font-display text-lg font-bold text-asphalt-900 group-hover:text-ember-600 transition-colors line-clamp-2">
               <?= htmlspecialchars($announcement->title); ?>
             </h3>
-            <p class="mt-2 text-sm text-asphalt-700/70 leading-relaxed whitespace-pre-line line-clamp-5">
+            <p class="mt-2 text-sm text-asphalt-700/70 leading-relaxed whitespace-pre-line line-clamp-3">
               <?= htmlspecialchars($announcement->message); ?>
             </p>
-            <div class="mt-5 pt-4 border-t border-asphalt-800/10 flex items-center justify-between gap-2 text-[9px] uppercase tracking-wider font-semibold text-asphalt-700/40">
+            <div class="mt-4 pt-3 border-t border-asphalt-800/10 flex items-center justify-between gap-2 text-[9px] uppercase tracking-wider font-semibold text-asphalt-700/40">
               <span class="flex items-center gap-1.5">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M15 19a4 4 0 10-6 0M12 15a3 3 0 100-6 3 3 0 000 6z"/></svg>
                 <?= htmlspecialchars($announcement->admin_name ?: 'Club Admin'); ?>
