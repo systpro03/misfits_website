@@ -64,7 +64,7 @@ class Message_model extends CI_Model
 
     public function add_message($data)
     {
-        date_default_timezone_set('Asia/Manila');
+        
 
         if (empty($data['created_at'])) {
             $data['created_at'] = date('Y-m-d H:i:s');

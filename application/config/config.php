@@ -9,6 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | domain, e.g. 'https://misfitsriders.infinityfreeapp.com/'
 | Leave blank ('') to let CodeIgniter auto-detect it (works on most hosts).
 */
+
+date_default_timezone_set('Asia/Manila');
 $config['base_url'] = 'https://misfits.lovestoblog.com/';
 
 $config['index_page'] = '';
