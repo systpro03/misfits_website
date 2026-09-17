@@ -36,7 +36,8 @@ $json_gallery = htmlspecialchars(json_encode($formatted_gallery, JSON_HEX_TAG | 
 <div x-data="{ 
     lightboxOpen: false, 
     lightboxIndex: 0,
-    items: <?= $json_gallery; ?>
+    items: <?= $json_gallery; ?>,
+    submitModalOpen: false
   }" class="relative">
 
   <!-- ================= PAGE HEADER ================= -->
@@ -139,6 +140,22 @@ $json_gallery = htmlspecialchars(json_encode($formatted_gallery, JSON_HEX_TAG | 
 
   <!-- ================= SUBMIT PHOTO SECTION ================= -->
   <section id="submit" class="bg-paper-50 border-t border-asphalt-800/10 py-10 md:py-12">
+    <div class="max-w-md mx-auto px-4 text-center">
+      <button type="button" @click="submitModalOpen = true"
+        class="px-7 py-3.5 bg-ember-500 hover:bg-ember-600 text-asphalt-950 font-display font-bold text-sm tracking-wider uppercase rounded-xl transition-all shadow-md active:scale-95">
+        Submit a Photo
+      </button>
+    </div>
+
+    <div x-cloak x-show="submitModalOpen" x-transition.opacity
+      @keydown.escape.window="submitModalOpen = false"
+      class="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div class="absolute inset-0 bg-asphalt-950/60 backdrop-blur-xs" @click="submitModalOpen = false"></div>
+      <div class="relative w-full max-w-lg max-h-[90vh] overflow-y-auto">
+        <button type="button" @click="submitModalOpen = false"
+          class="absolute top-3 right-3 z-10 p-1.5 rounded-lg bg-asphalt-900 text-white hover:bg-ember-500 hover:text-asphalt-950 transition-colors"
+          aria-label="Close submit photo modal">&times;</button>
+
     <div class="max-w-md mx-auto px-4" x-data="{ 
            files: [], 
            previews: [],
@@ -233,6 +250,8 @@ $json_gallery = htmlspecialchars(json_encode($formatted_gallery, JSON_HEX_TAG | 
           Submit Photos for Review
         </button>
       </form>
+    </div>
+      </div>
     </div>
   </section>
 
