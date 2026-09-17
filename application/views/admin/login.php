@@ -71,7 +71,7 @@
           <label for="username"
             class="block text-xs font-semibold text-chrome-200/80 uppercase tracking-wider mb-2">Username</label>
           <div class="relative">
-            <svg class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-chrome-200/10" fill="none"
+            <svg class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-chrome-200/80" fill="none"
               stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -86,7 +86,7 @@
           <label for="password"
             class="block text-xs font-semibold text-chrome-200/80 uppercase tracking-wider mb-2">Password</label>
           <div class="relative">
-            <svg class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-chrome-200/10" fill="none"
+            <svg class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-chrome-200/80" fill="none"
               stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -94,7 +94,7 @@
             <input type="password" id="password" name="password" required placeholder="••••••••"
               class="w-full bg-asphalt-950/80 border border-asphalt-800/80 rounded-xl pl-10 pr-11 py-3 text-xs text-dark placeholder:text-chrome-200/5 focus:border-ember-500 focus:ring-2 focus:ring-ember-500/20 outline-none transition-all">
             <button type="button" id="togglePassword" aria-label="Show password" aria-pressed="false"
-              class="absolute right-3.5 top-1/2 -translate-y-1/2 text-chrome-200/10 hover:text-ember-500 transition-colors focus:outline-none"
+              class="absolute right-3.5 top-1/2 -translate-y-1/2 text-chrome-200/90 hover:text-ember-500 transition-colors focus:outline-none"
               title="Show password">
               <svg id="eyeIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
