@@ -20,7 +20,7 @@ class Home extends Public_Controller
 		$data[ 'upcoming_rides' ] = $this->Ride_model->get_upcoming(3);
 		$data[ 'past_rides' ] = $this->Ride_model->get_past(3);
 		$data[ 'members' ] = $this->Member_model->get_active();
-		$data[ 'gallery' ] = $this->Gallery_model->get_all(8) ?? [];
+		$data[ 'gallery' ] = $this->Gallery_model->get_all() ?? [];
 		$data[ 'member_count' ] = $this->Member_model->count_active();
 		$data[ 'upcoming_count' ] = $this->Ride_model->count_upcoming();
 		$data[ 'past_count' ] = $this->Ride_model->count_past();

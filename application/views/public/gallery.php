@@ -37,7 +37,8 @@ $json_gallery = htmlspecialchars(json_encode($formatted_gallery, JSON_HEX_TAG | 
     lightboxOpen: false, 
     lightboxIndex: 0,
     items: <?= $json_gallery; ?>,
-    submitModalOpen: false
+    submitModalOpen: false,
+    submittingPhoto: false
   }" class="relative">
 
   <!-- ================= PAGE HEADER ================= -->
@@ -245,9 +246,13 @@ $json_gallery = htmlspecialchars(json_encode($formatted_gallery, JSON_HEX_TAG | 
           </div>
         </template>
 
-        <button type="submit"
-          class="w-full py-2.5 bg-ember-500 hover:bg-ember-600 text-asphalt-950 font-display font-bold text-xs tracking-wider uppercase rounded-lg transition-all shadow-xs active:scale-95">
-          Submit Photos for Review
+        <button type="submit" @click="submittingPhoto = true" :disabled="submittingPhoto"
+          class="w-full py-2.5 bg-ember-500 hover:bg-ember-600 text-asphalt-950 font-display font-bold text-xs tracking-wider uppercase rounded-lg transition-all shadow-xs active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed">
+          <span x-show="!submittingPhoto">Submit Photos for Review</span>
+          <span x-show="submittingPhoto" class="inline-flex items-center justify-center gap-2">
+            <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 00-5 5h3a5 5 0 005-5H4z"></path></svg>
+            Submitting Photo...
+          </span>
         </button>
       </form>
     </div>

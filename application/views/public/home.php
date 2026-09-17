@@ -41,6 +41,7 @@ if (!empty($gallery)) {
       items: <?= htmlspecialchars(json_encode($gallery_items ?? []), ENT_QUOTES, 'UTF-8'); ?>,
       suggestModalOpen: false,
       submitPhotoModalOpen: false,
+      submittingPhoto: false,
       activeRideId: null,
       activeRideTitle: ''
   }" class="relative">
@@ -719,6 +720,18 @@ if (!empty($gallery)) {
   </section>
 
   <!-- ================= GALLERY PREVIEW ================= -->
+  <?php
+    $gallery_items_per_page = 12;
+    $gallery_total_items = count($gallery ?? []);
+    $gallery_total_pages = max(1, (int) ceil($gallery_total_items / $gallery_items_per_page));
+    $gallery_current_page = isset($_GET['gallery_page']) ? (int) $_GET['gallery_page'] : 1;
+    $gallery_current_page = max(1, min($gallery_current_page, $gallery_total_pages));
+    $gallery_query = $_GET;
+    unset($gallery_query['gallery_page']);
+    $gallery_query_string = http_build_query($gallery_query);
+    $gallery_offset = ($gallery_current_page - 1) * $gallery_items_per_page;
+    $home_gallery = array_slice($gallery ?? [], $gallery_offset, $gallery_items_per_page);
+  ?>
   <?php if (!empty($gallery)): ?>
     <section class="max-w-6xl mx-auto px-5 py-24">
       <div class="flex items-end justify-between mb-12">
@@ -733,7 +746,7 @@ if (!empty($gallery)) {
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-        <?php foreach (array_slice($gallery, 0, 12) as $index => $g): ?>
+        <?php foreach ($home_gallery as $index => $g): ?>
           <?php $img_url = upload_url('gallery', $g->image); ?>
           <div
             class="group relative aspect-square rounded-xl overflow-hidden bg-asphalt-900 cursor-pointer border border-asphalt-800/20 shadow-xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
@@ -756,6 +769,37 @@ if (!empty($gallery)) {
           </div>
         <?php endforeach; ?>
       </div>
+
+      <?php if ($gallery_total_pages > 1): ?>
+        <div class="mt-8 flex items-center justify-center gap-1.5">
+          <?php if ($gallery_current_page > 1): ?>
+            <a href="?<?= $gallery_query_string ? $gallery_query_string . '&' : ''; ?>gallery_page=<?= $gallery_current_page - 1; ?>"
+              class="px-3 py-2 rounded-lg border border-asphalt-800/10 bg-white text-asphalt-900 font-display text-[10px] font-bold uppercase hover:border-ember-500 hover:text-ember-600 transition-all shadow-2xs">
+              &larr; Prev
+            </a>
+          <?php endif; ?>
+          <div class="flex items-center gap-1">
+            <?php for ($gp = 1; $gp <= $gallery_total_pages; $gp++): ?>
+              <?php if ($gp === $gallery_current_page): ?>
+                <span class="w-8 h-8 flex items-center justify-center rounded-lg bg-ember-500 text-asphalt-950 font-display font-bold text-[10px]">
+                  <?= $gp; ?>
+                </span>
+              <?php else: ?>
+                <a href="?<?= $gallery_query_string ? $gallery_query_string . '&' : ''; ?>gallery_page=<?= $gp; ?>"
+                  class="w-8 h-8 flex items-center justify-center rounded-lg border border-asphalt-800/10 bg-white text-asphalt-900 font-display font-bold text-[10px] hover:border-ember-500 hover:text-ember-600 transition-all">
+                  <?= $gp; ?>
+                </a>
+              <?php endif; ?>
+            <?php endfor; ?>
+          </div>
+          <?php if ($gallery_current_page < $gallery_total_pages): ?>
+            <a href="?<?= $gallery_query_string ? $gallery_query_string . '&' : ''; ?>gallery_page=<?= $gallery_current_page + 1; ?>"
+              class="px-3 py-2 rounded-lg border border-asphalt-800/10 bg-white text-asphalt-900 font-display text-[10px] font-bold uppercase hover:border-ember-500 hover:text-ember-600 transition-all shadow-2xs">
+              Next &rarr;
+            </a>
+          <?php endif; ?>
+        </div>
+      <?php endif; ?>
     </section>
   <?php endif; ?>
 
@@ -787,7 +831,13 @@ if (!empty($gallery)) {
         <div><label for="home_caption" class="mb-1 block text-xs font-bold">Caption / Note (optional)</label><input id="home_caption" type="text" name="caption" maxlength="255" placeholder="Where were these photos taken?" class="w-full rounded-lg border border-asphalt-800/20 px-3 py-2 text-sm outline-none focus:border-ember-500"></div>
         <div><label for="home_images" class="mb-1 block text-xs font-bold">Photos *</label><input id="home_images" x-ref="input" @change="select($event)" type="file" name="images[]" accept="image/png,image/jpeg,image/webp" multiple required class="w-full rounded-lg border border-asphalt-800/20 p-2 text-xs"><p class="mt-1 text-[10px] text-asphalt-700/60">JPG, PNG or WEBP up to 5MB each.</p></div>
         <div x-show="previews.length" class="grid grid-cols-4 gap-2 rounded-lg bg-paper-50 p-2"><template x-for="(src,i) in previews" :key="i"><div class="relative aspect-square overflow-hidden rounded-md"><img :src="src" class="h-full w-full object-cover"><button type="button" @click="remove(i)" class="absolute right-1 top-1 rounded-full bg-black/70 px-1.5 text-white">&times;</button></div></template></div>
-        <button type="submit" class="w-full rounded-lg bg-ember-500 py-3 text-xs font-bold uppercase tracking-wider text-asphalt-950 hover:bg-ember-600">Submit Photos for Review</button>
+        <button type="submit" @click="submittingPhoto = true" :disabled="submittingPhoto" class="w-full rounded-lg bg-ember-500 py-3 text-xs font-bold uppercase tracking-wider text-asphalt-950 hover:bg-ember-600 disabled:opacity-70 disabled:cursor-not-allowed transition-all">
+          <span x-show="!submittingPhoto">Submit Photos for Review</span>
+          <span x-show="submittingPhoto" class="inline-flex items-center justify-center gap-2">
+            <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v3a5 5 0 00-5 5H4z"></path></svg>
+            Submitting Photo...
+          </span>
+        </button>
       </form>
     </div>
   </div>
