@@ -771,7 +771,7 @@ if (!empty($gallery)) {
       </div>
 
       <?php if ($gallery_total_pages > 1): ?>
-        <div class="mt-8 flex items-center justify-center gap-1.5">
+        <div class="mt-10 flex items-center justify-center gap-1.5">
           <?php if ($gallery_current_page > 1): ?>
             <a href="?<?= $gallery_query_string ? $gallery_query_string . '&' : ''; ?>gallery_page=<?= $gallery_current_page - 1; ?>#ride-gallery"
               class="px-3 py-2 rounded-lg border border-asphalt-800/10 bg-white text-asphalt-900 font-display text-[10px] font-bold uppercase hover:border-ember-500 hover:text-ember-600 transition-all shadow-2xs">
