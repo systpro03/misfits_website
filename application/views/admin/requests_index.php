@@ -19,8 +19,11 @@
   },
   selectedAreApproved() {
     if (!this.selectedIds.length) return false;
-    const selected = this.selectedIds.map(id => this.$root.querySelector('.request-checkbox[value="' + id + '"]'));
-    return selected.length > 0 && selected.every(el => el && el.dataset.status === 'approved');
+    const checkboxes = Array.from(this.$root.querySelectorAll('.request-checkbox'));
+    return this.selectedIds.every(id => {
+      const checkbox = checkboxes.find(el => el.value === String(id));
+      return checkbox && checkbox.dataset.status === 'approved';
+    });
   }
 }" x-cloak class="space-y-6">
 
