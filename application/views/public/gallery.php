@@ -60,7 +60,7 @@ $json_gallery = htmlspecialchars(json_encode($formatted_gallery, JSON_HEX_TAG | 
   </section>
 
   <!-- ================= GALLERY GRID (6 PER ROW) ================= -->
-  <section class="max-w-6xl mx-auto px-4 py-8 md:py-12 mt-3">
+  <section id="gallery-grid" class="max-w-6xl mx-auto px-4 py-8 md:py-12 mt-3 scroll-mt-24">
     <?php if (empty($gallery)): ?>
       <div class="bg-paper-50 border border-asphalt-800/10 rounded-xl p-6 text-center">
         <p class="text-asphalt-700/60 font-display text-sm">No photos yet — be the first to submit one below.</p>
@@ -106,7 +106,7 @@ $json_gallery = htmlspecialchars(json_encode($formatted_gallery, JSON_HEX_TAG | 
       <?php if ($total_pages > 1): ?>
         <div class="mt-8 flex items-center justify-center gap-1.5">
           <?php if ($current_page > 1): ?>
-            <a href="?page=<?= $current_page - 1; ?>"
+            <a href="?page=<?= $current_page - 1; ?>#gallery-grid"
               class="px-2.5 py-1.5 rounded-md border border-asphalt-800/10 bg-white font-display text-[11px] font-bold uppercase text-asphalt-900 hover:border-ember-500 hover:text-ember-600 transition-all shadow-2xs">
               &larr; Prev
             </a>
@@ -120,7 +120,7 @@ $json_gallery = htmlspecialchars(json_encode($formatted_gallery, JSON_HEX_TAG | 
                   <?= $p; ?>
                 </span>
               <?php else: ?>
-                <a href="?page=<?= $p; ?>"
+                <a href="?page=<?= $p; ?>#gallery-grid"
                   class="w-7 h-7 flex items-center justify-center rounded-md border border-asphalt-800/10 bg-white text-asphalt-900 font-display font-bold text-[11px] hover:border-ember-500 hover:text-ember-600 transition-all shadow-2xs">
                   <?= $p; ?>
                 </a>
@@ -129,7 +129,7 @@ $json_gallery = htmlspecialchars(json_encode($formatted_gallery, JSON_HEX_TAG | 
           </div>
 
           <?php if ($current_page < $total_pages): ?>
-            <a href="?page=<?= $current_page + 1; ?>"
+            <a href="?page=<?= $current_page + 1; ?>#gallery-grid"
               class="px-2.5 py-1.5 rounded-md border border-asphalt-800/10 bg-white font-display text-[11px] font-bold uppercase text-asphalt-900 hover:border-ember-500 hover:text-ember-600 transition-all shadow-2xs">
               Next &rarr;
             </a>

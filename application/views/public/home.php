@@ -733,7 +733,7 @@ if (!empty($gallery)) {
     $home_gallery = array_slice($gallery ?? [], $gallery_offset, $gallery_items_per_page);
   ?>
   <?php if (!empty($gallery)): ?>
-    <section class="max-w-6xl mx-auto px-5 py-24">
+    <section id="ride-gallery" class="max-w-6xl mx-auto px-5 py-24 scroll-mt-24">
       <div class="flex items-end justify-between mb-12">
         <div>
           <h2 class="font-display text-xs font-bold tracking-[0.25em] text-ember-600 uppercase mb-2">From the Road</h2>
@@ -773,7 +773,7 @@ if (!empty($gallery)) {
       <?php if ($gallery_total_pages > 1): ?>
         <div class="mt-8 flex items-center justify-center gap-1.5">
           <?php if ($gallery_current_page > 1): ?>
-            <a href="?<?= $gallery_query_string ? $gallery_query_string . '&' : ''; ?>gallery_page=<?= $gallery_current_page - 1; ?>"
+            <a href="?<?= $gallery_query_string ? $gallery_query_string . '&' : ''; ?>gallery_page=<?= $gallery_current_page - 1; ?>#ride-gallery"
               class="px-3 py-2 rounded-lg border border-asphalt-800/10 bg-white text-asphalt-900 font-display text-[10px] font-bold uppercase hover:border-ember-500 hover:text-ember-600 transition-all shadow-2xs">
               &larr; Prev
             </a>
@@ -785,7 +785,7 @@ if (!empty($gallery)) {
                   <?= $gp; ?>
                 </span>
               <?php else: ?>
-                <a href="?<?= $gallery_query_string ? $gallery_query_string . '&' : ''; ?>gallery_page=<?= $gp; ?>"
+                <a href="?<?= $gallery_query_string ? $gallery_query_string . '&' : ''; ?>gallery_page=<?= $gp; ?>#ride-gallery"
                   class="w-8 h-8 flex items-center justify-center rounded-lg border border-asphalt-800/10 bg-white text-asphalt-900 font-display font-bold text-[10px] hover:border-ember-500 hover:text-ember-600 transition-all">
                   <?= $gp; ?>
                 </a>
@@ -793,7 +793,7 @@ if (!empty($gallery)) {
             <?php endfor; ?>
           </div>
           <?php if ($gallery_current_page < $gallery_total_pages): ?>
-            <a href="?<?= $gallery_query_string ? $gallery_query_string . '&' : ''; ?>gallery_page=<?= $gallery_current_page + 1; ?>"
+            <a href="?<?= $gallery_query_string ? $gallery_query_string . '&' : ''; ?>gallery_page=<?= $gallery_current_page + 1; ?>#ride-gallery"
               class="px-3 py-2 rounded-lg border border-asphalt-800/10 bg-white text-asphalt-900 font-display text-[10px] font-bold uppercase hover:border-ember-500 hover:text-ember-600 transition-all shadow-2xs">
               Next &rarr;
             </a>
