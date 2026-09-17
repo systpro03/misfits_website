@@ -146,7 +146,7 @@
   .back-to-top-button {
     position: fixed !important;
     right: 20px !important;
-    bottom: 76px !important;
+    bottom: 80px !important;
     z-index: 99998 !important;
     display: flex !important;
     visibility: hidden !important;
