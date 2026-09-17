@@ -120,6 +120,36 @@ class Admin_requests extends Admin_Controller {
 	}
 
 	/**
+	 * Revert multiple approved requests back to pending and remove their
+	 * published gallery copies.
+	 */
+	public function bulk_revert()
+	{
+		$ids = $this->input->post('ids');
+		$ids = is_array($ids) ? array_filter(array_map('intval', $ids)) : array();
+		$count = 0;
+
+		foreach ($ids as $id)
+		{
+			$req = $this->Request_model->find($id);
+			if ( ! $req || $req->status !== 'approved') { continue; }
+
+			$new_name = 'g_' . $req->image;
+			$gallery_path = FCPATH . 'assets/uploads/gallery/' . $new_name;
+			if (is_file($gallery_path))
+			{
+				@unlink($gallery_path);
+			}
+
+			$this->Request_model->set_status($id, 'pending', $this->admin['id'], NULL);
+			$count++;
+		}
+
+		set_flash('success', $count . ' request(s) reverted to pending.');
+		redirect('admin/requests');
+	}
+
+	/**
 	 * Delete multiple selected requests and their uploaded images.
 	 */
 	public function bulk_delete()

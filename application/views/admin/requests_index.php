@@ -1,6 +1,7 @@
 <div x-data="{ 
   approveUrl: '', 
   approveName: '',
+  revertOpen: false,
   rejectUrl: '',
   rejectName: '',
   deleteUrl: '',
@@ -15,6 +16,11 @@
     this.selectedIds = event.target.checked
       ? Array.from(this.$root.querySelectorAll('.request-checkbox')).map(el => el.value)
       : [];
+  },
+  selectedAreApproved() {
+    if (!this.selectedIds.length) return false;
+    const selected = this.selectedIds.map(id => this.$root.querySelector('.request-checkbox[value="' + id + '"]'));
+    return selected.length > 0 && selected.every(el => el && el.dataset.status === 'approved');
   }
 }" x-cloak class="space-y-6">
 
@@ -38,9 +44,11 @@
     <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
       <!-- Bulk Actions -->
       <div x-show="selectedIds.length > 0" x-transition class="flex items-center gap-2">
-        <button type="button" @click="bulkApproveOpen = true"
+        <button type="button"
+          @click="selectedAreApproved() ? revertOpen = true : bulkApproveOpen = true"
           class="px-3 py-2 bg-ember-500 hover:bg-ember-600 text-white text-xs font-semibold rounded-xl transition-all">
-          Approve Selected (<span x-text="selectedIds.length"></span>)
+          <span x-text="selectedAreApproved() ? 'Revert Selected' : 'Approve Selected'"></span>
+          (<span x-text="selectedIds.length"></span>)
         </button>
         <button type="button" @click="bulkDeleteOpen = true"
           class="px-3 py-2 border border-rose-200 text-rose-600 hover:bg-rose-50 text-xs font-semibold rounded-xl transition-all">
@@ -111,7 +119,7 @@
           x-show="(statusFilter === 'all' || statusFilter === '<?= $req->status; ?>') && (!search || '<?= addslashes(strtolower(htmlspecialchars($req->submitter_name))); ?>'.includes(search.toLowerCase()) || '<?= addslashes(strtolower(htmlspecialchars($req->caption ?: ''))); ?>'.includes(search.toLowerCase()))"
           class="bg-white border border-asphalt-800/10 rounded-2xl p-4 shadow-xs hover:shadow-md transition-all flex flex-col gap-4 group relative">
           <label class="absolute top-3 left-3 z-10 bg-white/90 backdrop-blur-sm rounded-lg p-1.5 shadow-sm cursor-pointer">
-            <input type="checkbox" value="<?= (int) $req->id; ?>" x-model="selectedIds"
+            <input type="checkbox" value="<?= (int) $req->id; ?>" data-status="<?= htmlspecialchars($req->status); ?>" x-model="selectedIds"
               class="request-checkbox w-4 h-4 rounded border-asphalt-800/20 text-ember-500 focus:ring-ember-500/30">
           </label>
           <!-- Photo Container (Click to Lightbox Preview) -->
@@ -407,6 +415,34 @@
             class="px-4 py-2 text-xs font-semibold text-asphalt-700 bg-asphalt-900/5 hover:bg-asphalt-900/10 rounded-xl">Cancel</button>
           <button type="submit"
             class="px-4 py-2 bg-ember-500 hover:bg-ember-600 text-white text-xs font-display font-semibold tracking-wide rounded-xl">Approve &amp; Publish</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== BULK REVERT CONFIRMATION MODAL ==================== -->
+  <div x-show="revertOpen" x-cloak
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-xs" x-transition.opacity>
+    <div class="absolute inset-0 bg-asphalt-950/60" @click="revertOpen = false"></div>
+    <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 border border-asphalt-800/10">
+      <div class="w-12 h-12 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center mb-4">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v6h6M20 20v-6h-6M19 9a7 7 0 00-12.9-3.9L4 10m16 4l-2.1 4.9A7 7 0 015 15" />
+        </svg>
+      </div>
+      <h2 class="font-display font-bold text-lg text-asphalt-900 mb-1">Revert Selected Requests?</h2>
+      <p class="text-xs text-asphalt-700/70 leading-relaxed mb-6">
+        The selected approved request(s) will be removed from the public gallery and returned to pending status.
+      </p>
+      <form action="<?= site_url('admin/requests/bulk-revert'); ?>" method="post">
+        <template x-for="id in selectedIds" :key="id">
+          <input type="hidden" name="ids[]" :value="id">
+        </template>
+        <div class="flex items-center justify-end gap-3">
+          <button type="button" @click="revertOpen = false"
+            class="px-4 py-2 text-xs font-semibold text-asphalt-700 bg-asphalt-900/5 hover:bg-asphalt-900/10 rounded-xl">Cancel</button>
+          <button type="submit"
+            class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white text-xs font-display font-semibold tracking-wide rounded-xl">Confirm Revert</button>
         </div>
       </form>
     </div>
