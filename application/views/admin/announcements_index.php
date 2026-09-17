@@ -84,12 +84,12 @@
   <!-- Add / Edit modals -->
   <div x-show="modal === 'add'" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4">
     <div class="absolute inset-0 bg-asphalt-950/60 backdrop-blur-xs" @click="modal = null"></div>
-    <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto text-asphalt-900">
-      <div class="flex items-center justify-between px-6 py-5 border-b border-asphalt-800/10">
-        <div><p class="text-[10px] font-bold uppercase tracking-[0.2em] text-ember-600">Club Bulletin</p><h2 class="font-display text-xl font-bold">New Announcement</h2></div>
+    <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[82vh] overflow-y-auto text-asphalt-900">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-asphalt-800/10">
+        <div><p class="text-[10px] font-bold uppercase tracking-[0.2em] text-ember-600">Club Bulletin</p><h2 class="font-display text-lg font-bold">New Announcement</h2></div>
         <button type="button" @click="modal = null" class="p-2 rounded-lg text-asphalt-700/40 hover:bg-asphalt-900/5 hover:text-asphalt-900">&times;</button>
       </div>
-      <form action="<?= site_url('admin/announcements/add'); ?>" method="post" class="p-6 space-y-4">
+      <form action="<?= site_url('admin/announcements/add'); ?>" method="post" class="p-5 space-y-3">
         <?php $this->load->view('admin/_announcement_fields', array('announcement' => NULL)); ?>
         <div class="flex justify-end gap-2 pt-3 border-t border-asphalt-800/10">
           <button type="button" @click="modal = null" class="px-4 py-2.5 rounded-xl bg-asphalt-900/5 text-asphalt-800 text-xs font-semibold hover:bg-asphalt-900/10">Cancel</button>
@@ -102,12 +102,12 @@
   <?php foreach ($announcements as $a): ?>
     <div x-show="modal === 'edit-<?= (int) $a->id; ?>'" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div class="absolute inset-0 bg-asphalt-950/60 backdrop-blur-xs" @click="modal = null"></div>
-      <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto text-asphalt-900">
-        <div class="flex items-center justify-between px-6 py-5 border-b border-asphalt-800/10">
-          <div><p class="text-[10px] font-bold uppercase tracking-[0.2em] text-ember-600">Club Bulletin</p><h2 class="font-display text-xl font-bold">Edit Announcement</h2></div>
+      <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[82vh] overflow-y-auto text-asphalt-900">
+        <div class="flex items-center justify-between px-5 py-4 border-b border-asphalt-800/10">
+          <div><p class="text-[10px] font-bold uppercase tracking-[0.2em] text-ember-600">Club Bulletin</p><h2 class="font-display text-lg font-bold">Edit Announcement</h2></div>
           <button type="button" @click="modal = null" class="p-2 rounded-lg text-asphalt-700/40 hover:bg-asphalt-900/5 hover:text-asphalt-900">&times;</button>
         </div>
-        <form action="<?= site_url('admin/announcements/edit/' . $a->id); ?>" method="post" class="p-6 space-y-4">
+        <form action="<?= site_url('admin/announcements/edit/' . $a->id); ?>" method="post" class="p-5 space-y-3">
           <?php $this->load->view('admin/_announcement_fields', array('announcement' => $a)); ?>
           <div class="flex justify-end gap-2 pt-3 border-t border-asphalt-800/10">
             <button type="button" @click="modal = null" class="px-4 py-2.5 rounded-xl bg-asphalt-900/5 text-asphalt-800 text-xs font-semibold hover:bg-asphalt-900/10">Cancel</button>
@@ -121,7 +121,7 @@
   <!-- Delete confirmation -->
   <div x-show="modal === 'delete'" x-cloak class="fixed inset-0 z-50 flex items-center justify-center p-4">
     <div class="absolute inset-0 bg-asphalt-950/70 backdrop-blur-xs" @click="modal = null"></div>
-    <div class="relative w-full max-w-md rounded-2xl bg-white shadow-2xl p-6 text-asphalt-900">
+    <div class="relative w-full max-w-sm rounded-2xl bg-white shadow-2xl p-5 text-asphalt-900">
       <div class="w-11 h-11 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center mb-4">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v4m0 4h.01M10.3 3.6l-7 12.1A2 2 0 005 18.7h14a2 2 0 001.7-3l-7-12.1a2 2 0 00-3.4 0z"/></svg>
       </div>
