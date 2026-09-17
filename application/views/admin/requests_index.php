@@ -78,7 +78,7 @@
 
   <?php else: ?>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       <?php foreach ($requests as $req): ?>
         <div
           x-show="(statusFilter === 'all' || statusFilter === '<?= $req->status; ?>') && (!search || '<?= addslashes(strtolower(htmlspecialchars($req->submitter_name))); ?>'.includes(search.toLowerCase()) || '<?= addslashes(strtolower(htmlspecialchars($req->caption ?: ''))); ?>'.includes(search.toLowerCase()))"
