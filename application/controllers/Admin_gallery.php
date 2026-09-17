@@ -93,17 +93,34 @@ class Admin_gallery extends Admin_Controller
 
 	public function delete_batch()
 	{
-		if ($this->input->method() === 'post') {
-			$ids = $this->input->post('ids');
-			if (!empty($ids) && is_array($ids)) {
-				$count = 0;
-				foreach ($ids as $id) {
-					$this->Gallery_model->delete((int) $id);
-					$count++;
-				}
-				set_flash('success', $count . ' photo(s) permanently removed from gallery.');
+		if ($this->input->method() !== 'post') {
+			redirect('admin/gallery');
+			return;
+		}
+
+		$ids = $this->input->post('ids');
+		$ids = is_array($ids) ? array_filter(array_map('intval', $ids)) : array();
+
+		if (empty($ids)) {
+			set_flash('error', 'No photos were selected for deletion.');
+			redirect('admin/gallery');
+			return;
+		}
+
+		$count = 0;
+		foreach ($ids as $id)
+		{
+			if ($this->Gallery_model->delete($id)) {
+				$count++;
 			}
 		}
+
+		if ($count > 0) {
+			set_flash('success', $count . ' photo(s) permanently removed from gallery.');
+		} else {
+			set_flash('error', 'No selected photos could be removed.');
+		}
+
 		redirect('admin/gallery');
 	}
 }

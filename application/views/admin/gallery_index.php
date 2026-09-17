@@ -394,7 +394,7 @@ $galleryItems = array_map(function ($g) {
       <p class="text-sm text-asphalt-700/70 mb-6">These photos will be permanently removed from the public gallery. This
         operation cannot be undone.</p>
 
-      <form action="<?= site_url('admin/gallery/delete_batch'); ?>" method="post" class="flex items-center gap-3">
+      <form action="<?= site_url('admin/gallery/delete-batch'); ?>" method="post" class="flex items-center gap-3">
         <template x-for="id in selected" :key="id">
           <input type="hidden" name="ids[]" :value="id">
         </template>
