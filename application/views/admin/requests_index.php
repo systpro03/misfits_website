@@ -164,7 +164,7 @@
                   <button type="button"
                     @click="approveUrl = '<?= site_url('admin/requests/approve/' . $req->id); ?>'; approveName = '<?= addslashes(htmlspecialchars($req->submitter_name)); ?>'"
                     class="px-3.5 py-1.5 bg-ember-500 hover:bg-ember-600 text-white text-xs font-display font-semibold tracking-wide rounded-xl transition-all shadow-xs active:scale-95">
-                    Approve &amp; Publish
+                    Publish
                   </button>
                 </div>
               <?php else: ?>
