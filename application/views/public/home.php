@@ -136,9 +136,38 @@ if (!empty($gallery)) {
       suggestModalOpen: false,
       submitPhotoModalOpen: false,
       submittingPhoto: false,
-      announcementOpen: <?= !empty($announcements) ? 'true' : 'false'; ?>,
+      announcementOpen: false,
+      announcementStorageKey: 'misfits_announcements_last_opened',
+      announcementInterval: 12 * 60 * 60 * 1000,
       activeRideId: null,
-      activeRideTitle: ''
+      activeRideTitle: '',
+      init() {
+        <?php if (!empty($announcements)): ?>
+        try {
+          const lastOpened = parseInt(localStorage.getItem(this.announcementStorageKey) || '0', 10);
+          const shouldOpen = !lastOpened || (Date.now() - lastOpened >= this.announcementInterval);
+          if (shouldOpen) {
+            this.announcementOpen = true;
+            localStorage.setItem(this.announcementStorageKey, String(Date.now()));
+          }
+        } catch (e) {
+          // If localStorage is unavailable, keep the bulletin available on load.
+          this.announcementOpen = true;
+        }
+        <?php endif; ?>
+      },
+      openAnnouncements() {
+        this.announcementOpen = true;
+        try {
+          localStorage.setItem(this.announcementStorageKey, String(Date.now()));
+        } catch (e) {}
+      },
+      closeAnnouncements() {
+        this.announcementOpen = false;
+        try {
+          localStorage.setItem(this.announcementStorageKey, String(Date.now()));
+        } catch (e) {}
+      }
   }" class="relative">
 
   <!-- ================= HERO ================= -->
@@ -214,7 +243,7 @@ if (!empty($gallery)) {
   <!-- ================= CLUB BULLETIN POPUP ================= -->
   <?php if (!empty($announcements)): ?>
     <div x-show="announcementOpen" x-cloak class="announcement-overlay fixed inset-0 flex items-center justify-center p-3 sm:p-5" role="dialog" aria-modal="true" aria-label="Club announcements">
-      <div class="absolute inset-0 bg-asphalt-950/75 backdrop-blur-sm" @click="announcementOpen = false"></div>
+      <div class="absolute inset-0 bg-asphalt-950/75 backdrop-blur-sm" @click="closeAnnouncements()"></div>
 
       <div class="relative w-full max-w-xl max-h-[70vh] sm:max-h-[74vh] bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden text-asphalt-900 flex flex-col">
         <div class="relative px-5 sm:px-7 py-5 border-b border-asphalt-800/10 flex-shrink-0">
@@ -232,7 +261,7 @@ if (!empty($gallery)) {
                 <p class="mt-1 text-xs text-asphalt-700/55">Important updates, reminders and notices from the Misfits admin team.</p>
               </div>
             </div>
-            <button type="button" @click="announcementOpen = false" class="p-2 rounded-xl text-asphalt-700/40 hover:text-asphalt-900 hover:bg-asphalt-900/5 transition-colors flex-shrink-0" aria-label="Close announcements">
+            <button type="button" @click="closeAnnouncements()" class="p-2 rounded-xl text-asphalt-700/40 hover:text-asphalt-900 hover:bg-asphalt-900/5 transition-colors flex-shrink-0" aria-label="Close announcements">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12M18 6L6 18"/></svg>
             </button>
           </div>
@@ -273,13 +302,13 @@ if (!empty($gallery)) {
 
         <div class="px-5 sm:px-7 py-4 border-t border-asphalt-800/10 bg-asphalt-900/[0.025] flex items-center justify-between gap-3 flex-shrink-0">
           <span class="text-[10px] uppercase tracking-wider font-semibold text-asphalt-700/40">Please stay updated before your next ride.</span>
-          <button type="button" @click="announcementOpen = false" class="px-4 py-2.5 rounded-xl bg-ember-500 hover:bg-ember-600 text-asphalt-950 text-xs font-display font-bold uppercase tracking-wider transition-all active:scale-95">Got It</button>
+          <button type="button" @click="closeAnnouncements()" class="px-4 py-2.5 rounded-xl bg-ember-500 hover:bg-ember-600 text-asphalt-950 text-xs font-display font-bold uppercase tracking-wider transition-all active:scale-95">Got It</button>
         </div>
       </div>
     </div>
 
     <!-- Floating announcement button after closing the bulletin -->
-    <button type="button" x-show="!announcementOpen" x-cloak @click="announcementOpen = true" class="announcement-floating-button fixed right-5 bottom-[140px] sm:right-5 sm:bottom-[140px] group flex items-center justify-center w-[54px] h-[54px] rounded-full bg-asphalt-950 border border-ember-500 shadow-2xl shadow-asphalt-950/25 hover:border-ember-500 hover:bg-asphalt-900 transition-all active:scale-95" aria-label="Open announcements" title="Open announcements">
+    <button type="button" x-show="!announcementOpen" x-cloak @click="openAnnouncements()" class="announcement-floating-button fixed right-5 bottom-[140px] sm:right-5 sm:bottom-[140px] group flex items-center justify-center w-[54px] h-[54px] rounded-full bg-asphalt-950 border border-ember-500 shadow-2xl shadow-asphalt-950/25 hover:border-ember-500 hover:bg-asphalt-900 transition-all active:scale-95" aria-label="Open announcements" title="Open announcements">
       <span class="relative inline-flex items-center justify-center w-10 h-10 rounded-full bg-ember-500 text-asphalt-950">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M19 5H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3l4 3 4-3h3a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zM7 9h10M7 13h7"/>
