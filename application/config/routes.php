@@ -26,6 +26,12 @@ $route[ 'admin/login' ] = 'admin_auth/login';
 $route[ 'admin/logout' ] = 'admin_auth/logout';
 $route[ 'admin/dashboard' ] = 'admin_dashboard/index';
 
+/* -------------------- Admin: announcements -------------------- */
+$route[ 'admin/announcements' ] = 'admin_announcements/index';
+$route[ 'admin/announcements/add' ] = 'admin_announcements/add';
+$route[ 'admin/announcements/edit/(:num)' ] = 'admin_announcements/edit/$1';
+$route[ 'admin/announcements/delete/(:num)' ] = 'admin_announcements/delete/$1';
+
 /* -------------------- Admin: rides -------------------- */
 $route[ 'admin/rides' ] = 'admin_rides/index';
 $route[ 'admin/rides/add' ] = 'admin_rides/add';
