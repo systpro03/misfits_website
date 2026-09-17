@@ -279,7 +279,7 @@ if (!empty($gallery)) {
     </div>
 
     <!-- Floating announcement button after closing the bulletin -->
-    <button type="button" x-show="!announcementOpen" x-cloak @click="announcementOpen = true" class="announcement-floating-button fixed right-5 bottom-[140px] sm:right-5 sm:bottom-[140px] group flex items-center justify-center w-[54px] h-[54px] rounded-full bg-asphalt-950 text-white border border-ember-500/45 shadow-2xl shadow-asphalt-950/25 hover:border-ember-500 hover:bg-asphalt-900 transition-all active:scale-95" aria-label="Open announcements" title="Open announcements">
+    <button type="button" x-show="!announcementOpen" x-cloak @click="announcementOpen = true" class="announcement-floating-button fixed right-5 bottom-[140px] sm:right-5 sm:bottom-[140px] group flex items-center justify-center w-[54px] h-[54px] rounded-full bg-asphalt-950 border border-ember-500/45 shadow-2xl shadow-asphalt-950/25 hover:border-ember-500 hover:bg-asphalt-900 transition-all active:scale-95" aria-label="Open announcements" title="Open announcements">
       <span class="relative inline-flex items-center justify-center w-10 h-10 rounded-full bg-ember-500 text-asphalt-950">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M19 5H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3l4 3 4-3h3a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zM7 9h10M7 13h7"/>
