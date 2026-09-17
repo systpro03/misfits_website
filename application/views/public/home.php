@@ -57,7 +57,7 @@
     justify-content: center;
     min-width: 15px;
     height: 15px;
-    padding: 0 4px;
+    padding: 0 5px;
     border: 2px solid #17181c;
     border-radius: 999px;
     background: #e8580c;
@@ -67,7 +67,7 @@
     line-height: 1;
   }
 
-    .announcement-floating-button .announcement-dot  {
+  .announcement-floating-button .announcement-dot  {
     position: absolute;
     top: 0;
     right: 0;
