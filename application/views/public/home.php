@@ -49,17 +49,17 @@
   }
 
   .announcement-floating-button .announcement-count {
-    position: absolute !important;
-    top: -7px !important;
-    right: -7px !important;
-    margin: 0 !important;
-    transform: none !important;
-    width: auto !important;
-    height: 20px !important;
-    min-width: 20px !important;
-    flex: 0 0 auto !important;
-    border-radius: 9999px !important;
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
     border: 2px solid #17181c;
+    border-radius: 999px;
     background: #e8580c;
     color: #fff;
     font-size: 9px;
