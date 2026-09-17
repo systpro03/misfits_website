@@ -42,6 +42,7 @@ if (!empty($gallery)) {
       suggestModalOpen: false,
       submitPhotoModalOpen: false,
       submittingPhoto: false,
+      announcementOpen: <?= !empty($announcements) ? 'true' : 'false'; ?>,
       activeRideId: null,
       activeRideTitle: ''
   }" class="relative">
@@ -116,65 +117,82 @@ if (!empty($gallery)) {
     </div>
   </section>
 
-  <!-- ================= CLUB BULLETIN ================= -->
+  <!-- ================= CLUB BULLETIN POPUP ================= -->
   <?php if (!empty($announcements)): ?>
-    <section class="max-w-6xl mx-auto px-5 py-14 md:py-16">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-8">
-        <div>
-          <div class="flex items-center gap-2 mb-2">
-            <span class="relative flex h-2.5 w-2.5">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ember-500 opacity-60"></span>
-              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-ember-500"></span>
-            </span>
-            <h2 class="font-display text-xs font-bold tracking-[0.25em] text-ember-600 uppercase">Club Bulletin</h2>
-          </div>
-          <p class="font-display text-3xl md:text-4xl font-bold text-asphalt-900">Rider Announcements</p>
-          <p class="mt-2 text-sm text-asphalt-700/60 max-w-2xl">Important updates, ride reminders, route suggestions and notices from the Misfits admin team.</p>
-        </div>
-        <div class="hidden sm:block text-[10px] font-display font-bold uppercase tracking-widest text-asphalt-700/40">Stay in the loop</div>
-      </div>
+    <div x-show="announcementOpen" x-cloak class="fixed inset-0 z-[80] flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-label="Club announcements">
+      <div class="absolute inset-0 bg-asphalt-950/75 backdrop-blur-sm" @click="announcementOpen = false"></div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
-        <?php foreach ($announcements as $announcement):
-          $bulletin_type = $announcement->type ?? 'announcement';
-          $type_styles = array(
-            'announcement' => array('label' => 'Announcement', 'icon' => 'M19 5H5a2 2 0 00-2 2v9a2 2 0 002 2h3l4 3 4-3h3a2 2 0 002-2V7a2 2 0 00-2-2zM7 9h10M7 13h7', 'class' => 'bg-sky-50 text-sky-700 border-sky-200'),
-            'reminder' => array('label' => 'Ride Reminder', 'icon' => 'M12 8v4l3 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z', 'class' => 'bg-amber-50 text-amber-700 border-amber-200'),
-            'attention' => array('label' => 'Attention', 'icon' => 'M12 9v4m0 4h.01M10.3 3.6l-7 12.1A2 2 0 005 18.7h14a2 2 0 001.7-3l-7-12.1a2 2 0 00-3.4 0z', 'class' => 'bg-rose-50 text-rose-700 border-rose-200'),
-            'suggestion' => array('label' => 'Ride Suggestion', 'icon' => 'M9.5 3a6.5 6.5 0 014.9 10.8c-.9 1-1.4 2-1.4 3.2h-2v-1.5c0-1.4-.6-2.5-1.4-3.5A6.5 6.5 0 019.5 3zM8 21h4M8 18h4', 'class' => 'bg-emerald-50 text-emerald-700 border-emerald-200')
-          );
-          $style = isset($type_styles[$bulletin_type]) ? $type_styles[$bulletin_type] : $type_styles['announcement'];
-        ?>
-          <article class="group bg-white rounded-2xl border border-asphalt-800/10 p-5 shadow-xs hover:shadow-lg hover:border-ember-500/30 transition-all duration-300 relative overflow-hidden h-fit">
-            <div class="absolute top-0 left-0 right-0 h-0.5 bg-ember-500/70 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-            <div class="flex items-start justify-between gap-3">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[9px] font-bold uppercase tracking-wider <?= $style['class']; ?>">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="<?= $style['icon']; ?>"/></svg>
-                <?= $style['label']; ?>
-              </span>
-              <?php if (($announcement->priority ?? 'normal') !== 'normal'): ?>
-                <span class="text-[9px] font-display font-bold uppercase tracking-wider <?= $announcement->priority === 'urgent' ? 'text-rose-600' : 'text-amber-600'; ?>">
-                  <?= htmlspecialchars($announcement->priority); ?>
+      <div class="relative w-full max-w-2xl max-h-[88vh] bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden text-asphalt-900 flex flex-col">
+        <div class="relative px-5 sm:px-7 py-5 border-b border-asphalt-800/10 flex-shrink-0">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-ember-500"></div>
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex items-start gap-3 min-w-0">
+              <div class="w-10 h-10 rounded-xl bg-ember-500/10 text-ember-600 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke="currentColor" stroke-width="1.8" fill="none" d="M19 5H5a2 2 0 00-2 2v9a2 2 0 002 2h3l4 3 4-3h3a2 2 0 002-2V7a2 2 0 00-2-2zM7 9h10M7 13h7"/>
+                </svg>
+              </div>
+              <div class="min-w-0">
+                <p class="text-[10px] font-bold uppercase tracking-[0.22em] text-ember-600">Club Bulletin</p>
+                <h2 class="mt-0.5 font-display text-xl sm:text-2xl font-bold text-asphalt-900">Rider Announcements</h2>
+                <p class="mt-1 text-xs text-asphalt-700/55">Important updates, reminders and notices from the Misfits admin team.</p>
+              </div>
+            </div>
+            <button type="button" @click="announcementOpen = false" class="p-2 rounded-xl text-asphalt-700/40 hover:text-asphalt-900 hover:bg-asphalt-900/5 transition-colors flex-shrink-0" aria-label="Close announcements">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="overflow-y-auto px-5 sm:px-7 py-5 space-y-3">
+          <?php foreach ($announcements as $announcement):
+            $bulletin_type = $announcement->type ?? 'announcement';
+            $type_styles = array(
+              'announcement' => array('label' => 'Announcement', 'icon' => 'M19 5H5a2 2 0 00-2 2v9a2 2 0 002 2h3l4 3 4-3h3a2 2 0 002-2V7a2 2 0 00-2-2zM7 9h10M7 13h7', 'class' => 'bg-sky-50 text-sky-700 border-sky-200'),
+              'reminder' => array('label' => 'Ride Reminder', 'icon' => 'M12 8v4l3 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z', 'class' => 'bg-amber-50 text-amber-700 border-amber-200'),
+              'attention' => array('label' => 'Attention', 'icon' => 'M12 9v4m0 4h.01M10.3 3.6l-7 12.1A2 2 0 005 18.7h14a2 2 0 001.7-3l-7-12.1a2 2 0 00-3.4 0z', 'class' => 'bg-rose-50 text-rose-700 border-rose-200'),
+              'suggestion' => array('label' => 'Ride Suggestion', 'icon' => 'M9.5 3a6.5 6.5 0 014.9 10.8c-.9 1-1.4 2-1.4 3.2h-2v-1.5c0-1.4-.6-2.5-1.4-3.5A6.5 6.5 0 019.5 3zM8 21h4M8 18h4', 'class' => 'bg-emerald-50 text-emerald-700 border-emerald-200')
+            );
+            $style = isset($type_styles[$bulletin_type]) ? $type_styles[$bulletin_type] : $type_styles['announcement'];
+          ?>
+            <article class="rounded-xl border border-asphalt-800/10 bg-asphalt-900/[0.025] p-4 sm:p-5 hover:border-ember-500/25 transition-colors">
+              <div class="flex items-start justify-between gap-3">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[9px] font-bold uppercase tracking-wider <?= $style['class']; ?>">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" d="<?= $style['icon']; ?>"/></svg>
+                  <?= $style['label']; ?>
                 </span>
-              <?php endif; ?>
-            </div>
-            <h3 class="mt-3 font-display text-lg font-bold text-asphalt-900 group-hover:text-ember-600 transition-colors line-clamp-2">
-              <?= htmlspecialchars($announcement->title); ?>
-            </h3>
-            <p class="mt-2 text-sm text-asphalt-700/70 leading-relaxed whitespace-pre-line line-clamp-3">
-              <?= htmlspecialchars($announcement->message); ?>
-            </p>
-            <div class="mt-4 pt-3 border-t border-asphalt-800/10 flex items-center justify-between gap-2 text-[9px] uppercase tracking-wider font-semibold text-asphalt-700/40">
-              <span class="flex items-center gap-1.5">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M15 19a4 4 0 10-6 0M12 15a3 3 0 100-6 3 3 0 000 6z"/></svg>
-                <?= htmlspecialchars($announcement->admin_name ?: 'Club Admin'); ?>
-              </span>
-              <span><?= date('M j, Y', strtotime($announcement->created_at)); ?></span>
-            </div>
-          </article>
-        <?php endforeach; ?>
+                <?php if (($announcement->priority ?? 'normal') !== 'normal'): ?>
+                  <span class="text-[9px] font-display font-bold uppercase tracking-wider <?= $announcement->priority === 'urgent' ? 'text-rose-600' : 'text-amber-600'; ?>">
+                    <?= htmlspecialchars($announcement->priority); ?>
+                  </span>
+                <?php endif; ?>
+              </div>
+              <h3 class="mt-2.5 font-display text-base sm:text-lg font-bold text-asphalt-900"><?= htmlspecialchars($announcement->title); ?></h3>
+              <p class="mt-1.5 text-sm text-asphalt-700/70 leading-relaxed whitespace-pre-line"><?= htmlspecialchars($announcement->message); ?></p>
+              <div class="mt-3 pt-3 border-t border-asphalt-800/10 flex items-center justify-between gap-2 text-[9px] uppercase tracking-wider font-semibold text-asphalt-700/40">
+                <span>By <?= htmlspecialchars($announcement->admin_name ?: 'Club Admin'); ?></span>
+                <span><?= date('M j, Y', strtotime($announcement->created_at)); ?></span>
+              </div>
+            </article>
+          <?php endforeach; ?>
+        </div>
+
+        <div class="px-5 sm:px-7 py-4 border-t border-asphalt-800/10 bg-asphalt-900/[0.025] flex items-center justify-between gap-3 flex-shrink-0">
+          <span class="text-[10px] uppercase tracking-wider font-semibold text-asphalt-700/40">Please stay updated before your next ride.</span>
+          <button type="button" @click="announcementOpen = false" class="px-4 py-2.5 rounded-xl bg-ember-500 hover:bg-ember-600 text-asphalt-950 text-xs font-display font-bold uppercase tracking-wider transition-all active:scale-95">Got It</button>
+        </div>
       </div>
-    </section>
+    </div>
+
+    <!-- Floating announcement button after closing the bulletin -->
+    <button type="button" x-show="!announcementOpen" x-cloak @click="announcementOpen = true" class="fixed right-5 bottom-5 sm:right-7 sm:bottom-7 z-[70] group flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-asphalt-950 text-white border border-ember-500/40 shadow-2xl shadow-asphalt-950/25 hover:border-ember-500 hover:bg-asphalt-900 transition-all active:scale-95" aria-label="Open announcements">
+      <span class="relative flex h-2.5 w-2.5">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-ember-500 opacity-60"></span>
+        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-ember-500"></span>
+      </span>
+      <span class="text-[10px] sm:text-xs font-display font-bold uppercase tracking-wider">Announcements</span>
+      <svg class="w-4 h-4 text-ember-500 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </button>
   <?php endif; ?>
 
   <!-- ================= VISION / MISSION ================= -->
