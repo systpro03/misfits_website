@@ -80,4 +80,63 @@ class Admin_requests extends Admin_Controller {
 		set_flash('success', 'Request removed.');
 		redirect('admin/requests');
 	}
+
+	/**
+	 * Approve multiple selected pending requests in one action.
+	 */
+	public function bulk_approve()
+	{
+		$ids = $this->input->post('ids');
+		$ids = is_array($ids) ? array_filter(array_map('intval', $ids)) : array();
+		$count = 0;
+
+		foreach ($ids as $id)
+		{
+			$req = $this->Request_model->find($id);
+			if ( ! $req || $req->status !== 'pending') { continue; }
+
+			$source = FCPATH . 'assets/uploads/requests/' . $req->image;
+			$new_name = 'g_' . $req->image;
+			$destination = FCPATH . 'assets/uploads/gallery/' . $new_name;
+
+			if (is_file($source))
+			{
+				@copy($source, $destination);
+			}
+
+			$this->Gallery_model->create(array(
+				'image'             => $new_name,
+				'caption'           => $req->caption,
+				'submitted_by_name' => $req->submitter_name,
+				'source'            => 'member_request',
+			));
+
+			$this->Request_model->set_status($id, 'approved', $this->admin['id']);
+			$count++;
+		}
+
+		set_flash('success', $count . ' request(s) approved and published.');
+		redirect('admin/requests');
+	}
+
+	/**
+	 * Delete multiple selected requests and their uploaded images.
+	 */
+	public function bulk_delete()
+	{
+		$ids = $this->input->post('ids');
+		$ids = is_array($ids) ? array_filter(array_map('intval', $ids)) : array();
+		$count = 0;
+
+		foreach ($ids as $id)
+		{
+			if ($this->Request_model->delete($id))
+			{
+				$count++;
+			}
+		}
+
+		set_flash('success', $count . ' request(s) removed.');
+		redirect('admin/requests');
+	}
 }

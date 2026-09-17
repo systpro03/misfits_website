@@ -1,13 +1,21 @@
 <div x-data="{ 
   approveUrl: '', 
-  approveName: '', 
-  rejectUrl: '', 
-  rejectName: '', 
-  deleteUrl: '', 
+  approveName: '',
+  rejectUrl: '',
+  rejectName: '',
+  deleteUrl: '',
   deleteName: '',
+  bulkApproveOpen: false,
+  bulkDeleteOpen: false,
+  selectedIds: [],
   search: '',
   statusFilter: 'all',
-  previewImage: null
+  previewImage: null,
+  toggleAll(event) {
+    this.selectedIds = event.target.checked
+      ? Array.from(this.$root.querySelectorAll('.request-checkbox')).map(el => el.value)
+      : [];
+  }
 }" x-cloak class="space-y-6">
 
   <!-- ==================== TOP ACTION & FILTER BAR ==================== -->
@@ -26,9 +34,28 @@
       </span>
     </div>
 
-    <!-- Right Controls: Status Tabs & Live Search -->
+    <!-- Right Controls: Bulk Actions, Status Tabs & Live Search -->
     <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+      <!-- Bulk Actions -->
+      <div x-show="selectedIds.length > 0" x-transition class="flex items-center gap-2">
+        <button type="button" @click="bulkApproveOpen = true"
+          class="px-3 py-2 bg-ember-500 hover:bg-ember-600 text-white text-xs font-semibold rounded-xl transition-all">
+          Approve Selected (<span x-text="selectedIds.length"></span>)
+        </button>
+        <button type="button" @click="bulkDeleteOpen = true"
+          class="px-3 py-2 border border-rose-200 text-rose-600 hover:bg-rose-50 text-xs font-semibold rounded-xl transition-all">
+          Delete Selected
+        </button>
+      </div>
       <!-- Status Filter Tabs -->
+      <div class="flex items-center gap-2 text-xs">
+        <label class="inline-flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-asphalt-900/5 cursor-pointer text-asphalt-700">
+          <input type="checkbox" @change="toggleAll($event)" :checked="selectedIds.length > 0 && selectedIds.length === $root.querySelectorAll('.request-checkbox').length"
+            class="w-3.5 h-3.5 rounded border-asphalt-800/20 text-ember-500 focus:ring-ember-500/30">
+          <span>Select All</span>
+        </label>
+      </div>
+
       <div
         class="flex bg-asphalt-900/5 p-1 rounded-xl border border-asphalt-800/10 text-xs font-medium text-asphalt-700">
         <button type="button" @click="statusFilter = 'all'"
@@ -82,7 +109,11 @@
       <?php foreach ($requests as $req): ?>
         <div
           x-show="(statusFilter === 'all' || statusFilter === '<?= $req->status; ?>') && (!search || '<?= addslashes(strtolower(htmlspecialchars($req->submitter_name))); ?>'.includes(search.toLowerCase()) || '<?= addslashes(strtolower(htmlspecialchars($req->caption ?: ''))); ?>'.includes(search.toLowerCase()))"
-          class="bg-white border border-asphalt-800/10 rounded-2xl p-4 shadow-xs hover:shadow-md transition-all flex flex-col gap-4 group">
+          class="bg-white border border-asphalt-800/10 rounded-2xl p-4 shadow-xs hover:shadow-md transition-all flex flex-col gap-4 group relative">
+          <label class="absolute top-3 left-3 z-10 bg-white/90 backdrop-blur-sm rounded-lg p-1.5 shadow-sm cursor-pointer">
+            <input type="checkbox" value="<?= (int) $req->id; ?>" x-model="selectedIds"
+              class="request-checkbox w-4 h-4 rounded border-asphalt-800/20 text-ember-500 focus:ring-ember-500/30">
+          </label>
           <!-- Photo Container (Click to Lightbox Preview) -->
           <div @click="previewImage = {
               src: '<?= upload_url('requests', $req->image); ?>',
@@ -350,6 +381,62 @@
         </div>
       </form>
 
+    </div>
+  </div>
+
+  <!-- ==================== BULK APPROVE CONFIRMATION MODAL ==================== -->
+  <div x-show="bulkApproveOpen" x-cloak
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-xs" x-transition.opacity>
+    <div class="absolute inset-0 bg-asphalt-950/60" @click="bulkApproveOpen = false"></div>
+    <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 border border-asphalt-800/10">
+      <div class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <h2 class="font-display font-bold text-lg text-asphalt-900 mb-1">Approve Selected Requests?</h2>
+      <p class="text-xs text-asphalt-700/70 leading-relaxed mb-6">
+        <span x-text="selectedIds.length" class="font-semibold text-asphalt-900"></span> selected request(s) will be approved and their photos published to the public gallery.
+      </p>
+      <form action="<?= site_url('admin/requests/bulk_approve'); ?>" method="post">
+        <template x-for="id in selectedIds" :key="id">
+          <input type="hidden" name="ids[]" :value="id">
+        </template>
+        <div class="flex items-center justify-end gap-3">
+          <button type="button" @click="bulkApproveOpen = false"
+            class="px-4 py-2 text-xs font-semibold text-asphalt-700 bg-asphalt-900/5 hover:bg-asphalt-900/10 rounded-xl">Cancel</button>
+          <button type="submit"
+            class="px-4 py-2 bg-ember-500 hover:bg-ember-600 text-white text-xs font-display font-semibold tracking-wide rounded-xl">Approve &amp; Publish</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== BULK DELETE CONFIRMATION MODAL ==================== -->
+  <div x-show="bulkDeleteOpen" x-cloak
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-xs" x-transition.opacity>
+    <div class="absolute inset-0 bg-asphalt-950/60" @click="bulkDeleteOpen = false"></div>
+    <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 border border-asphalt-800/10">
+      <div class="w-12 h-12 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center mb-4">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 1.732z" />
+        </svg>
+      </div>
+      <h2 class="font-display font-bold text-lg text-asphalt-900 mb-1">Delete Selected Requests?</h2>
+      <p class="text-xs text-asphalt-700/70 leading-relaxed mb-6">
+        You are about to permanently remove <span x-text="selectedIds.length" class="font-semibold text-asphalt-900"></span> request(s) and their uploaded images. This action cannot be undone.
+      </p>
+      <form action="<?= site_url('admin/requests/bulk_delete'); ?>" method="post">
+        <template x-for="id in selectedIds" :key="id">
+          <input type="hidden" name="ids[]" :value="id">
+        </template>
+        <div class="flex items-center justify-end gap-3">
+          <button type="button" @click="bulkDeleteOpen = false"
+            class="px-4 py-2 text-xs font-semibold text-asphalt-700 bg-asphalt-900/5 hover:bg-asphalt-900/10 rounded-xl">Cancel</button>
+          <button type="submit"
+            class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-display font-semibold tracking-wide rounded-xl">Confirm Delete</button>
+        </div>
+      </form>
     </div>
   </div>
 
