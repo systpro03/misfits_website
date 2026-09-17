@@ -398,7 +398,7 @@
       <p class="text-xs text-asphalt-700/70 leading-relaxed mb-6">
         <span x-text="selectedIds.length" class="font-semibold text-asphalt-900"></span> selected request(s) will be approved and their photos published to the public gallery.
       </p>
-      <form action="<?= site_url('admin/requests/bulk_approve'); ?>" method="post">
+      <form action="<?= site_url('admin/requests/bulk-approve'); ?>" method="post">
         <template x-for="id in selectedIds" :key="id">
           <input type="hidden" name="ids[]" :value="id">
         </template>
@@ -426,7 +426,7 @@
       <p class="text-xs text-asphalt-700/70 leading-relaxed mb-6">
         You are about to permanently remove <span x-text="selectedIds.length" class="font-semibold text-asphalt-900"></span> request(s) and their uploaded images. This action cannot be undone.
       </p>
-      <form action="<?= site_url('admin/requests/bulk_delete'); ?>" method="post">
+      <form action="<?= site_url('admin/requests/bulk-delete'); ?>" method="post">
         <template x-for="id in selectedIds" :key="id">
           <input type="hidden" name="ids[]" :value="id">
         </template>

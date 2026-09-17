@@ -61,6 +61,8 @@ $route[ 'admin/requests' ] = 'admin_requests/index';
 $route[ 'admin/requests/approve/(:num)' ] = 'admin_requests/approve/$1';
 $route[ 'admin/requests/reject/(:num)' ] = 'admin_requests/reject/$1';
 $route[ 'admin/requests/delete/(:num)' ] = 'admin_requests/delete/$1';
+$route[ 'admin/requests/bulk-approve' ] = 'admin_requests/bulk_approve';
+$route[ 'admin/requests/bulk-delete' ] = 'admin_requests/bulk_delete';
 
 /* -------------------- Admin: chat -------------------- */
 $route[ 'admin/index' ] = 'admin_chat/index';
