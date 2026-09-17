@@ -55,9 +55,9 @@
     display: none;
     align-items: center;
     justify-content: center;
-    min-width: 20px;
-    height: 20px;
-    padding: 0 5px;
+    min-width: 15px;
+    height: 15px;
+    padding: 0 4px;
     border: 2px solid #17181c;
     border-radius: 999px;
     background: #e8580c;
@@ -65,6 +65,17 @@
     font-size: 9px;
     font-weight: 800;
     line-height: 1;
+  }
+
+    .announcement-floating-button .announcement-dot  {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 9px;
+    height: 9px;
+    border: 2px solid #17181c;
+    border-radius: 50%;
+    background: #f2a165;
   }
 
   .announcement-floating-button > span > svg {
@@ -271,6 +282,7 @@ if (!empty($gallery)) {
           <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M19 5H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3l4 3 4-3h3a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zM7 9h10M7 13h7"/>
         </svg>
       </span>
+       <span class="announcement-dot"></span>
       <span class="announcement-count">
         <?= count($announcements) > 99 ? '99+' : count($announcements); ?>
       </span>
