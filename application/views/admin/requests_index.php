@@ -22,7 +22,7 @@
       </div>
       <span
         class="px-2.5 py-1 text-xs font-semibold text-asphalt-800 bg-asphalt-900/5 rounded-full border border-asphalt-800/10">
-        <?= count($requests); ?> Submissions
+        <?= $total_requests; ?> Submissions
       </span>
     </div>
 
@@ -78,11 +78,11 @@
 
   <?php else: ?>
 
-    <div class="space-y-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
       <?php foreach ($requests as $req): ?>
         <div
           x-show="(statusFilter === 'all' || statusFilter === '<?= $req->status; ?>') && (!search || '<?= addslashes(strtolower(htmlspecialchars($req->submitter_name))); ?>'.includes(search.toLowerCase()) || '<?= addslashes(strtolower(htmlspecialchars($req->caption ?: ''))); ?>'.includes(search.toLowerCase()))"
-          class="bg-white border border-asphalt-800/10 rounded-2xl p-5 shadow-xs hover:shadow-md transition-all flex flex-col sm:flex-row gap-5 group">
+          class="bg-white border border-asphalt-800/10 rounded-2xl p-4 shadow-xs hover:shadow-md transition-all flex flex-col gap-4 group">
           <!-- Photo Container (Click to Lightbox Preview) -->
           <div @click="previewImage = {
               src: '<?= upload_url('requests', $req->image); ?>',
@@ -92,7 +92,7 @@
               approveUrl: '<?= site_url('admin/requests/approve/' . $req->id); ?>',
               rejectUrl: '<?= site_url('admin/requests/reject/' . $req->id); ?>'
             }"
-            class="w-full sm:w-48 h-48 sm:h-36 rounded-xl overflow-hidden bg-asphalt-900/10 flex-shrink-0 relative group/img cursor-pointer border border-asphalt-800/10">
+            class="w-full h-48 rounded-xl overflow-hidden bg-asphalt-900/10 flex-shrink-0 relative group/img cursor-pointer border border-asphalt-800/10">
             <img src="<?= upload_url('requests', $req->image); ?>"
               class="w-full h-full object-cover transition-transform duration-300 group-hover/img:scale-105"
               alt="Submission photo">
@@ -194,6 +194,28 @@
         </div>
       <?php endforeach; ?>
     </div>
+
+    <!-- Pagination -->
+    <?php if ($total_pages > 1): ?>
+      <div class="flex items-center justify-center gap-2 pt-4">
+        <?php if ($current_page > 1): ?>
+          <a href="<?= site_url('admin/requests?page=' . ($current_page - 1)); ?>"
+            class="px-3 py-2 text-xs font-semibold text-asphalt-700 bg-white border border-asphalt-800/10 rounded-xl hover:bg-asphalt-900/5 transition-colors">Previous</a>
+        <?php endif; ?>
+
+        <?php for ($page = 1; $page <= $total_pages; $page++): ?>
+          <a href="<?= site_url('admin/requests?page=' . $page); ?>"
+            class="px-3 py-2 text-xs font-semibold rounded-xl border transition-colors <?= $page === $current_page ? 'bg-ember-500 text-white border-ember-500' : 'bg-white text-asphalt-700 border-asphalt-800/10 hover:bg-asphalt-900/5'; ?>">
+            <?= $page; ?>
+          </a>
+        <?php endfor; ?>
+
+        <?php if ($current_page < $total_pages): ?>
+          <a href="<?= site_url('admin/requests?page=' . ($current_page + 1)); ?>"
+            class="px-3 py-2 text-xs font-semibold text-asphalt-700 bg-white border border-asphalt-800/10 rounded-xl hover:bg-asphalt-900/5 transition-colors">Next</a>
+        <?php endif; ?>
+      </div>
+    <?php endif; ?>
 
   <?php endif; ?>
 

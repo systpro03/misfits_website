@@ -14,8 +14,20 @@ class Admin_requests extends Admin_Controller {
 	{
 		$data = $this->data;
 		$data['admin']    = $this->admin;
-		$data['title']    = 'Photo Requests';
-		$data['requests'] = $this->Request_model->get_all();
+		$data['title'] = 'Photo Requests';
+
+		// Paginate submissions: 16 records per page.
+		$per_page = 16;
+		$page = max(1, (int) $this->input->get('page'));
+		$all_requests = $this->Request_model->get_all();
+		$total_requests = count($all_requests);
+		$total_pages = max(1, (int) ceil($total_requests / $per_page));
+		$page = min($page, $total_pages);
+
+		$data['requests'] = array_slice($all_requests, ($page - 1) * $per_page, $per_page);
+		$data['current_page'] = $page;
+		$data['total_pages'] = $total_pages;
+		$data['total_requests'] = $total_requests;
 
 		$this->load->view('admin/layout_header', $data);
 		$this->load->view('admin/requests_index', $data);
