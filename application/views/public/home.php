@@ -119,10 +119,10 @@ if (!empty($gallery)) {
 
   <!-- ================= CLUB BULLETIN POPUP ================= -->
   <?php if (!empty($announcements)): ?>
-    <div x-show="announcementOpen" x-cloak class="fixed inset-0 z-[80] flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-label="Club announcements">
+    <div x-show="announcementOpen" x-cloak class="fixed inset-0 z-[2147483647] flex items-center justify-center p-3 sm:p-5" role="dialog" aria-modal="true" aria-label="Club announcements">
       <div class="absolute inset-0 bg-asphalt-950/75 backdrop-blur-sm" @click="announcementOpen = false"></div>
 
-      <div class="relative w-full max-w-xl max-h-[72vh] sm:max-h-[76vh] bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden text-asphalt-900 flex flex-col">
+      <div class="relative w-full max-w-xl max-h-[70vh] sm:max-h-[74vh] bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden text-asphalt-900 flex flex-col">
         <div class="relative px-5 sm:px-7 py-5 border-b border-asphalt-800/10 flex-shrink-0">
           <div class="absolute top-0 left-0 right-0 h-1 bg-ember-500"></div>
           <div class="flex items-start justify-between gap-4">
@@ -185,9 +185,9 @@ if (!empty($gallery)) {
     </div>
 
     <!-- Floating announcement button after closing the bulletin -->
-    <button type="button" x-show="!announcementOpen" x-cloak @click="announcementOpen = true" class="fixed right-5 bottom-[132px] sm:right-5 sm:bottom-[132px] z-[70] group flex items-center justify-center w-[54px] h-[54px] rounded-full bg-asphalt-950 text-white border border-ember-500/45 shadow-2xl shadow-asphalt-950/25 hover:border-ember-500 hover:bg-asphalt-900 transition-all active:scale-95" aria-label="Open announcements" title="Open announcements">
-      <span class="relative inline-flex items-center justify-center w-5 h-5">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <button type="button" x-show="!announcementOpen" x-cloak @click="announcementOpen = true" class="fixed right-5 bottom-[144px] sm:right-5 sm:bottom-[144px] z-[2147483647] group flex items-center justify-center w-[54px] h-[54px] rounded-full bg-asphalt-950 text-white border border-ember-500/45 shadow-2xl shadow-asphalt-950/25 hover:border-ember-500 hover:bg-asphalt-900 transition-all active:scale-95" aria-label="Open announcements" title="Open announcements">
+      <span class="relative inline-flex items-center justify-center w-7 h-7">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M19 5H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3l4 3 4-3h3a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zM7 9h10M7 13h7"/>
         </svg>
         <span class="absolute -top-3 -right-3 min-w-[20px] h-5 px-1 rounded-full bg-ember-500 text-asphalt-950 border-2 border-asphalt-950 text-[9px] font-display font-black leading-none flex items-center justify-center">
