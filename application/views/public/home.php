@@ -40,6 +40,7 @@ if (!empty($gallery)) {
       currentIndex: 0,
       items: <?= htmlspecialchars(json_encode($gallery_items ?? []), ENT_QUOTES, 'UTF-8'); ?>,
       suggestModalOpen: false,
+      submitPhotoModalOpen: false,
       activeRideId: null,
       activeRideTitle: ''
   }" class="relative">
@@ -765,12 +766,31 @@ if (!empty($gallery)) {
         <p class="font-display text-2xl font-bold text-white">Got a shot from a ride?</p>
         <p class="text-chrome-200/60 mt-1 text-sm">Send it in — approved photos get featured in the main gallery.</p>
       </div>
-      <a href="<?= site_url('gallery'); ?>#submit"
+      <button type="button" @click="submitPhotoModalOpen = true"
         class="px-7 py-3.5 bg-ember-500 hover:bg-ember-600 text-asphalt-950 font-display font-bold text-sm tracking-wider uppercase rounded-xl transition-all shadow-md active:scale-95 whitespace-nowrap">
         Submit a Photo
-      </a>
+      </button>
     </div>
   </section>
+
+  <!-- ================= SUBMIT PHOTO MODAL ================= -->
+  <div x-cloak x-show="submitPhotoModalOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4" x-transition.opacity @keydown.escape.window="submitPhotoModalOpen = false">
+    <div class="absolute inset-0 bg-asphalt-950/70 backdrop-blur-sm" @click="submitPhotoModalOpen = false"></div>
+    <div class="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl bg-white text-asphalt-900 shadow-2xl" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100">
+      <div class="flex items-center justify-between border-b border-asphalt-800/10 px-6 py-4">
+        <div><p class="text-[10px] font-bold uppercase tracking-[0.2em] text-ember-600">Share a Moment</p><h2 class="font-display text-xl font-bold">Submit Photos</h2></div>
+        <button type="button" @click="submitPhotoModalOpen = false" class="rounded-lg p-2 text-asphalt-700/50 hover:bg-asphalt-900/10 hover:text-asphalt-900" aria-label="Close modal">&times;</button>
+      </div>
+      <form action="<?= site_url('gallery/submit'); ?>" method="post" enctype="multipart/form-data" class="space-y-4 p-6" x-data="{ files: [], previews: [], select(e) { this.files = Array.from(e.target.files); this.previews = this.files.map(f => URL.createObjectURL(f)); }, remove(i) { URL.revokeObjectURL(this.previews[i]); this.files.splice(i,1); this.previews.splice(i,1); const dt = new DataTransfer(); this.files.forEach(f => dt.items.add(f)); this.$refs.input.files = dt.files; } }">
+        <div><label for="home_submitter_name" class="mb-1 block text-xs font-bold">Your Name *</label><input id="home_submitter_name" type="text" name="submitter_name" required maxlength="120" class="w-full rounded-lg border border-asphalt-800/20 px-3 py-2 text-sm outline-none focus:border-ember-500"></div>
+        <div><label for="home_submitter_email" class="mb-1 block text-xs font-bold">Email (optional)</label><input id="home_submitter_email" type="email" name="submitter_email" maxlength="150" class="w-full rounded-lg border border-asphalt-800/20 px-3 py-2 text-sm outline-none focus:border-ember-500"></div>
+        <div><label for="home_caption" class="mb-1 block text-xs font-bold">Caption / Note (optional)</label><input id="home_caption" type="text" name="caption" maxlength="255" placeholder="Where were these photos taken?" class="w-full rounded-lg border border-asphalt-800/20 px-3 py-2 text-sm outline-none focus:border-ember-500"></div>
+        <div><label for="home_images" class="mb-1 block text-xs font-bold">Photos *</label><input id="home_images" x-ref="input" @change="select($event)" type="file" name="images[]" accept="image/png,image/jpeg,image/webp" multiple required class="w-full rounded-lg border border-asphalt-800/20 p-2 text-xs"><p class="mt-1 text-[10px] text-asphalt-700/60">JPG, PNG or WEBP up to 5MB each.</p></div>
+        <div x-show="previews.length" class="grid grid-cols-4 gap-2 rounded-lg bg-paper-50 p-2"><template x-for="(src,i) in previews" :key="i"><div class="relative aspect-square overflow-hidden rounded-md"><img :src="src" class="h-full w-full object-cover"><button type="button" @click="remove(i)" class="absolute right-1 top-1 rounded-full bg-black/70 px-1.5 text-white">&times;</button></div></template></div>
+        <button type="submit" class="w-full rounded-lg bg-ember-500 py-3 text-xs font-bold uppercase tracking-wider text-asphalt-950 hover:bg-ember-600">Submit Photos for Review</button>
+      </form>
+    </div>
+  </div>
 
   <!-- ================= SUGGEST ROUTE MODAL ================= -->
   <div x-cloak x-show="suggestModalOpen"
