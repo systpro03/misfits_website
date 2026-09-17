@@ -92,9 +92,9 @@
                 d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
             <input type="password" id="password" name="password" required placeholder="••••••••"
-              class="w-full bg-asphalt-950/80 border border-asphalt-800/80 rounded-xl pl-10 pr-11 py-3 text-xs text-dark placeholder:text-chrome-200/30 focus:border-ember-500 focus:ring-2 focus:ring-ember-500/20 outline-none transition-all">
+              class="w-full bg-asphalt-950/80 border border-asphalt-800/80 rounded-xl pl-10 pr-11 py-3 text-xs text-dark placeholder:text-chrome-200/5 focus:border-ember-500 focus:ring-2 focus:ring-ember-500/20 outline-none transition-all">
             <button type="button" id="togglePassword" aria-label="Show password" aria-pressed="false"
-              class="absolute right-3.5 top-1/2 -translate-y-1/2 text-chrome-200/40 hover:text-ember-500 transition-colors focus:outline-none"
+              class="absolute right-3.5 top-1/2 -translate-y-1/2 text-chrome-200/10 hover:text-ember-500 transition-colors focus:outline-none"
               title="Show password">
               <svg id="eyeIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
