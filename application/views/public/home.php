@@ -49,16 +49,22 @@
   }
 
   .announcement-floating-button .announcement-count {
-  position: absolute !important;
-  top: -7px !important;
-  right: -7px !important;
-  margin: 0 !important;
-  transform: none !important;
+    position: absolute !important;
+    top: -7px !important;
+    right: -7px !important;
+    margin: 0 !important;
+    transform: none !important;
     width: auto !important;
     height: 20px !important;
     min-width: 20px !important;
     flex: 0 0 auto !important;
     border-radius: 9999px !important;
+    border: 2px solid #17181c;
+    background: #e8580c;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1;
   }
 
   .announcement-floating-button > span > svg {
