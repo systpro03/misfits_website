@@ -49,6 +49,11 @@
   }
 
   .announcement-floating-button .announcement-count {
+  position: absolute !important;
+  top: -7px !important;
+  right: -7px !important;
+  margin: 0 !important;
+  transform: none !important;
     width: auto !important;
     height: 20px !important;
     min-width: 20px !important;
@@ -260,7 +265,7 @@ if (!empty($gallery)) {
           <path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M19 5H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3l4 3 4-3h3a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zM7 9h10M7 13h7"/>
         </svg>
       </span>
-      <span class="announcement-count absolute -top-2 -right-2 min-w-[20px] h-5 px-1 rounded-full bg-ember-500 text-asphalt-950 border-2 border-asphalt-950 text-[9px] font-display font-black leading-none flex items-center justify-center z-10">
+      <span class="announcement-count">
         <?= count($announcements) > 99 ? '99+' : count($announcements); ?>
       </span>
     </button>
