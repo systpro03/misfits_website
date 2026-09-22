@@ -1,8 +1,8 @@
 
-#RewriteEngine On
+RewriteEngine On
 
-#RewriteCond %{REQUEST_URI} ^misfits.lovestoblog.com/htdocs.*
-#RewriteRule ^(.*)$ /index.php?/$1 [L]
+RewriteCond %{REQUEST_URI} ^misfits.lovestoblog.com/htdocs.*
+RewriteRule ^(.*)$ /index.php?/$1 [L]
 
 RewriteCond %{REQUEST_URI} ^application.*
 RewriteRule ^(.*)$ /index.php?/$1 [L]
