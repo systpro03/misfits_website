@@ -99,7 +99,7 @@
                   <div class="flex items-center gap-3 min-w-0">
                     <div class="w-10 h-10 rounded-xl overflow-hidden bg-asphalt-900/5 border border-asphalt-800/10 flex-shrink-0 flex items-center justify-center text-asphalt-700/30">
                       <?php if (!empty($ride->cover_image)): ?>
-                        <img src="<?= upload_url('rides', $ride->cover_image); ?>" alt="" class="w-full h-full object-cover">
+                        <img src="<?= site_url('admin/rides/image/' . rawurlencode($ride->cover_image)); ?>" alt="" class="w-full h-full object-cover">
                       <?php else: ?>
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 17h14M6 17l1.2-5.2A2 2 0 019.15 10h5.7a2 2 0 011.95 1.8L18 17M8 10l1.2-3h5.6l1.2 3"/></svg>
                       <?php endif; ?>
