@@ -149,7 +149,7 @@ class Admin_rides extends Admin_Controller {
 		}
 
 		$config['upload_path']   = './assets/uploads/' . $folder . '/';
-		$config['allowed_types'] = 'jpg|jpeg|png|webp';
+		$config['allowed_types'] = '*';
 		$config['max_size']      = 5120;
 		$config['encrypt_name']  = TRUE;
 
