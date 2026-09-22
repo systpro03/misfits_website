@@ -78,7 +78,7 @@
     <?php else: ?>
 
       <div class="overflow-x-auto">
-        <table class="w-full min-w-[920px] text-left text-xs border-collapse app-datatable" data-datatable="false">
+        <table class="w-full min-w-[920px] text-left text-xs border-collapse app-datatable">
           <thead
             class="bg-asphalt-900/5 border-b border-asphalt-800/10 text-asphalt-700/60 uppercase font-semibold tracking-wider">
             <tr>
