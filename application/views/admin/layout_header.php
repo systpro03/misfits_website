@@ -28,30 +28,47 @@
 
         <!-- Chart.js CDN -->
     <style>
+      /* Admin DataTables — match the light MISFITS UI */
       .dataTables_wrapper {
-        color: #9ca3af;
+        color: rgba(55, 65, 81, 0.72);
         font-size: 0.75rem;
-        padding: 1rem;
+        padding: 1rem 1.25rem;
+      }
+
+      .dataTables_wrapper .dataTables_length,
+      .dataTables_wrapper .dataTables_filter {
+        margin-bottom: 0.75rem;
       }
 
       .dataTables_wrapper .dataTables_length select,
       .dataTables_wrapper .dataTables_filter input {
-        background-color: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 0.5rem;
-        color: #000000;
-        padding: 0.25rem 0.5rem;
+        background: #fff;
+        border: 1px solid rgba(31, 41, 55, 0.12);
+        border-radius: 0.625rem;
+        color: #1f2937;
+        padding: 0.4rem 0.65rem;
         outline: none;
+        transition: border-color .15s ease, box-shadow .15s ease;
+      }
+
+      .dataTables_wrapper .dataTables_length select {
+        min-width: 4rem;
+        margin: 0 0.25rem;
+      }
+
+      .dataTables_wrapper .dataTables_filter input {
+        margin-left: 0.5rem;
       }
 
       .dataTables_wrapper .dataTables_length select:focus,
       .dataTables_wrapper .dataTables_filter input:focus {
-        border-color: #3b82f6;
+        border-color: rgba(220, 72, 54, 0.55);
+        box-shadow: 0 0 0 3px rgba(220, 72, 54, 0.08);
       }
 
       .dataTables_wrapper .dataTables_info {
-        color: #9ca3af;
-        padding-top: 0.75rem;
+        color: rgba(55, 65, 81, 0.58);
+        padding-top: 0.9rem;
       }
 
       .dataTables_wrapper .dataTables_paginate {
@@ -59,34 +76,59 @@
       }
 
       .dataTables_wrapper .dataTables_paginate .paginate_button {
-        color: #9ca3af !important;
-        border-radius: 0.375rem !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        background: rgba(255, 255, 255, 0.05) !important;
-        padding: 0.2rem 0.6rem !important;
+        color: rgba(31, 41, 55, 0.72) !important;
+        border-radius: 0.5rem !important;
+        border: 1px solid rgba(31, 41, 55, 0.10) !important;
+        background: #fff !important;
+        padding: 0.3rem 0.65rem !important;
         margin-left: 0.25rem !important;
       }
 
       .dataTables_wrapper .dataTables_paginate .paginate_button.current,
       .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-        background: #3b82f6 !important;
-        color: #ffffff !important;
-        border-color: transparent !important;
+        background: #dc4836 !important;
+        color: #fff !important;
+        border-color: #dc4836 !important;
       }
 
       .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-        background: rgba(255, 255, 255, 0.15) !important;
-        color: #ffffff !important;
+        background: rgba(31, 41, 55, 0.05) !important;
+        color: #1f2937 !important;
+        border-color: rgba(31, 41, 55, 0.15) !important;
       }
 
       .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
       .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover {
-        opacity: 0.3;
+        opacity: 0.4;
         cursor: not-allowed;
+        background: #fff !important;
       }
 
       table.dataTable.no-footer {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(31, 41, 55, 0.10);
+      }
+
+      table.dataTable thead th {
+        border-bottom: 0 !important;
+      }
+
+      @media (max-width: 640px) {
+        .dataTables_wrapper {
+          padding: 0.75rem;
+        }
+
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dataTables_filter {
+          float: none;
+          text-align: left;
+        }
+
+        .dataTables_wrapper .dataTables_filter input {
+          width: 100%;
+          max-width: 220px;
+          margin-left: 0;
+          margin-top: 0.35rem;
+        }
       }
     </style>
   </head>
