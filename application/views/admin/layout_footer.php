@@ -34,13 +34,8 @@
       }
     });
 
-    // Initialize only tables that are not already controlled by a page-level
-    // Alpine/search UI. Page-specific tables can opt out with data-datatable="false".
-    $('.app-datatable').each(function () {
-      if ($(this).attr('data-datatable') !== 'false' && !$.fn.dataTable.isDataTable(this)) {
-        $(this).DataTable();
-      }
-    });
+    // Automatically target any table with the class .app-datatable
+    $('.app-datatable').DataTable();
   });
 </script>
 </body>

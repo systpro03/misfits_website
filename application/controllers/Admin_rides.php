@@ -121,17 +121,6 @@ class Admin_rides extends Admin_Controller {
 		redirect('admin/rides?open=edit-' . $id);
 	}
 
-	/** Serve a ride cover image through the authenticated admin endpoint. */
-	public function image($filename = '')
-	{
-		$filename = basename(rawurldecode($filename));
-		$path = FCPATH . 'assets/uploads/rides/' . $filename;
-		if (empty($filename) || !is_file($path)) { show_404(); return; }
-		$info = @getimagesize($path);
-		if ($info === false) { show_404(); return; }
-		$this->output->set_content_type($info['mime'])->set_header('Content-Length: ' . filesize($path))->set_header('Cache-Control: private, max-age=86400')->set_output(file_get_contents($path));
-	}
-
 	public function delete($id)
 	{
 		$this->Ride_model->delete($id);
@@ -160,7 +149,7 @@ class Admin_rides extends Admin_Controller {
 		}
 
 		$config['upload_path']   = './assets/uploads/' . $folder . '/';
-		$config['allowed_types'] = '*';
+		$config['allowed_types'] = 'jpg|jpeg|png|webp';
 		$config['max_size']      = 5120;
 		$config['encrypt_name']  = TRUE;
 

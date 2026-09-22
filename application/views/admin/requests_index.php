@@ -127,7 +127,7 @@
           </label>
           <!-- Photo Container (Click to Lightbox Preview) -->
           <div @click="previewImage = {
-              src: '<?= site_url('admin/requests/image/' . rawurlencode($req->image)); ?>',
+              src: '<?= upload_url('requests', $req->image); ?>',
               name: '<?= addslashes(htmlspecialchars($req->submitter_name)); ?>',
               caption: '<?= addslashes(htmlspecialchars($req->caption ?: 'No caption provided')); ?>',
               status: '<?= $req->status; ?>',
@@ -135,7 +135,7 @@
               rejectUrl: '<?= site_url('admin/requests/reject/' . $req->id); ?>'
             }"
             class="w-full h-48 rounded-xl overflow-hidden bg-asphalt-900/10 flex-shrink-0 relative group/img cursor-pointer border border-asphalt-800/10">
-            <img src="<?= site_url('admin/requests/image/' . rawurlencode($req->image)); ?>"
+            <img src="<?= upload_url('requests', $req->image); ?>"
               class="w-full h-full object-cover transition-transform duration-300 group-hover/img:scale-105"
               alt="Submission photo">
             <!-- Zoom Overlay -->

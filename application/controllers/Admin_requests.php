@@ -66,17 +66,6 @@ class Admin_requests extends Admin_Controller {
 		redirect('admin/requests');
 	}
 
-	/** Serve a request image through the authenticated admin endpoint. */
-	public function image($filename = '')
-	{
-		$filename = basename(rawurldecode($filename));
-		$path = FCPATH . 'assets/uploads/requests/' . $filename;
-		if (empty($filename) || !is_file($path)) { show_404(); return; }
-		$info = @getimagesize($path);
-		if ($info === false) { show_404(); return; }
-		$this->output->set_content_type($info['mime'])->set_header('Content-Length: ' . filesize($path))->set_header('Cache-Control: private, max-age=86400')->set_output(file_get_contents($path));
-	}
-
 	public function reject($id)
 	{
 		$note = $this->input->post('admin_note', TRUE);

@@ -15,6 +15,16 @@ class Public_Controller extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+
+		header('Access-Control-Allow-Origin: *');
+		header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+		header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+
+		if ($_SERVER[ 'REQUEST_METHOD' ] === 'OPTIONS') {
+			http_response_code(204);
+			exit;
+		}
+
 		$this->load->library('session');
 		$this->load->model('Setting_model', 'settings');
 

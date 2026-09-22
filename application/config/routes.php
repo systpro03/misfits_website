@@ -62,7 +62,6 @@ $route[ 'admin/members/delete/(:num)' ] = 'admin_members/delete/$1';
 /* -------------------- Admin: gallery / requests -------------------- */
 $route[ 'admin/gallery' ] = 'admin_gallery/index';
 $route[ 'admin/gallery/add' ] = 'admin_gallery/add';
-$route[ 'admin/gallery/image/(.*)' ] = 'admin_gallery/image/$1';
 $route[ 'admin/gallery/delete/(:num)' ] = 'admin_gallery/delete/$1';
 $route[ 'admin/gallery/delete_batch' ] = 'admin_gallery/delete_batch';
 $route[ 'admin/requests' ] = 'admin_requests/index';

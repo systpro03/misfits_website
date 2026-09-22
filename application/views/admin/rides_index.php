@@ -29,21 +29,21 @@
     </div>
 
     <!-- Right Controls: Search & Add Button -->
-    <div class="flex items-center gap-3">
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full lg:w-auto">
       <!-- Live Filter Search -->
-      <div class="relative min-w-[200px] sm:min-w-[240px]">
+      <div class="relative w-full sm:w-[260px] lg:w-[280px]">
         <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-asphalt-700/40" fill="none"
           stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
         <input type="text" x-model="search" placeholder="Search rides or locations..."
-          class="w-full pl-9 pr-9 py-2.5 bg-asphalt-900/5 hover:bg-asphalt-900/10 focus:bg-white text-xs text-asphalt-900 rounded-xl border border-transparent focus:border-ember-500/50 outline-none transition-all placeholder:text-asphalt-700/40">
+          class="w-full pl-9 pr-9 py-2.5 bg-asphalt-900/5 hover:bg-asphalt-900/10 focus:bg-white text-xs text-asphalt-900 rounded-xl border border-transparent focus:border-ember-500/50 outline-none transition-all placeholder:text-asphalt-700/40"
       </div>
 
       <!-- New Ride Trigger -->
       <button type="button" @click="modal = 'add'"
-        class="w-auto justify-center px-3.5 py-2 bg-ember-500 hover:bg-ember-600 text-white text-xs font-display font-semibold tracking-wide rounded-lg transition-all shadow-xs hover:shadow active:scale-95 flex items-center gap-1.5 flex-shrink-0">
+        class="w-full sm:w-auto justify-center px-4 py-2.5 bg-ember-500 hover:bg-ember-600 text-white text-xs font-display font-semibold tracking-wide rounded-xl transition-all shadow-xs hover:shadow active:scale-95 flex items-center gap-1.5 flex-shrink-0">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
         </svg>
@@ -78,13 +78,13 @@
     <?php else: ?>
 
       <div class="overflow-x-auto">
-        <table class="w-full min-w-[920px] text-left text-xs border-collapse app-datatable">
+        <table class="w-full min-w-[760px] text-left text-xs border-collapse app-datatable">
           <thead
             class="bg-asphalt-900/5 border-b border-asphalt-800/10 text-asphalt-700/60 uppercase font-semibold tracking-wider">
             <tr>
-              <th class="px-5 lg:px-6 py-3.5">Ride</th>
-              <th class="px-5 lg:px-6 py-3.5">Schedule</th>
-              <th class="px-5 lg:px-6 py-3.5">Status</th>
+              <th class="px-5 lg:px-6 py-3.5">Ride Details</th>
+              <th class="px-5 lg:px-6 py-3.5">Date & Time</th>
+              <th class="px-5 lg:px-6 py-3.5">Category</th>
               <th class="px-5 lg:px-6 py-3.5">Meeting Point</th>
               <th class="px-5 lg:px-6 py-3.5 text-right">Actions</th>
             </tr>
@@ -94,27 +94,14 @@
               <tr
                 x-show="!search || '<?= addslashes(strtolower(htmlspecialchars($ride->title))); ?>'.includes(search.toLowerCase()) || '<?= addslashes(strtolower(htmlspecialchars($ride->meeting_point))); ?>'.includes(search.toLowerCase())"
                 class="hover:bg-asphalt-900/5 transition-colors group">
-                <!-- Ride -->
-                <td class="px-5 lg:px-6 py-4">
-                  <div class="flex items-center gap-3 min-w-0">
-                    <div class="w-10 h-10 rounded-xl overflow-hidden bg-asphalt-900/5 border border-asphalt-800/10 flex-shrink-0 flex items-center justify-center text-asphalt-700/30">
-                      <?php if (!empty($ride->cover_image)): ?>
-                        <img src="<?= site_url('admin/rides/image/' . rawurlencode($ride->cover_image)); ?>" alt="" class="w-full h-full object-cover">
-                      <?php else: ?>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 17h14M6 17l1.2-5.2A2 2 0 019.15 10h5.7a2 2 0 011.95 1.8L18 17M8 10l1.2-3h5.6l1.2 3"/></svg>
-                      <?php endif; ?>
-                    </div>
-                    <div class="min-w-0">
-                      <div class="font-semibold text-asphalt-900 truncate max-w-[240px] group-hover:text-ember-600 transition-colors"><?= htmlspecialchars($ride->title); ?></div>
-                      <div class="text-[10px] text-asphalt-700/40 mt-0.5">Ride #<?= (int) $ride->id; ?></div>
-                    </div>
-                  </div>
+                <!-- Title -->
+                <td class="px-5 lg:px-6 py-4 font-semibold text-asphalt-900">
+                  <span class="group-hover:text-ember-600 transition-colors"><?= htmlspecialchars($ride->title); ?></span>
                 </td>
 
-                <!-- Schedule -->
-                <td class="px-5 lg:px-6 py-4 whitespace-nowrap">
-                  <div class="font-medium text-asphalt-800"><?= friendly_date($ride->ride_date); ?></div>
-                  <div class="text-[11px] text-asphalt-700/45 mt-0.5"><?= !empty($ride->ride_time) ? date('g:i A', strtotime($ride->ride_time)) : 'Time not set'; ?></div>
+                <!-- Date -->
+                <td class="px-5 lg:px-6 py-4 text-asphalt-700/80 font-medium whitespace-nowrap">
+                  <?= friendly_date($ride->ride_date); ?>
                 </td>
 
                 <!-- Type Badge -->
