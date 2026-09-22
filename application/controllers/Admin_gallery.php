@@ -106,6 +106,7 @@ class Admin_gallery extends Admin_Controller
 
 		$this->output
 			->set_content_type($info['mime'])
+			->set_header('Content-Length: ' . filesize($path))
 			->set_header('Cache-Control: public, max-age=86400')
 			->set_output(file_get_contents($path));
 	}
