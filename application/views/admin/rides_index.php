@@ -31,7 +31,7 @@
     <!-- Right Controls: Search & Add Button -->
     <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full lg:w-auto">
       <!-- Live Filter Search -->
-      <div class="relative w-full sm:w-[260px] lg:w-[280px]">
+      <div class="relative w-full sm:w-[200px] lg:w-[220px]">
         <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-asphalt-700/40" fill="none"
           stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

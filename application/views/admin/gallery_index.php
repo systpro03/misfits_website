@@ -3,7 +3,7 @@
 $galleryItems = array_map(function ($g) {
   return [
     'id' => (int) $g->id,
-    'image' => site_url('admin/gallery/image/' . rawurlencode($g->image)),
+    'image' => upload_url('gallery', $g->image),
     'caption' => $g->caption ?: 'No caption',
     'submittedBy' => ($g->source === 'member_request') ? 'From ' . $g->submitted_by_name : '',
     'deleteUrl' => site_url('admin/gallery/delete/' . $g->id)
