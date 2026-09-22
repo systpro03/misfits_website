@@ -1,9 +1,12 @@
-# Rules for InfinityFree CodeIgniter 3
-RewriteEngine On
-RewriteBase /
 
-# Removes index.php from the URL
+RewriteEngine On
+
+RewriteCond %{REQUEST_URI} ^misfits.lovestoblog.com.*
+RewriteRule ^(.*)$ /index.php?/$1 [L]
+
+RewriteCond %{REQUEST_URI} ^application.*
+RewriteRule ^(.*)$ /index.php?/$1 [L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?/$1 [L]
-
