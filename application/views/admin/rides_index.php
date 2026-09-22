@@ -40,8 +40,8 @@
             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
         <input type="text" x-model="search" placeholder="Search rides or locations..."
-          class="w-full pl-9 pr-9 py-2.5 bg-asphalt-900/5 hover:bg-asphalt-900/10 focus:bg-white text-xs text-asphalt-900 rounded-xl border border-transparent focus:border-ember-500/50 outline-none transition-all placeholder:text-asphalt-700/40"
-          </div>
+          class="w-full pl-9 pr-9 py-2.5 bg-asphalt-900/5 hover:bg-asphalt-900/10 focus:bg-white text-xs text-asphalt-900 rounded-xl border border-transparent focus:border-ember-500/50 outline-none transition-all placeholder:text-asphalt-700/40">
+      </div>
 
         <!-- New Ride Trigger -->
         <button type="button" @click="modal = 'add'"
