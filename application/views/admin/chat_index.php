@@ -130,7 +130,7 @@ function adminChat() {
 
     load() {
       this.loading = true;
-      fetch('<?= site_url('admin/messages'); ?>', { headers: { Accept: 'application/json' } })
+      fetch('<?= base_url('admin/messages'); ?>', { headers: { Accept: 'application/json' } })
         .then(r => r.json())
         .then(result => {
           if (!result.success) throw new Error(result.message || 'Unable to load messages.');
@@ -143,7 +143,7 @@ function adminChat() {
     },
 
     markRead() {
-      fetch('<?= site_url('admin/mark-read'); ?>', { method: 'POST', headers: { Accept: 'application/json' } }).catch(() => {});
+      fetch('<?= base_url('admin/mark-read'); ?>', { method: 'POST', headers: { Accept: 'application/json' } }).catch(() => {});
     },
 
     send() {
@@ -154,7 +154,7 @@ function adminChat() {
       var body = new URLSearchParams();
       body.set('message', this.reply.trim());
 
-      fetch('<?= site_url('admin/send'); ?>', {
+      fetch('<?= base_url('admin/send'); ?>', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8', Accept: 'application/json' },
         body: body.toString()
@@ -184,7 +184,7 @@ function adminChat() {
       this.error = '';
       this.notice = '';
 
-      fetch('<?= site_url('admin/delete/'); ?>' + encodeURIComponent(id), {
+      fetch('<?= base_url('admin/delete/'); ?>' + encodeURIComponent(id), {
         method: 'GET',
         headers: { Accept: 'application/json' }
       })

@@ -197,11 +197,11 @@ if (!empty($gallery)) {
           </p>
 
           <div class="animate-rise mt-9 flex flex-wrap gap-4" style="animation-delay:.24s">
-            <a href="<?= site_url('rides/upcoming'); ?>"
+            <a href="<?= base_url('rides/upcoming'); ?>"
               class="px-7 py-3.5 bg-ember-500 hover:bg-ember-600 text-asphalt-950 font-display font-bold text-sm tracking-wider uppercase rounded-xl transition-all shadow-lg shadow-ember-500/20 active:scale-95">
               See Upcoming Rides
             </a>
-            <a href="<?= site_url('members'); ?>"
+            <a href="<?= base_url('members'); ?>"
               class="px-7 py-3.5 border border-chrome-200/30 hover:border-ember-500 hover:text-ember-500 font-display font-bold text-sm tracking-wider uppercase rounded-xl transition-all active:scale-95">
               Meet the Team
             </a>
@@ -347,7 +347,7 @@ if (!empty($gallery)) {
           <h2 class="font-display text-xs font-bold tracking-[0.25em] text-ember-500 uppercase mb-2">Kickstands Up</h2>
           <p class="font-display text-3xl md:text-4xl font-bold text-white">Upcoming Group Rides</p>
         </div>
-        <a href="<?= site_url('rides/upcoming'); ?>"
+        <a href="<?= base_url('rides/upcoming'); ?>"
           class="hidden sm:inline-flex items-center gap-2 text-sm font-display tracking-wide text-ember-500 hover:text-ember-400 font-semibold">
           <span>View all</span> &rarr;
         </a>
@@ -378,7 +378,7 @@ if (!empty($gallery)) {
                   <p class="font-display text-ember-500 text-xs tracking-widest font-bold uppercase">
                     <?= strtoupper(date('l, F j, Y', strtotime($ride->ride_date))); ?>
                   </p>
-                  <a href="<?= site_url('rides/' . $ride->id); ?>"
+                  <a href="<?= base_url('rides/' . $ride->id); ?>"
                     class="block font-display text-3xl md:text-4xl font-bold text-white hover:text-ember-500 transition-colors">
                     <?= htmlspecialchars($ride->title); ?>
                   </a>
@@ -742,7 +742,7 @@ if (!empty($gallery)) {
                             <button @click="
                             if (!isVoted) {
                               const previousVotedId = votedRouteId;
-                              fetch('<?= site_url('admin/vote_route/' . $route->id); ?>?previous_route_id=' + (previousVotedId || ''))
+                              fetch('<?= base_url('admin/vote_route/' . $route->id); ?>?previous_route_id=' + (previousVotedId || ''))
                                 .then(res => {
                                   if (!res.ok) throw new Error('Network error');
                                   return res.json();
@@ -833,7 +833,7 @@ if (!empty($gallery)) {
         <h2 class="font-display text-xs font-bold tracking-[0.25em] text-ember-600 uppercase mb-2">On the Logbook</h2>
         <p class="font-display text-3xl md:text-4xl font-bold text-asphalt-900">Latest Rides</p>
       </div>
-      <a href="<?= site_url('rides/past'); ?>"
+      <a href="<?= base_url('rides/past'); ?>"
         class="hidden sm:inline-flex items-center gap-2 text-sm font-display tracking-wide text-ember-600 hover:text-ember-700 font-semibold">
         <span>View all</span> &rarr;
       </a>
@@ -844,7 +844,7 @@ if (!empty($gallery)) {
     <?php else: ?>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <?php foreach ($past_rides as $ride): ?>
-          <a href="<?= site_url('rides/' . $ride->id); ?>"
+          <a href="<?= base_url('rides/' . $ride->id); ?>"
             class="block bg-white rounded-2xl overflow-hidden border border-asphalt-800/10 hover:border-ember-500/50 transition-all shadow-xs hover:shadow-lg group">
             <div class="h-48 bg-asphalt-900 relative overflow-hidden">
               <img src="<?= upload_url('rides', $ride->cover_image); ?>" alt="<?= htmlspecialchars($ride->title); ?>"
@@ -883,7 +883,7 @@ if (!empty($gallery)) {
           </h2>
           <p class="font-display text-3xl md:text-4xl font-bold text-asphalt-900">The Team</p>
         </div>
-        <a href="<?= site_url('members'); ?>"
+        <a href="<?= base_url('members'); ?>"
           class="hidden sm:inline-flex items-center gap-2 text-sm font-display tracking-wide text-ember-600 hover:text-ember-700 font-semibold">
           <span>Full roster</span> &rarr;
         </a>
@@ -943,7 +943,7 @@ if (!empty($gallery)) {
           <h2 class="font-display text-xs font-bold tracking-[0.25em] text-ember-600 uppercase mb-2">From the Road</h2>
           <p class="font-display text-3xl md:text-4xl font-bold text-asphalt-900">Ride Gallery</p>
         </div>
-        <a href="<?= site_url('gallery'); ?>"
+        <a href="<?= base_url('gallery'); ?>"
           class="hidden sm:inline-flex items-center gap-2 text-sm font-display tracking-wide text-ember-600 hover:text-ember-700 font-semibold transition-colors duration-200">
           <span>View gallery</span> &rarr;
         </a>
@@ -1029,7 +1029,7 @@ if (!empty($gallery)) {
         <div><p class="text-[10px] font-bold uppercase tracking-[0.2em] text-ember-600">Share a Moment</p><h2 class="font-display text-xl font-bold">Submit Photos</h2></div>
         <button type="button" @click="submitPhotoModalOpen = false" class="rounded-lg p-2 text-asphalt-700/50 hover:bg-asphalt-900/10 hover:text-asphalt-900" aria-label="Close modal">&times;</button>
       </div>
-      <form action="<?= site_url('gallery/submit'); ?>" method="post" enctype="multipart/form-data" class="space-y-4 p-6" x-data="{ files: [], previews: [], select(e) { this.files = Array.from(e.target.files); this.previews = this.files.map(f => URL.createObjectURL(f)); }, remove(i) { URL.revokeObjectURL(this.previews[i]); this.files.splice(i,1); this.previews.splice(i,1); const dt = new DataTransfer(); this.files.forEach(f => dt.items.add(f)); this.$refs.input.files = dt.files; } }">
+      <form action="<?= base_url('gallery/submit'); ?>" method="post" enctype="multipart/form-data" class="space-y-4 p-6" x-data="{ files: [], previews: [], select(e) { this.files = Array.from(e.target.files); this.previews = this.files.map(f => URL.createObjectURL(f)); }, remove(i) { URL.revokeObjectURL(this.previews[i]); this.files.splice(i,1); this.previews.splice(i,1); const dt = new DataTransfer(); this.files.forEach(f => dt.items.add(f)); this.$refs.input.files = dt.files; } }">
         <div><label for="home_submitter_name" class="mb-1 block text-xs font-bold">Your Name *</label><input id="home_submitter_name" type="text" name="submitter_name" required maxlength="120" class="w-full rounded-lg border border-asphalt-800/20 px-3 py-2 text-sm outline-none focus:border-ember-500"></div>
         <div><label for="home_submitter_email" class="mb-1 block text-xs font-bold">Email (optional)</label><input id="home_submitter_email" type="email" name="submitter_email" maxlength="150" class="w-full rounded-lg border border-asphalt-800/20 px-3 py-2 text-sm outline-none focus:border-ember-500"></div>
         <div><label for="home_caption" class="mb-1 block text-xs font-bold">Caption / Note (optional)</label><input id="home_caption" type="text" name="caption" maxlength="255" placeholder="Where were these photos taken?" class="w-full rounded-lg border border-asphalt-800/20 px-3 py-2 text-sm outline-none focus:border-ember-500"></div>
@@ -1074,7 +1074,7 @@ if (!empty($gallery)) {
 
       <!-- Modal Form Body -->
       <div class="p-6 overflow-y-auto">
-        <form action="<?= site_url('suggest_route'); ?>" method="post" enctype="multipart/form-data" class="space-y-4">
+        <form action="<?= base_url('suggest_route'); ?>" method="post" enctype="multipart/form-data" class="space-y-4">
 
           <!-- Attached Ride Binding -->
           <input type="hidden" name="ride_id" :value="activeRideId">

@@ -2,7 +2,7 @@
 <section class="bg-asphalt-950 text-white border-b border-asphalt-800/20 py-4 md:py-6 relative overflow-hidden">
   <div class="max-w-6xl mx-auto px-3 relative z-10">
     <div class="flex items-center gap-1 mb-0.5">
-      <a href="<?= site_url('rides'); ?>"
+      <a href="<?= base_url('rides'); ?>"
         class="font-display text-ember-500 hover:text-ember-400 tracking-wider text-[9px] font-semibold uppercase transition-colors">
         The Logbook
       </a>
@@ -22,7 +22,7 @@
       <h3 class="font-display font-semibold text-sm text-asphalt-900">Nothing Logged Here Yet</h3>
       <p class="text-asphalt-700/60 text-[11px] mt-0.5">Check back soon for new rides and event updates.</p>
       <div class="mt-2.5">
-        <a href="<?= site_url('rides'); ?>"
+        <a href="<?= base_url('rides'); ?>"
           class="inline-flex items-center gap-1 text-[10px] font-display font-semibold uppercase tracking-wider text-ember-600 hover:text-ember-700 transition-colors">
           &larr; Back to all rides
         </a>
@@ -31,7 +31,7 @@
   <?php else: ?>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-3">
       <?php foreach ($rides as $ride): ?>
-        <a href="<?= site_url('rides/' . $ride->id); ?>"
+        <a href="<?= base_url('rides/' . $ride->id); ?>"
           class="group bg-white rounded-md overflow-hidden border border-asphalt-800/10 hover:border-ember-500/50 hover:shadow-xs transition-all duration-200 flex flex-col justify-between">
 
           <div>

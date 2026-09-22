@@ -2,7 +2,7 @@
 
   <!-- ==================== LEFT COLUMN: MAIN SITE SETTINGS ==================== -->
   <div class="lg:col-span-2">
-    <form action="<?= site_url('admin/settings'); ?>" method="post" enctype="multipart/form-data"
+    <form action="<?= base_url('admin/settings'); ?>" method="post" enctype="multipart/form-data"
       class="bg-white border border-asphalt-800/10 rounded-2xl shadow-xs overflow-hidden">
       <input type="hidden" name="form_action" value="site_info">
 
@@ -190,7 +190,7 @@
 
   <!-- ==================== RIGHT COLUMN: CHANGE PASSWORD ==================== -->
   <div class="lg:col-span-1">
-    <form action="<?= site_url('admin/settings'); ?>" method="post"
+    <form action="<?= base_url('admin/settings'); ?>" method="post"
       class="bg-white border border-asphalt-800/10 rounded-2xl shadow-xs overflow-hidden sticky top-6">
       <input type="hidden" name="form_action" value="password">
 

@@ -131,7 +131,7 @@
                     <div class="flex items-center justify-end gap-1.5">
 
                       <!-- View Link -->
-                      <a href="<?= site_url('rides/' . $ride->id); ?>" target="_blank"
+                      <a href="<?= base_url('rides/' . $ride->id); ?>" target="_blank"
                         class="p-1.5 text-asphalt-700/50 hover:text-asphalt-900 hover:bg-white rounded-lg transition-colors border border-transparent hover:border-asphalt-800/10"
                         title="View Public Page">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -152,7 +152,7 @@
 
                       <!-- Delete Trigger Button -->
                       <button type="button"
-                        @click="delUrl = '<?= site_url('admin/rides/delete/' . $ride->id); ?>'; delLabel = '<?= addslashes(htmlspecialchars($ride->title)); ?>'"
+                        @click="delUrl = '<?= base_url('admin/rides/delete/' . $ride->id); ?>'; delLabel = '<?= addslashes(htmlspecialchars($ride->title)); ?>'"
                         class="p-1.5 text-rose-600 hover:text-rose-700 hover:bg-rose-50 rounded-lg transition-colors"
                         title="Delete Ride">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -196,7 +196,7 @@
         <!-- Form Body -->
         <div class="p-6 overflow-y-auto">
           <?php $ride = NULL;
-          $action_url = site_url('admin/rides/add');
+          $action_url = base_url('admin/rides/add');
           $this->load->view('admin/_ride_fields', array('ride' => $ride, 'action_url' => $action_url)); ?>
         </div>
       </div>
@@ -226,7 +226,7 @@
 
           <!-- Form Body -->
           <div class="p-6 overflow-y-auto">
-            <?php $action_url = site_url('admin/rides/edit/' . $ride->id);
+            <?php $action_url = base_url('admin/rides/edit/' . $ride->id);
             $this->load->view('admin/_ride_fields', array('ride' => $ride, 'action_url' => $action_url)); ?>
           </div>
         </div>

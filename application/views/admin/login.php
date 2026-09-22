@@ -63,7 +63,7 @@
       <?php endif; ?>
 
       <!-- Login Form Card -->
-      <form action="<?= site_url('admin/login'); ?>" method="post"
+      <form action="<?= base_url('admin/login'); ?>" method="post"
         class="bg-asphalt-900/90 border border-asphalt-800/80 rounded-2xl p-7 shadow-2xl backdrop-blur-md space-y-5">
 
         <!-- Username Field -->

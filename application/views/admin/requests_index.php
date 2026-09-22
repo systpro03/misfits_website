@@ -131,8 +131,8 @@
               name: '<?= addslashes(htmlspecialchars($req->submitter_name)); ?>',
               caption: '<?= addslashes(htmlspecialchars($req->caption ?: 'No caption provided')); ?>',
               status: '<?= $req->status; ?>',
-              approveUrl: '<?= site_url('admin/requests/approve/' . $req->id); ?>',
-              rejectUrl: '<?= site_url('admin/requests/reject/' . $req->id); ?>'
+              approveUrl: '<?= base_url('admin/requests/approve/' . $req->id); ?>',
+              rejectUrl: '<?= base_url('admin/requests/reject/' . $req->id); ?>'
             }"
             class="w-full h-48 rounded-xl overflow-hidden bg-asphalt-900/10 flex-shrink-0 relative group/img cursor-pointer border border-asphalt-800/10">
             <img src="<?= upload_url('requests', $req->image); ?>"
@@ -199,12 +199,12 @@
               <?php if ($req->status === 'pending'): ?>
                 <div class="flex items-center gap-2">
                   <button type="button"
-                    @click="rejectUrl = '<?= site_url('admin/requests/reject/' . $req->id); ?>'; rejectName = '<?= addslashes(htmlspecialchars($req->submitter_name)); ?>'"
+                    @click="rejectUrl = '<?= base_url('admin/requests/reject/' . $req->id); ?>'; rejectName = '<?= addslashes(htmlspecialchars($req->submitter_name)); ?>'"
                     class="px-3 py-1.5 border border-rose-200 text-rose-600 hover:bg-rose-50 text-xs font-semibold rounded-xl transition-all">
                     Reject
                   </button>
                   <button type="button"
-                    @click="approveUrl = '<?= site_url('admin/requests/approve/' . $req->id); ?>'; approveName = '<?= addslashes(htmlspecialchars($req->submitter_name)); ?>'"
+                    @click="approveUrl = '<?= base_url('admin/requests/approve/' . $req->id); ?>'; approveName = '<?= addslashes(htmlspecialchars($req->submitter_name)); ?>'"
                     class="px-3.5 py-1.5 bg-ember-500 hover:bg-ember-600 text-white text-xs font-display font-semibold tracking-wide rounded-xl transition-all shadow-xs active:scale-95">
                     Publish
                   </button>
@@ -219,7 +219,7 @@
                     </span>
                   <?php endif; ?>
                   <button type="button"
-                    @click="deleteUrl = '<?= site_url('admin/requests/delete/' . $req->id); ?>'; deleteName = '<?= addslashes(htmlspecialchars($req->submitter_name)); ?>'"
+                    @click="deleteUrl = '<?= base_url('admin/requests/delete/' . $req->id); ?>'; deleteName = '<?= addslashes(htmlspecialchars($req->submitter_name)); ?>'"
                     class="p-1.5 text-rose-600 hover:text-rose-700 hover:bg-rose-50 rounded-lg transition-colors flex items-center gap-1 text-xs font-medium"
                     title="Delete record">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -241,19 +241,19 @@
     <?php if ($total_pages > 1): ?>
       <div class="flex items-center justify-center gap-2 pt-4">
         <?php if ($current_page > 1): ?>
-          <a href="<?= site_url('admin/requests?page=' . ($current_page - 1)); ?>"
+          <a href="<?= base_url('admin/requests?page=' . ($current_page - 1)); ?>"
             class="px-3 py-2 text-xs font-semibold text-asphalt-700 bg-white border border-asphalt-800/10 rounded-xl hover:bg-asphalt-900/5 transition-colors">Previous</a>
         <?php endif; ?>
 
         <?php for ($page = 1; $page <= $total_pages; $page++): ?>
-          <a href="<?= site_url('admin/requests?page=' . $page); ?>"
+          <a href="<?= base_url('admin/requests?page=' . $page); ?>"
             class="px-3 py-2 text-xs font-semibold rounded-xl border transition-colors <?= $page === $current_page ? 'bg-ember-500 text-white border-ember-500' : 'bg-white text-asphalt-700 border-asphalt-800/10 hover:bg-asphalt-900/5'; ?>">
             <?= $page; ?>
           </a>
         <?php endfor; ?>
 
         <?php if ($current_page < $total_pages): ?>
-          <a href="<?= site_url('admin/requests?page=' . ($current_page + 1)); ?>"
+          <a href="<?= base_url('admin/requests?page=' . ($current_page + 1)); ?>"
             class="px-3 py-2 text-xs font-semibold text-asphalt-700 bg-white border border-asphalt-800/10 rounded-xl hover:bg-asphalt-900/5 transition-colors">Next</a>
         <?php endif; ?>
       </div>
@@ -409,7 +409,7 @@
       <p class="text-xs text-asphalt-700/70 leading-relaxed mb-6">
         <span x-text="selectedIds.length" class="font-semibold text-asphalt-900"></span> selected request(s) will be approved and their photos published to the public gallery.
       </p>
-      <form action="<?= site_url('admin/requests/bulk-approve'); ?>" method="post">
+      <form action="<?= base_url('admin/requests/bulk-approve'); ?>" method="post">
         <template x-for="id in selectedIds" :key="id">
           <input type="hidden" name="ids[]" :value="id">
         </template>
@@ -437,7 +437,7 @@
       <p class="text-xs text-asphalt-700/70 leading-relaxed mb-6">
         The selected approved request(s) will be removed from the public gallery and returned to pending status.
       </p>
-      <form action="<?= site_url('admin/requests/bulk-revert'); ?>" method="post">
+      <form action="<?= base_url('admin/requests/bulk-revert'); ?>" method="post">
         <template x-for="id in selectedIds" :key="id">
           <input type="hidden" name="ids[]" :value="id">
         </template>
@@ -465,7 +465,7 @@
       <p class="text-xs text-asphalt-700/70 leading-relaxed mb-6">
         You are about to permanently remove <span x-text="selectedIds.length" class="font-semibold text-asphalt-900"></span> request(s) and their uploaded images. This action cannot be undone.
       </p>
-      <form action="<?= site_url('admin/requests/bulk-delete'); ?>" method="post">
+      <form action="<?= base_url('admin/requests/bulk-delete'); ?>" method="post">
         <template x-for="id in selectedIds" :key="id">
           <input type="hidden" name="ids[]" :value="id">
         </template>

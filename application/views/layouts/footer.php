@@ -29,25 +29,25 @@
       <h3 class="font-display text-xs font-semibold tracking-[0.2em] text-ember-500 uppercase mb-4">Ride With Us</h3>
       <ul class="space-y-2.5 text-xs md:text-sm text-asphalt-300">
         <li>
-          <a href="<?= site_url('rides/upcoming'); ?>" class="hover:text-ember-400 transition-colors inline-flex items-center gap-1.5">
+          <a href="<?= base_url('rides/upcoming'); ?>" class="hover:text-ember-400 transition-colors inline-flex items-center gap-1.5">
             <span class="w-1.5 h-1.5 rounded-full bg-ember-500/50"></span>
             Upcoming Rides
           </a>
         </li>
         <li>
-          <a href="<?= site_url('rides/past'); ?>" class="hover:text-ember-400 transition-colors inline-flex items-center gap-1.5">
+          <a href="<?= base_url('rides/past'); ?>" class="hover:text-ember-400 transition-colors inline-flex items-center gap-1.5">
             <span class="w-1.5 h-1.5 rounded-full bg-asphalt-600"></span>
             Latest Rides
           </a>
         </li>
         <li>
-          <a href="<?= site_url('members'); ?>" class="hover:text-ember-400 transition-colors inline-flex items-center gap-1.5">
+          <a href="<?= base_url('members'); ?>" class="hover:text-ember-400 transition-colors inline-flex items-center gap-1.5">
             <span class="w-1.5 h-1.5 rounded-full bg-asphalt-600"></span>
             Meet the Team
           </a>
         </li>
         <li>
-          <a href="<?= site_url('gallery'); ?>" class="hover:text-ember-400 transition-colors inline-flex items-center gap-1.5">
+          <a href="<?= base_url('gallery'); ?>" class="hover:text-ember-400 transition-colors inline-flex items-center gap-1.5">
             <span class="w-1.5 h-1.5 rounded-full bg-asphalt-600"></span>
             Ride Gallery
           </a>
@@ -190,7 +190,7 @@
 </style>
 
 <script>
-  window.MISFITS_CHAT_BASE = <?= json_encode(rtrim(site_url(), '/') . '/'); ?>;
+  window.MISFITS_CHAT_BASE = <?= json_encode(rtrim(base_url(), '/') . '/'); ?>;
 </script>
 
 

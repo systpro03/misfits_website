@@ -62,7 +62,7 @@
                 <button type="button" @click="modal = 'edit-<?= (int) $a->id; ?>'" class="p-2 rounded-lg text-asphalt-700/40 hover:text-ember-600 hover:bg-ember-500/10 transition-colors" title="Edit">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.5-9.5a2.121 2.121 0 013 3L12 14l-4 1 1-4 7.5-7.5z"/></svg>
                 </button>
-                <button type="button" @click="delUrl = '<?= site_url('admin/announcements/delete/' . $a->id); ?>'; delLabel = '<?= htmlspecialchars(addslashes($a->title), ENT_QUOTES); ?>'; modal = 'delete'" class="p-2 rounded-lg text-asphalt-700/40 hover:text-rose-600 hover:bg-rose-50 transition-colors" title="Delete">
+                <button type="button" @click="delUrl = '<?= base_url('admin/announcements/delete/' . $a->id); ?>'; delLabel = '<?= htmlspecialchars(addslashes($a->title), ENT_QUOTES); ?>'; modal = 'delete'" class="p-2 rounded-lg text-asphalt-700/40 hover:text-rose-600 hover:bg-rose-50 transition-colors" title="Delete">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7V4h6v3m-8 0h10"/></svg>
                 </button>
               </div>
@@ -89,7 +89,7 @@
         <div><p class="text-[10px] font-bold uppercase tracking-[0.2em] text-ember-600">Club Bulletin</p><h2 class="font-display text-lg font-bold">New Announcement</h2></div>
         <button type="button" @click="modal = null" class="p-2 rounded-lg text-asphalt-700/40 hover:bg-asphalt-900/5 hover:text-asphalt-900">&times;</button>
       </div>
-      <form action="<?= site_url('admin/announcements/add'); ?>" method="post" class="p-5 space-y-3">
+      <form action="<?= base_url('admin/announcements/add'); ?>" method="post" class="p-5 space-y-3">
         <?php $this->load->view('admin/_announcement_fields', array('announcement' => NULL)); ?>
         <div class="flex justify-end gap-2 pt-3 border-t border-asphalt-800/10">
           <button type="button" @click="modal = null" class="px-4 py-2.5 rounded-xl bg-asphalt-900/5 text-asphalt-800 text-xs font-semibold hover:bg-asphalt-900/10">Cancel</button>
@@ -107,7 +107,7 @@
           <div><p class="text-[10px] font-bold uppercase tracking-[0.2em] text-ember-600">Club Bulletin</p><h2 class="font-display text-lg font-bold">Edit Announcement</h2></div>
           <button type="button" @click="modal = null" class="p-2 rounded-lg text-asphalt-700/40 hover:bg-asphalt-900/5 hover:text-asphalt-900">&times;</button>
         </div>
-        <form action="<?= site_url('admin/announcements/edit/' . $a->id); ?>" method="post" class="p-5 space-y-3">
+        <form action="<?= base_url('admin/announcements/edit/' . $a->id); ?>" method="post" class="p-5 space-y-3">
           <?php $this->load->view('admin/_announcement_fields', array('announcement' => $a)); ?>
           <div class="flex justify-end gap-2 pt-3 border-t border-asphalt-800/10">
             <button type="button" @click="modal = null" class="px-4 py-2.5 rounded-xl bg-asphalt-900/5 text-asphalt-800 text-xs font-semibold hover:bg-asphalt-900/10">Cancel</button>

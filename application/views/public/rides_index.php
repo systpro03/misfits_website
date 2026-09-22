@@ -18,7 +18,7 @@
         <span class="w-1.5 h-1.5 rounded-full bg-ember-500 animate-pulse"></span>
         <h2 class="font-display text-base font-semibold text-asphalt-900">Upcoming Rides</h2>
       </div>
-      <a href="<?= site_url('rides/upcoming'); ?>"
+      <a href="<?= base_url('rides/upcoming'); ?>"
         class="inline-flex items-center gap-1 text-[10px] font-display font-semibold tracking-wider uppercase text-ember-600 hover:text-ember-700 transition-colors">
         <span>View all</span>
         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,7 +35,7 @@
     <?php else: ?>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-3">
         <?php foreach ($upcoming_rides as $ride): ?>
-          <a href="<?= site_url('rides/' . $ride->id); ?>"
+          <a href="<?= base_url('rides/' . $ride->id); ?>"
             class="group relative bg-asphalt-950 text-white rounded-md overflow-hidden border border-asphalt-800/60 hover:border-ember-500/80 shadow-2xs hover:shadow-xs transition-all duration-200 flex flex-col justify-between">
 
             <div class="p-3">
@@ -93,7 +93,7 @@
   <div>
     <div class="flex items-center justify-between mb-3 pb-1.5 border-b border-asphalt-800/10">
       <h2 class="font-display text-base font-semibold text-asphalt-900">Past Rides Log</h2>
-      <a href="<?= site_url('rides/past'); ?>"
+      <a href="<?= base_url('rides/past'); ?>"
         class="inline-flex items-center gap-1 text-[10px] font-display font-semibold tracking-wider uppercase text-ember-600 hover:text-ember-700 transition-colors">
         <span>View all</span>
         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -109,7 +109,7 @@
     <?php else: ?>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-3">
         <?php foreach ($past_rides as $ride): ?>
-          <a href="<?= site_url('rides/' . $ride->id); ?>"
+          <a href="<?= base_url('rides/' . $ride->id); ?>"
             class="group bg-white rounded-md overflow-hidden border border-asphalt-800/10 hover:border-ember-500/50 hover:shadow-xs transition-all duration-200 flex flex-col justify-between">
 
             <div>

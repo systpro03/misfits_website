@@ -141,7 +141,7 @@
 
                     <!-- Delete Trigger Button -->
                     <button type="button"
-                      @click="delUrl = '<?= site_url('admin/members/delete/' . $m->id); ?>'; delLabel = '<?= addslashes(htmlspecialchars($m->road_name ?: $m->full_name)); ?>'"
+                      @click="delUrl = '<?= base_url('admin/members/delete/' . $m->id); ?>'; delLabel = '<?= addslashes(htmlspecialchars($m->road_name ?: $m->full_name)); ?>'"
                       class="p-1.5 text-rose-600 hover:text-rose-700 hover:bg-rose-50 rounded-lg transition-colors"
                       title="Delete Member">
                       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -185,7 +185,7 @@
       <!-- Form Body -->
       <div class="p-6 overflow-y-auto">
         <?php $member = NULL;
-        $action_url = site_url('admin/members/add');
+        $action_url = base_url('admin/members/add');
         $this->load->view('admin/_member_fields', array('member' => $member, 'action_url' => $action_url)); ?>
       </div>
     </div>
@@ -215,7 +215,7 @@
 
         <!-- Form Body -->
         <div class="p-6 overflow-y-auto">
-          <?php $action_url = site_url('admin/members/edit/' . $m->id);
+          <?php $action_url = base_url('admin/members/edit/' . $m->id);
           $this->load->view('admin/_member_fields', array('member' => $m, 'action_url' => $action_url)); ?>
         </div>
       </div>

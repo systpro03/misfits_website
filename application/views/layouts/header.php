@@ -49,17 +49,17 @@ if ($base_path && strpos($current_path, $base_path) === 0) {
           <nav class="hidden md:flex items-center gap-8 font-display text-sm tracking-wide">
             <a href="<?= base_url(); ?>"
               class="hover:text-ember-500 transition-colors <?= ($current_path == '' || $current_path == base_url()) ? 'text-ember-500 font-medium' : 'text-chrome-200'; ?>">Home</a>
-            <a href="<?= site_url('rides'); ?>"
+            <a href="<?= base_url('rides'); ?>"
               class="hover:text-ember-500 transition-colors <?= (strpos($current_path, 'rides') === 0) ? 'text-ember-500 font-medium' : 'text-chrome-200'; ?>">Rides</a>
-            <a href="<?= site_url('members'); ?>"
+            <a href="<?= base_url('members'); ?>"
               class="hover:text-ember-500 transition-colors <?= ($current_path == 'members') ? 'text-ember-500 font-medium' : 'text-chrome-200'; ?>">Team</a>
-            <a href="<?= site_url('gallery'); ?>"
+            <a href="<?= base_url('gallery'); ?>"
               class="hover:text-ember-500 transition-colors <?= ($current_path == 'gallery') ? 'text-ember-500 font-medium' : 'text-chrome-200'; ?>">Gallery</a>
-            <a href="<?= site_url('about'); ?>"
+            <a href="<?= base_url('about'); ?>"
               class="hover:text-ember-500 transition-colors <?= ($current_path == 'about') ? 'text-ember-500 font-medium' : 'text-chrome-200'; ?>">About</a>
-            <a href="<?= site_url('contact'); ?>"
+            <a href="<?= base_url('contact'); ?>"
               class="hover:text-ember-500 transition-colors <?= ($current_path == 'contact') ? 'text-ember-500 font-medium' : 'text-chrome-200'; ?>">Contact</a>
-            <a href="<?= site_url('admin'); ?>"
+            <a href="<?= base_url('admin'); ?>"
               class="ml-2 px-4 py-2 rounded border border-ember-500 text-ember-500 hover:bg-ember-500 hover:text-asphalt-950 transition-colors">Admin</a>
           </nav>
 
@@ -74,17 +74,17 @@ if ($base_path && strpos($current_path, $base_path) === 0) {
         <nav id="mobile-menu" class="md:hidden hidden font-display text-sm tracking-wide flex flex-col gap-1 py-3 border-t border-white/10">
           <a href="<?= base_url(); ?>"
             class="flex items-center min-h-11 px-3 rounded-lg hover:bg-white/5 hover:text-ember-500 transition-colors <?= ($current_path == '' || $current_path == base_url()) ? 'text-ember-500 font-medium bg-white/5' : ''; ?>">Home</a>
-          <a href="<?= site_url('rides'); ?>"
+          <a href="<?= base_url('rides'); ?>"
             class="flex items-center min-h-11 px-3 rounded-lg hover:bg-white/5 hover:text-ember-500 transition-colors <?= (strpos($current_path, 'rides') === 0) ? 'text-ember-500 font-medium bg-white/5' : ''; ?>">Rides</a>
-          <a href="<?= site_url('members'); ?>"
+          <a href="<?= base_url('members'); ?>"
             class="flex items-center min-h-11 px-3 rounded-lg hover:bg-white/5 hover:text-ember-500 transition-colors <?= ($current_path == 'members') ? 'text-ember-500 font-medium bg-white/5' : ''; ?>">Team</a>
-          <a href="<?= site_url('gallery'); ?>"
+          <a href="<?= base_url('gallery'); ?>"
             class="flex items-center min-h-11 px-3 rounded-lg hover:bg-white/5 hover:text-ember-500 transition-colors <?= ($current_path == 'gallery') ? 'text-ember-500 font-medium bg-white/5' : ''; ?>">Gallery</a>
-          <a href="<?= site_url('about'); ?>"
+          <a href="<?= base_url('about'); ?>"
             class="flex items-center min-h-11 px-3 rounded-lg hover:bg-white/5 hover:text-ember-500 transition-colors <?= ($current_path == 'about') ? 'text-ember-500 font-medium bg-white/5' : ''; ?>">About</a>
-          <a href="<?= site_url('contact'); ?>"
+          <a href="<?= base_url('contact'); ?>"
             class="flex items-center min-h-11 px-3 rounded-lg hover:bg-white/5 hover:text-ember-500 transition-colors <?= ($current_path == 'contact') ? 'text-ember-500 font-medium bg-white/5' : ''; ?>">Contact</a>
-          <a href="<?= site_url('admin'); ?>" class="flex items-center min-h-11 px-3 rounded-lg text-ember-500 font-semibold hover:bg-ember-500/10">Admin</a>
+          <a href="<?= base_url('admin'); ?>" class="flex items-center min-h-11 px-3 rounded-lg text-ember-500 font-semibold hover:bg-ember-500/10">Admin</a>
         </nav>
       </div>
     </header>

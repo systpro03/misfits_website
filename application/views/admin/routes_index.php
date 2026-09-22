@@ -178,14 +178,14 @@
 
                     <!-- Approve / Reject Direct Actions for Suggestions -->
                     <?php if ($status === 'pending'): ?>
-                      <a href="<?= site_url('admin/routes/approve/' . $route->id); ?>"
+                      <a href="<?= base_url('admin/routes/approve/' . $route->id); ?>"
                         class="p-1.5 text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 rounded-lg transition-colors"
                         title="Approve Route">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                         </svg>
                       </a>
-                      <a href="<?= site_url('admin/routes/reject/' . $route->id); ?>"
+                      <a href="<?= base_url('admin/routes/reject/' . $route->id); ?>"
                         class="p-1.5 text-amber-600 hover:text-amber-700 hover:bg-amber-50 rounded-lg transition-colors"
                         title="Reject Route">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -195,7 +195,7 @@
                     <?php endif; ?>
 
                     <?php if ($status === 'approved' || $status === 'rejected'): ?>
-                    <a href="<?= site_url('admin/routes/undo/' . $route->id); ?>"
+                    <a href="<?= base_url('admin/routes/undo/' . $route->id); ?>"
                         class="p-1.5 text-amber-600 hover:text-amber-700 hover:bg-amber-50 rounded-lg transition-colors"
                         title="Reject Route">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -215,7 +215,7 @@
 
                     <!-- Delete Trigger Button -->
                     <button type="button"
-                      @click="delUrl = '<?= site_url('admin/routes/delete/' . $route->id); ?>'; delLabel = '<?= addslashes(htmlspecialchars($route->route_name)); ?>'"
+                      @click="delUrl = '<?= base_url('admin/routes/delete/' . $route->id); ?>'; delLabel = '<?= addslashes(htmlspecialchars($route->route_name)); ?>'"
                       class="p-1.5 text-rose-600 hover:text-rose-700 hover:bg-rose-50 rounded-lg transition-colors"
                       title="Delete Route">
                       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -259,7 +259,7 @@
       <!-- Form Body -->
       <div class="p-6 overflow-y-auto">
         <?php $route = NULL;
-        $action_url = site_url('admin/routes/add');
+        $action_url = base_url('admin/routes/add');
         $this->load->view('admin/_route_fields', array('route' => $route, 'rides' => $rides, 'action_url' => $action_url)); ?>
       </div>
     </div>
@@ -289,7 +289,7 @@
 
         <!-- Form Body -->
         <div class="p-6 overflow-y-auto">
-          <?php $action_url = site_url('admin/routes/edit/' . $route->id);
+          <?php $action_url = base_url('admin/routes/edit/' . $route->id);
           $this->load->view('admin/_route_fields', array('route' => $route, 'rides' => $rides, 'action_url' => $action_url)); ?>
         </div>
       </div>

@@ -6,7 +6,7 @@ $galleryItems = array_map(function ($g) {
     'image' => upload_url('gallery', $g->image),
     'caption' => $g->caption ?: 'No caption',
     'submittedBy' => ($g->source === 'member_request') ? 'From ' . $g->submitted_by_name : '',
-    'deleteUrl' => site_url('admin/gallery/delete/' . $g->id)
+    'deleteUrl' => base_url('admin/gallery/delete/' . $g->id)
   ];
 }, $gallery);
 ?>
@@ -394,7 +394,7 @@ $galleryItems = array_map(function ($g) {
       <p class="text-sm text-asphalt-700/70 mb-6">These photos will be permanently removed from the public gallery. This
         operation cannot be undone.</p>
 
-      <form action="<?= site_url('admin/gallery/delete_batch'); ?>" method="post" class="flex items-center gap-3">
+      <form action="<?= base_url('admin/gallery/delete_batch'); ?>" method="post" class="flex items-center gap-3">
         <template x-for="id in selected" :key="id">
           <input type="hidden" name="ids[]" :value="id">
         </template>
@@ -421,7 +421,7 @@ $galleryItems = array_map(function ($g) {
           aria-label="Close">&times;</button>
       </div>
       <div class="p-6">
-        <form action="<?= site_url('admin/gallery/add'); ?>" method="post" enctype="multipart/form-data"
+        <form action="<?= base_url('admin/gallery/add'); ?>" method="post" enctype="multipart/form-data"
           class="space-y-4">
           <div>
             <label class="block text-sm font-medium text-asphalt-900 mb-1">Select Photo(s) *</label>

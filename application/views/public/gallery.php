@@ -183,7 +183,7 @@ $json_gallery = htmlspecialchars(json_encode($formatted_gallery, JSON_HEX_TAG | 
         </p>
       </div>
 
-      <form action="<?= site_url('gallery/submit'); ?>" method="post" enctype="multipart/form-data"
+      <form action="<?= base_url('gallery/submit'); ?>" method="post enctype="multipart/form-data"
         class="space-y-3.5 bg-white border border-asphalt-800/10 rounded-xl p-4 sm:p-5 shadow-2xs">
         <div>
           <label for="submitter_name"

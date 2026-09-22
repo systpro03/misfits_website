@@ -305,7 +305,7 @@
                     if (!isVoted && !voting) {
                       voting = true;
                       const previousVotedId = votedRouteId;
-                      fetch('<?= site_url('admin/vote_route/' . $route->id); ?>?previous_route_id=' + (previousVotedId || ''))
+                      fetch('<?= base_url('admin/vote_route/' . $route->id); ?>?previous_route_id=' + (previousVotedId || ''))
                         .then(res => { if (!res.ok) throw new Error('Network error'); return res.json(); })
                         .then(data => {
                           if (data.success) {
@@ -423,7 +423,7 @@
 
   <!-- Back Link Footer -->
   <div class="mt-12 pt-6 border-t border-asphalt-800/10">
-    <a href="<?= site_url('rides'); ?>"
+    <a href="<?= base_url('rides'); ?>"
       class="inline-flex items-center gap-2 text-xs font-display font-semibold uppercase tracking-wider text-ember-600 hover:text-ember-700 transition-colors">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />

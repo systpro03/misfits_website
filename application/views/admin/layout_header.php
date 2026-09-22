@@ -124,7 +124,7 @@
           <?php foreach ($nav_items as $item):
             $active = (strpos($current, $item[ 0 ]) === 0) || ($item[ 0 ] === 'admin/dashboard' && in_array($current, array('admin', ''), TRUE));
             ?>
-            <a href="<?= site_url($item[ 0 ]); ?>"
+            <a href="<?= base_url($item[ 0 ]); ?>"
               class="flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-all group <?= $active ? 'bg-ember-500 text-asphalt-950 font-bold shadow-xs' : 'hover:bg-asphalt-900 text-chrome-200/70 hover:text-white'; ?>">
 
               <div class="flex items-center gap-3">
@@ -155,7 +155,7 @@
             <p class="text-[10px] uppercase font-semibold text-chrome-200/40 tracking-wider">Logged in as</p>
             <p class="text-xs font-bold text-white truncate mt-0.5"><?= htmlspecialchars($admin[ 'full_name' ]); ?></p>
           </div>
-          <a href="<?= site_url('admin/logout'); ?>"
+          <a href="<?= base_url('admin/logout'); ?>"
             class="p-2 text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-lg transition-colors flex-shrink-0"
             title="Log out">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -188,12 +188,12 @@
         <nav id="mobile-admin-menu"
           class="hidden lg:hidden bg-asphalt-900 text-chrome-200 px-4 py-3 space-y-1 font-display text-sm border-b border-asphalt-800">
           <?php foreach ($nav_items as $item): ?>
-            <a href="<?= site_url($item[ 0 ]); ?>" class="flex items-center justify-between py-2 text-chrome-200/80 hover:text-white">
+            <a href="<?= base_url($item[ 0 ]); ?>" class="flex items-center justify-between py-2 text-chrome-200/80 hover:text-white">
               <span class="flex items-center gap-3"><span class="text-ember-500"><?= $item[ 2 ]; ?></span><span><?= $item[ 1 ]; ?></span></span>
               <?php if ($item[ 0 ] === 'admin/index' && !empty($chat_unread_count)): ?><span class="text-[10px] font-bold bg-ember-500/20 text-ember-500 rounded-full px-2 py-0.5"><?= (int) $chat_unread_count > 99 ? '99+' : (int) $chat_unread_count; ?></span><?php endif; ?>
             </a>
           <?php endforeach; ?>
-          <a href="<?= site_url('admin/logout'); ?>"
+          <a href="<?= base_url('admin/logout'); ?>"
             class="flex items-center gap-3 py-2 text-rose-400 hover:text-rose-300 pt-3 border-t border-asphalt-800/60">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

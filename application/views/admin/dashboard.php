@@ -14,7 +14,7 @@
         <button type="button" @click="timeFrame = 'year'" :class="timeFrame === 'year' ? 'bg-white text-asphalt-900 shadow-xs' : 'text-asphalt-700/60 hover:text-asphalt-900'" class="px-3 py-1.5 rounded-md transition-all">This Year</button>
       </div>
 
-      <a href="<?= site_url('admin/rides/add'); ?>" class="px-4 py-2 bg-ember-500 hover:bg-ember-600 text-white text-xs font-display font-semibold rounded-lg transition-all shadow-xs hover:shadow active:scale-95 flex items-center gap-1.5">
+      <a href="<?= base_url('admin/rides/add'); ?>" class="px-4 py-2 bg-ember-500 hover:bg-ember-600 text-white text-xs font-display font-semibold rounded-lg transition-all shadow-xs hover:shadow active:scale-95 flex items-center gap-1.5">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
         New Ride
       </a>
@@ -127,7 +127,7 @@
               <span class="px-2 py-0.5 text-[10px] font-bold bg-ember-500 text-white rounded-full"><?= count($pending_requests); ?></span>
           <?php endif; ?>
         </div>
-        <a href="<?= site_url('admin/requests'); ?>" class="text-xs font-semibold text-ember-600 hover:text-ember-700 transition-colors flex items-center gap-1 group">
+        <a href="<?= base_url('admin/requests'); ?>" class="text-xs font-semibold text-ember-600 hover:text-ember-700 transition-colors flex items-center gap-1 group">
           Review all 
           <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
         </a>
@@ -152,7 +152,7 @@
                     <p class="text-xs font-semibold text-asphalt-900 truncate"><?= htmlspecialchars($req->submitter_name); ?></p>
                     <p class="text-[11px] text-asphalt-700/60 truncate mt-0.5"><?= htmlspecialchars($req->caption ?: 'No caption provided'); ?></p>
                   </div>
-                  <a href="<?= site_url('admin/requests'); ?>" class="p-1.5 text-asphalt-700/40 hover:text-ember-600 rounded-lg hover:bg-white transition-colors" title="Review">
+                  <a href="<?= base_url('admin/requests'); ?>" class="p-1.5 text-asphalt-700/40 hover:text-ember-600 rounded-lg hover:bg-white transition-colors" title="Review">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                   </a>
                 </div>
@@ -170,7 +170,7 @@
         <span class="w-2.5 h-2.5 rounded-full bg-ember-500 animate-ping"></span>
         <h2 class="font-display font-semibold text-base text-asphalt-900">Next Scheduled Rides</h2>
       </div>
-      <a href="<?= site_url('admin/rides'); ?>" class="text-xs font-semibold text-ember-600 hover:text-ember-700 transition-colors flex items-center gap-1 group">
+      <a href="<?= base_url('admin/rides'); ?>" class="text-xs font-semibold text-ember-600 hover:text-ember-700 transition-colors flex items-center gap-1 group">
         Manage Schedule 
         <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
@@ -180,7 +180,7 @@
         <div class="py-12 text-center border-2 border-dashed border-asphalt-800/10 rounded-xl">
           <svg class="w-10 h-10 text-asphalt-700/30 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
           <p class="text-asphalt-700/60 text-sm font-medium">No upcoming rides scheduled.</p>
-          <a href="<?= site_url('admin/rides/add'); ?>" class="inline-block mt-3 px-4 py-2 bg-ember-500 text-white text-xs font-semibold rounded-lg hover:bg-ember-600 transition-colors">+ Schedule a Ride</a>
+          <a href="<?= base_url('admin/rides/add'); ?>" class="inline-block mt-3 px-4 py-2 bg-ember-500 text-white text-xs font-semibold rounded-lg hover:bg-ember-600 transition-colors">+ Schedule a Ride</a>
         </div>
     <?php else: ?>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -209,7 +209,7 @@
                   <span class="text-[11px] font-medium text-asphalt-700/50">
                     <?= date('g:i A', strtotime($ride->ride_date)); ?>
                   </span>
-                  <a href="<?= site_url('admin/rides/edit/' . $ride->id); ?>" class="px-3 py-1 bg-white hover:bg-asphalt-900 hover:text-white border border-asphalt-800/10 rounded-md text-xs font-semibold text-asphalt-800 transition-all shadow-2xs">
+                  <a href="<?= base_url('admin/rides/edit/' . $ride->id); ?>" class="px-3 py-1 bg-white hover:bg-asphalt-900 hover:text-white border border-asphalt-800/10 rounded-md text-xs font-semibold text-asphalt-800 transition-all shadow-2xs">
                     Edit Details
                   </a>
                 </div>
@@ -228,17 +228,17 @@
     </div>
 
     <div class="flex flex-wrap items-center gap-2.5">
-      <a href="<?= site_url('admin/rides/add'); ?>" class="px-4 py-2.5 bg-ember-500 hover:bg-ember-600 text-white text-xs font-display font-semibold tracking-wide rounded-xl transition-all shadow-xs active:scale-95 flex items-center gap-1.5">
+      <a href="<?= base_url('admin/rides/add'); ?>" class="px-4 py-2.5 bg-ember-500 hover:bg-ember-600 text-white text-xs font-display font-semibold tracking-wide rounded-xl transition-all shadow-xs active:scale-95 flex items-center gap-1.5">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
         New Ride
       </a>
 
-      <a href="<?= site_url('admin/routes/add'); ?>" class="px-4 py-2.5 bg-asphalt-800 hover:bg-asphalt-700 text-white text-xs font-display font-semibold tracking-wide rounded-xl transition-all active:scale-95 flex items-center gap-1.5">
+      <a href="<?= base_url('admin/routes/add'); ?>" class="px-4 py-2.5 bg-asphalt-800 hover:bg-asphalt-700 text-white text-xs font-display font-semibold tracking-wide rounded-xl transition-all active:scale-95 flex items-center gap-1.5">
         <svg class="w-4 h-4 text-asphalt-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
         New Route
       </a>
 
-      <a href="<?= site_url('admin/members/add'); ?>" class="px-4 py-2.5 bg-asphalt-800 hover:bg-asphalt-700 text-white text-xs font-display font-semibold tracking-wide rounded-xl transition-all active:scale-95 flex items-center gap-1.5">
+      <a href="<?= base_url('admin/members/add'); ?>" class="px-4 py-2.5 bg-asphalt-800 hover:bg-asphalt-700 text-white text-xs font-display font-semibold tracking-wide rounded-xl transition-all active:scale-95 flex items-center gap-1.5">
         <svg class="w-4 h-4 text-asphalt-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
         Add Member
       </a>
