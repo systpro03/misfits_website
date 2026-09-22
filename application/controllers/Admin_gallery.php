@@ -84,6 +84,32 @@ class Admin_gallery extends Admin_Controller
 		redirect('admin/gallery');
 	}
 
+	/**
+	 * Serves gallery images through PHP for hosts that fail to serve
+	 * files from assets/uploads directly.
+	 */
+	public function image($filename = '')
+	{
+		$filename = basename(rawurldecode($filename));
+		$path = FCPATH . 'assets/uploads/gallery/' . $filename;
+
+		if (empty($filename) || !is_file($path)) {
+			show_404();
+			return;
+		}
+
+		$info = @getimagesize($path);
+		if ($info === false) {
+			show_404();
+			return;
+		}
+
+		$this->output
+			->set_content_type($info['mime'])
+			->set_header('Cache-Control: public, max-age=86400')
+			->set_output(file_get_contents($path));
+	}
+
 	public function delete($id)
 	{
 		$this->Gallery_model->delete($id);

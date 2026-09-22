@@ -1,4 +1,8 @@
 <form action="<?= $action_url; ?>" method="post" enctype="multipart/form-data" class="space-y-5">
+  <div class="rounded-xl bg-ember-500/5 border border-ember-500/10 px-4 py-3 text-xs text-asphalt-700/70">
+    <span class="font-semibold text-asphalt-900">Ride details</span><br>
+    Set the schedule, meeting point, and optional cover image for this ride.
+  </div>
 
   <div>
     <label class="block text-sm font-medium text-asphalt-900 mb-1">Ride title *</label>
@@ -6,7 +10,7 @@
       class="w-full border border-asphalt-800/20 rounded px-3 py-2 focus:border-ember-500 focus:ring-1 focus:ring-ember-500 outline-none">
   </div>
 
-  <div class="grid grid-cols-2 gap-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <div>
       <label class="block text-sm font-medium text-asphalt-900 mb-1">Status *</label>
       <select name="ride_type" required class="w-full border border-asphalt-800/20 rounded px-3 py-2 focus:border-ember-500 outline-none">

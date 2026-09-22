@@ -78,13 +78,13 @@
     <?php else: ?>
 
       <div class="overflow-x-auto">
-        <table class="w-full min-w-[760px] text-left text-xs border-collapse app-datatable">
+        <table class="w-full min-w-[920px] text-left text-xs border-collapse app-datatable">
           <thead
             class="bg-asphalt-900/5 border-b border-asphalt-800/10 text-asphalt-700/60 uppercase font-semibold tracking-wider">
             <tr>
-              <th class="px-5 lg:px-6 py-3.5">Ride Details</th>
-              <th class="px-5 lg:px-6 py-3.5">Date & Time</th>
-              <th class="px-5 lg:px-6 py-3.5">Category</th>
+              <th class="px-5 lg:px-6 py-3.5">Ride</th>
+              <th class="px-5 lg:px-6 py-3.5">Schedule</th>
+              <th class="px-5 lg:px-6 py-3.5">Status</th>
               <th class="px-5 lg:px-6 py-3.5">Meeting Point</th>
               <th class="px-5 lg:px-6 py-3.5 text-right">Actions</th>
             </tr>
@@ -94,14 +94,27 @@
               <tr
                 x-show="!search || '<?= addslashes(strtolower(htmlspecialchars($ride->title))); ?>'.includes(search.toLowerCase()) || '<?= addslashes(strtolower(htmlspecialchars($ride->meeting_point))); ?>'.includes(search.toLowerCase())"
                 class="hover:bg-asphalt-900/5 transition-colors group">
-                <!-- Title -->
-                <td class="px-5 lg:px-6 py-4 font-semibold text-asphalt-900">
-                  <span class="group-hover:text-ember-600 transition-colors"><?= htmlspecialchars($ride->title); ?></span>
+                <!-- Ride -->
+                <td class="px-5 lg:px-6 py-4">
+                  <div class="flex items-center gap-3 min-w-0">
+                    <div class="w-10 h-10 rounded-xl overflow-hidden bg-asphalt-900/5 border border-asphalt-800/10 flex-shrink-0 flex items-center justify-center text-asphalt-700/30">
+                      <?php if (!empty($ride->cover_image)): ?>
+                        <img src="<?= upload_url('rides', $ride->cover_image); ?>" alt="" class="w-full h-full object-cover">
+                      <?php else: ?>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 17h14M6 17l1.2-5.2A2 2 0 019.15 10h5.7a2 2 0 011.95 1.8L18 17M8 10l1.2-3h5.6l1.2 3"/></svg>
+                      <?php endif; ?>
+                    </div>
+                    <div class="min-w-0">
+                      <div class="font-semibold text-asphalt-900 truncate max-w-[240px] group-hover:text-ember-600 transition-colors"><?= htmlspecialchars($ride->title); ?></div>
+                      <div class="text-[10px] text-asphalt-700/40 mt-0.5">Ride #<?= (int) $ride->id; ?></div>
+                    </div>
+                  </div>
                 </td>
 
-                <!-- Date -->
-                <td class="px-5 lg:px-6 py-4 text-asphalt-700/80 font-medium whitespace-nowrap">
-                  <?= friendly_date($ride->ride_date); ?>
+                <!-- Schedule -->
+                <td class="px-5 lg:px-6 py-4 whitespace-nowrap">
+                  <div class="font-medium text-asphalt-800"><?= friendly_date($ride->ride_date); ?></div>
+                  <div class="text-[11px] text-asphalt-700/45 mt-0.5"><?= !empty($ride->ride_time) ? date('g:i A', strtotime($ride->ride_time)) : 'Time not set'; ?></div>
                 </td>
 
                 <!-- Type Badge -->
