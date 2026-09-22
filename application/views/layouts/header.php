@@ -19,9 +19,7 @@ if ($base_path && strpos($current_path, $base_path) === 0) {
     <meta name="description"
       content="<?= htmlspecialchars(isset($site->tagline) ? $site->tagline : 'A motorcycle riding group built on brotherhood and the open road.'); ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" href="<?= base_url('assets/img/logo/misfits-logo.png'); ?>" type="image/png">
 
     <link rel="stylesheet" href="<?= base_url('assets/css/app.css') ?>">
