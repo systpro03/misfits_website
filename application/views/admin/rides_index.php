@@ -43,7 +43,7 @@
 
       <!-- New Ride Trigger -->
       <button type="button" @click="modal = 'add'"
-        class="w-full sm:w-auto justify-center px-4 py-2.5 bg-ember-500 hover:bg-ember-600 text-white text-xs font-display font-semibold tracking-wide rounded-xl transition-all shadow-xs hover:shadow active:scale-95 flex items-center gap-1.5 flex-shrink-0">
+        class="w-auto justify-center px-3.5 py-2 bg-ember-500 hover:bg-ember-600 text-white text-xs font-display font-semibold tracking-wide rounded-lg transition-all shadow-xs hover:shadow active:scale-95 flex items-center gap-1.5 flex-shrink-0">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
         </svg>
