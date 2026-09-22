@@ -5,6 +5,7 @@ module.exports = {
 		"./application/controllers/**/*.php",
 		"./application/models/**/*.php",
 		"./assets/js/**/*.js",
+		"./assets/css/*.css",
 	],
 
 	darkMode: "class",
