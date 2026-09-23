@@ -79,6 +79,16 @@ class CI_Profiler {
 	 * @var int
 	 */
 	protected $_query_toggle_count = 25;
+	protected $_compile_benchmarks = TRUE;
+	protected $_compile_get = TRUE;
+	protected $_compile_memory_usage = TRUE;
+	protected $_compile_post = TRUE;
+	protected $_compile_uri_string = TRUE;
+	protected $_compile_controller_info = TRUE;
+	protected $_compile_queries = TRUE;
+	protected $_compile_http_headers = TRUE;
+	protected $_compile_session_data = TRUE;
+	protected $_compile_config = TRUE;
 
 	/**
 	 * Reference to the CodeIgniter singleton
