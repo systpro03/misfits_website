@@ -4,4 +4,4 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 echo 'PHP is working<br>';
-echo 'PHP Version: ' . PHP_VERSION;
+echo 'PHP Version: ' . PHP_VERSION; 
