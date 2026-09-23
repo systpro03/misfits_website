@@ -754,6 +754,191 @@ table.dataTable td {
     }
 }
 
+/* =========================================================
+   MISFITS ADMIN DATA TABLE OVERRIDES
+   Keep DataTables controls and columns aligned with the UI.
+   ========================================================= */
+
+.dataTables_wrapper {
+    width: 100%;
+    clear: both;
+    color: #34383d;
+}
+
+.dataTables_wrapper .dt-top,
+.dataTables_wrapper .dt-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 16px;
+}
+
+.dataTables_wrapper .dt-top {
+    border-bottom: 1px solid rgba(52, 56, 61, 0.08);
+}
+
+.dataTables_wrapper .dt-bottom {
+    border-top: 1px solid rgba(52, 56, 61, 0.08);
+}
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate {
+    float: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dataTables_wrapper .dataTables_length label,
+.dataTables_wrapper .dataTables_filter label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(52, 56, 61, 0.65);
+}
+
+.dataTables_wrapper .dataTables_length select,
+.dataTables_wrapper .dataTables_filter input {
+    height: 34px;
+    box-sizing: border-box;
+    border: 1px solid rgba(52, 56, 61, 0.12);
+    border-radius: 10px;
+    background: #fff;
+    color: #34383d;
+    outline: none;
+    font-size: 12px;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    min-width: 58px;
+    padding: 0 8px;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    width: 220px;
+    margin-left: 0;
+    padding: 0 11px;
+}
+
+.dataTables_wrapper .dataTables_length select:focus,
+.dataTables_wrapper .dataTables_filter input:focus {
+    border-color: rgba(224, 57, 62, 0.5);
+}
+
+.dataTables_wrapper .dataTables_info {
+    font-size: 11px;
+    color: rgba(52, 56, 61, 0.6);
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    min-width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 0 8px;
+    margin: 0;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    border-color: rgba(52, 56, 61, 0.12);
+    background: rgba(52, 56, 61, 0.06);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    border-color: rgba(224, 57, 62, 0.2);
+    background: rgba(224, 57, 62, 0.08);
+    color: #34383d !important;
+}
+
+table.dataTable {
+    width: 100% !important;
+    margin: 0 !important;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: auto;
+}
+
+table.dataTable th,
+table.dataTable td {
+    box-sizing: border-box;
+}
+
+table.dataTable thead > tr > th,
+table.dataTable thead > tr > td {
+    padding: 12px 16px;
+    vertical-align: middle;
+}
+
+table.dataTable tbody > tr > th,
+table.dataTable tbody > tr > td {
+    padding: 14px 16px;
+    vertical-align: middle;
+}
+
+table.dataTable thead > tr > th.sorting,
+table.dataTable thead > tr > th.sorting_asc,
+table.dataTable thead > tr > th.sorting_desc {
+    padding-right: 30px;
+}
+
+@media screen and (max-width: 767px) {
+    .dataTables_wrapper .dt-top,
+    .dataTables_wrapper .dt-bottom {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .dataTables_wrapper .dataTables_filter {
+        margin-left: auto;
+    }
+
+    .dataTables_wrapper .dataTables_filter input {
+        width: 190px;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .dataTables_wrapper .dt-top,
+    .dataTables_wrapper .dt-bottom {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .dataTables_wrapper .dataTables_filter {
+        margin-left: 0;
+    }
+
+    .dataTables_wrapper .dataTables_filter input {
+        width: 100%;
+    }
+
+    .dataTables_wrapper .dataTables_paginate {
+        justify-content: center;
+    }
+
+    .dataTables_wrapper .dataTables_info {
+        text-align: center;
+    }
+}
+
 html.dark {
     --dt-row-hover: 255, 255, 255;
     --dt-row-stripe: 255, 255, 255;

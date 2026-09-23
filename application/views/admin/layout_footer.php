@@ -16,10 +16,12 @@
 <!-- Global DataTables Auto-Initialization Script -->
 <script>
   $(document).ready(function () {
-    // Apply default UI styling globally for all DataTables
+    // Consistent DataTables configuration across the admin area.
     $.extend(true, $.fn.dataTable.defaults, {
       pageLength: 10,
-      responsive: true,
+      responsive: false,
+      autoWidth: false,
+      dom: '<"dt-top"lf>rt<"dt-bottom"ip>',
       language: {
         search: "_INPUT_",
         searchPlaceholder: "Search records...",
@@ -34,7 +36,7 @@
       }
     });
 
-    // Automatically target any table with the class .app-datatable
+    // Automatically target any table with the class .app-datatable.
     $('.app-datatable').DataTable();
   });
 </script>
