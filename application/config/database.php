@@ -14,7 +14,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'sql210.infinityfree.com',
+	'hostname' => '',
 	'username' => 'if0_42879278',
 	'password' => 'Misfits2026',
 	'database' => 'if0_42879278_misfits_data',
