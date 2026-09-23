@@ -1,10 +1,10 @@
 RewriteEngine On
 
 # ---------------------------------------------------------
-# CodeIgniter 3 - InfinityFree
+# CodeIgniter 3 URL rewriting
 # ---------------------------------------------------------
 
-# Allow existing files and directories to load normally
+# Allow existing files and directories to load directly
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
