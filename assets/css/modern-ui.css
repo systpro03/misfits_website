@@ -185,6 +185,56 @@ body:has(> div.flex.min-h-screen) aside a.bg-ember-500 {
   box-shadow: 0 8px 22px rgba(229,57,69,.20);
 }
 
+/* ---------- Admin UI refinements ---------- */
+body:has(> div.flex.min-h-screen) main label {
+  color: #3f4650;
+  font-weight: 600;
+}
+
+body:has(> div.flex.min-h-screen) main input,
+body:has(> div.flex.min-h-screen) main select,
+body:has(> div.flex.min-h-screen) main textarea {
+  border-color: rgba(21,23,26,.12);
+  background: #fff;
+  color: #15171a;
+}
+
+body:has(> div.flex.min-h-screen) main input::placeholder,
+body:has(> div.flex.min-h-screen) main textarea::placeholder {
+  color: #8a919b;
+}
+
+body:has(> div.flex.min-h-screen) main .overflow-x-auto {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(21,23,26,.20) transparent;
+}
+
+body:has(> div.flex.min-h-screen) main .overflow-x-auto::-webkit-scrollbar {
+  height: 7px;
+}
+
+body:has(> div.flex.min-h-screen) main .overflow-x-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body:has(> div.flex.min-h-screen) main .overflow-x-auto::-webkit-scrollbar-thumb {
+  background: rgba(21,23,26,.18);
+  border-radius: 999px;
+}
+
+body:has(> div.flex.min-h-screen) main .flex.flex-col.sm\\:flex-row,
+body:has(> div.flex.min-h-screen) main .flex.flex-col.lg\\:flex-row {
+  min-width: 0;
+}
+
+body:has(> div.flex.min-h-screen) main .grid > * {
+  min-width: 0;
+}
+
+body:has(> div.flex.min-h-screen) main .fixed.inset-0 {
+  isolation: isolate;
+}
+
 /* ---------- Responsive refinements ---------- */
 @media (max-width: 1023px) {
   body > header > div { padding-left: 16px; padding-right: 16px; }

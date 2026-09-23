@@ -9,7 +9,6 @@
 <link rel="shortcut icon" type="image/png" href="<?= base_url('assets/img/logo/misfits-logo.png?v=3') ?>">
 <link rel="apple-touch-icon" href="<?= base_url('assets/img/logo/misfits-logo.png?v=3') ?>">
 
-    <link rel="icon" type="image/png" href="<?= base_url('assets/img/logo/misfits-logo.png'); ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/css/app.css') ?>">
@@ -183,7 +182,6 @@
           </button>
         </div>
 
-        <!-- Mobile Nav Menu Dropdown -->
         <!-- Mobile Nav Menu Dropdown -->
         <nav id="mobile-admin-menu"
           class="hidden lg:hidden bg-asphalt-900 text-chrome-200 px-4 py-3 space-y-1 font-display text-sm border-b border-asphalt-800">
