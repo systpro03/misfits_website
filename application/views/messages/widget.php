@@ -629,7 +629,7 @@
     return value ? value.charAt(0).toUpperCase() : fallback;
   }
 
-  function render(data) {
+  function render(data, scrollToLatest) {
     var oldScroll = messages.scrollHeight - messages.scrollTop - messages.clientHeight;
     var html = "";
 
@@ -671,10 +671,10 @@
     }
 
     messages.innerHTML = html;
-    if (oldScroll < 80) messages.scrollTop = messages.scrollHeight;
+    if (scrollToLatest || oldScroll < 80) messages.scrollTop = messages.scrollHeight;
   }
 
-  function loadMessages(markRead) {
+  function loadMessages(markRead, scrollToLatest) {
     var params = [];
     if (myGuestId) params.push("guest_id=" + encodeURIComponent(myGuestId));
     if (markRead) params.push("mark_read=1");
@@ -693,7 +693,7 @@
           localStorage.setItem("misfits_chat_guest_id", myGuestId);
         }
 
-        render(result.data || []);
+        render(result.data || [], scrollToLatest);
         updateCount(markRead ? 0 : result.count);
       })
       .catch(function () {
@@ -707,7 +707,8 @@
     toggle.setAttribute("aria-expanded", value ? "true" : "false");
 
     if (value) {
-      loadMessages(true);
+      messages.scrollTop = messages.scrollHeight;
+      loadMessages(true, true);
       if (!timer) timer = setInterval(function () { loadMessages(false); }, 4000);
       setTimeout(function () { messageInput.focus(); }, 50);
     } else if (timer) {
