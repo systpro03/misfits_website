@@ -148,117 +148,32 @@ $json_gallery = htmlspecialchars(json_encode($formatted_gallery, JSON_HEX_TAG | 
       </button>
     </div>
 
-    <div x-cloak x-show="submitModalOpen" x-transition.opacity
-      @keydown.escape.window="submitModalOpen = false"
-      class="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div class="absolute inset-0 bg-asphalt-950/60 backdrop-blur-xs" @click="submitModalOpen = false"></div>
-      <div class="relative w-full max-w-lg max-h-[90vh] overflow-y-auto">
-        <button type="button" @click="submitModalOpen = false"
-          class="absolute top-3 right-3 z-10 p-1.5 rounded-lg bg-asphalt-900 text-white hover:bg-ember-500 hover:text-asphalt-950 transition-colors"
-          aria-label="Close submit photo modal">&times;</button>
+  </section>
 
-    <div class="max-w-md mx-auto px-4" x-data="{ 
-           files: [], 
-           previews: [],
-           handleFileSelect(event) {
-             const selectedFiles = Array.from(event.target.files);
-             this.files = selectedFiles;
-             this.previews = selectedFiles.map(file => URL.createObjectURL(file));
-           },
-           removeFile(index) {
-             URL.revokeObjectURL(this.previews[index]);
-             this.files.splice(index, 1);
-             this.previews.splice(index, 1);
-             const dt = new DataTransfer();
-             this.files.forEach(file => dt.items.add(file));
-             this.$refs.fileInput.files = dt.files;
-           }
-         }">
-
-      <div class="text-center mb-5">
-        <p class="font-display text-[10px] font-bold tracking-[0.2em] text-ember-600 uppercase mb-1">Share a Moment</p>
-        <h2 class="font-display text-2xl font-bold text-asphalt-900">Submit Photos</h2>
-        <p class="text-asphalt-700/80 text-xs mt-1 leading-relaxed">
-          Got shots from a ride? Select multiple photos to upload — an admin will review them before they appear.
-        </p>
+  <!-- ================= SUBMIT PHOTO MODAL ================= -->
+  <div x-cloak x-show="submitModalOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4" x-transition.opacity @keydown.escape.window="submitModalOpen = false">
+    <div class="absolute inset-0 bg-asphalt-950/70 backdrop-blur-sm" @click="submitModalOpen = false"></div>
+    <div class="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl bg-white text-asphalt-900 shadow-2xl" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100">
+      <div class="flex items-center justify-between border-b border-asphalt-800/10 px-6 py-4">
+        <div><p class="text-[10px] font-bold uppercase tracking-[0.2em] text-ember-600">Share a Moment</p><h2 class="font-display text-xl font-bold">Submit Photos</h2></div>
+        <button type="button" @click="submitModalOpen = false" class="rounded-lg p-2 text-asphalt-700/50 hover:bg-asphalt-900/10 hover:text-asphalt-900" aria-label="Close modal">&times;</button>
       </div>
-
-      <form action="<?= base_url('gallery/submit'); ?>" method="post enctype="multipart/form-data"
-        class="space-y-3.5 bg-white border border-asphalt-800/10 rounded-xl p-4 sm:p-5 shadow-2xs">
-        <div>
-          <label for="submitter_name"
-            class="block text-[10px] font-display font-bold uppercase tracking-wider text-asphalt-900 mb-1">Your Name
-            *</label>
-          <input type="text" id="submitter_name" name="submitter_name" required maxlength="120"
-            value="<?= set_value('submitter_name'); ?>"
-            class="w-full border border-asphalt-800/20 rounded-lg px-3 py-2 text-xs text-asphalt-900 focus:border-ember-500 focus:ring-1 focus:ring-ember-500 outline-none transition-all">
-        </div>
-
-        <div>
-          <label for="submitter_email"
-            class="block text-[10px] font-display font-bold uppercase tracking-wider text-asphalt-900 mb-1">Email
-            (optional)</label>
-          <input type="email" id="submitter_email" name="submitter_email" maxlength="150"
-            value="<?= set_value('submitter_email'); ?>"
-            class="w-full border border-asphalt-800/20 rounded-lg px-3 py-2 text-xs text-asphalt-900 focus:border-ember-500 focus:ring-1 focus:ring-ember-500 outline-none transition-all">
-        </div>
-
-        <div>
-          <label for="caption"
-            class="block text-[10px] font-display font-bold uppercase tracking-wider text-asphalt-900 mb-1">Caption /
-            Note (optional)</label>
-          <input type="text" id="caption" name="caption" maxlength="255" value="<?= set_value('caption'); ?>"
-            class="w-full border border-asphalt-800/20 rounded-lg px-3 py-2 text-xs text-asphalt-900 focus:border-ember-500 focus:ring-1 focus:ring-ember-500 outline-none transition-all"
-            placeholder="Where were these photos taken?">
-        </div>
-
-        <div>
-          <label for="images"
-            class="block text-[10px] font-display font-bold uppercase tracking-wider text-asphalt-900 mb-1">Photos
-            *</label>
-          <input type="file" id="images" name="images[]" accept="image/png,image/jpeg,image/webp" multiple required
-            x-ref="fileInput" @change="handleFileSelect($event)"
-            class="w-full text-[11px] text-asphalt-700/80 border border-asphalt-800/20 rounded-lg p-1.5 file:mr-3 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-[10px] file:font-display file:font-bold file:bg-asphalt-900 file:text-ember-500 hover:file:bg-asphalt-800 file:transition-colors cursor-pointer">
-          <p class="text-[10px] text-asphalt-700/50 mt-1">Hold Ctrl / Cmd to select multiple files. JPG, PNG or WEBP up
-            to 5MB each.</p>
-        </div>
-
-        <template x-if="previews.length > 0">
-          <div class="mt-2.5 border border-asphalt-800/10 rounded-lg p-2.5 bg-paper-50">
-            <p class="text-[10px] font-display font-bold uppercase text-asphalt-700/70 mb-2">
-              Selected Files Preview (<span x-text="previews.length"></span>):
-            </p>
-            <div class="grid grid-cols-3 sm:grid-cols-5 gap-2">
-              <template x-for="(src, index) in previews" :key="index">
-                <div
-                  class="relative aspect-square rounded-md overflow-hidden border border-asphalt-800/20 bg-asphalt-900 group">
-                  <img :src="src" class="w-full h-full object-cover">
-                  <button type="button" @click="removeFile(index)" title="Remove photo"
-                    class="absolute top-0.5 right-0.5 bg-asphalt-950/80 hover:bg-red-600 text-white rounded-full p-0.5 shadow-xs transition-colors">
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                        d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-              </template>
-            </div>
-          </div>
-        </template>
-
-        <button type="submit" @click="submittingPhoto = true" :disabled="submittingPhoto"
-          class="w-full py-2.5 bg-ember-500 hover:bg-ember-600 text-asphalt-950 font-display font-bold text-xs tracking-wider uppercase rounded-lg transition-all shadow-xs active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed">
+      <form action="<?= base_url('gallery/submit'); ?>" method="post" enctype="multipart/form-data" class="space-y-4 p-6" x-data="{ files: [], previews: [], select(e) { this.previews.forEach(url => URL.revokeObjectURL(url)); this.files = Array.from(e.target.files); this.previews = this.files.map(f => URL.createObjectURL(f)); }, remove(i) { URL.revokeObjectURL(this.previews[i]); this.files.splice(i,1); this.previews.splice(i,1); const dt = new DataTransfer(); this.files.forEach(f => dt.items.add(f)); this.$refs.input.files = dt.files; } }" @submit="if (!files.length || !$refs.input.files.length) { $event.preventDefault(); $refs.input.reportValidity(); } else { submittingPhoto = true; }">
+        <div><label for="gallery_submitter_name" class="mb-1 block text-xs font-bold">Your Name *</label><input id="gallery_submitter_name" type="text" name="submitter_name" required maxlength="120" class="w-full rounded-lg border border-asphalt-800/20 px-3 py-2 text-sm outline-none focus:border-ember-500"></div>
+        <div><label for="gallery_submitter_email" class="mb-1 block text-xs font-bold">Email (optional)</label><input id="gallery_submitter_email" type="email" name="submitter_email" maxlength="150" class="w-full rounded-lg border border-asphalt-800/20 px-3 py-2 text-sm outline-none focus:border-ember-500"></div>
+        <div><label for="gallery_caption" class="mb-1 block text-xs font-bold">Caption / Note (optional)</label><input id="gallery_caption" type="text" name="caption" maxlength="255" placeholder="Where were these photos taken?" class="w-full rounded-lg border border-asphalt-800/20 px-3 py-2 text-sm outline-none focus:border-ember-500"></div>
+        <div><label for="gallery_images" class="mb-1 block text-xs font-bold">Photos *</label><input id="gallery_images" x-ref="input" @change="select($event)" type="file" name="images[]" accept="image/png,image/jpeg,image/webp" multiple required class="w-full rounded-lg border border-asphalt-800/20 p-2 text-xs"><p class="mt-1 text-[10px] text-asphalt-700/60">JPG, PNG or WEBP up to 5MB each.</p></div>
+        <div x-show="previews.length" class="grid grid-cols-4 gap-2 rounded-lg bg-paper-50 p-2"><template x-for="(src,i) in previews" :key="i"><div class="relative aspect-square overflow-hidden rounded-md"><img :src="src" class="h-full w-full object-cover"><button type="button" @click="remove(i)" class="absolute right-1 top-1 rounded-full bg-black/70 px-1.5 text-white">&times;</button></div></template></div>
+        <button type="submit" :disabled="submittingPhoto" class="w-full rounded-lg bg-ember-500 py-3 text-xs font-bold uppercase tracking-wider text-asphalt-950 hover:bg-ember-600 disabled:opacity-70 disabled:cursor-not-allowed transition-all">
           <span x-show="!submittingPhoto">Submit Photos for Review</span>
           <span x-show="submittingPhoto" class="inline-flex items-center justify-center gap-2">
-            <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 00-5 5h3a5 5 0 005-5H4z"></path></svg>
+            <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v3a5 5 0 00-5 5H4z"></path></svg>
             Submitting Photo...
           </span>
         </button>
       </form>
     </div>
-      </div>
-    </div>
-  </section>
+  </div>
 
   <!-- ================= LIGHTBOX MODAL PREVIEW ================= -->
 <div x-cloak x-show="lightboxOpen" 
